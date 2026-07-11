@@ -68,7 +68,7 @@ const normalizeVector = (vector) => {
   };
 };
 
-const rotateVector = (quaternion, vector) => {
+export function rotateVector(quaternion, vector) {
   const imaginary = {
     x: quaternion.x,
     y: quaternion.y,
@@ -81,7 +81,7 @@ const rotateVector = (quaternion, vector) => {
     y: vector.y + 2 * (quaternion.w * firstCross.y + secondCross.y),
     z: vector.z + 2 * (quaternion.w * firstCross.z + secondCross.z),
   };
-};
+}
 
 export const identityQuaternion = () => ({ x: 0, y: 0, z: 0, w: 1 });
 
