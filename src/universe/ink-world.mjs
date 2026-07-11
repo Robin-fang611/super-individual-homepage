@@ -112,11 +112,11 @@ function createInkClouds(THREE, plan) {
   const group = new THREE.Group();
   group.name = "InkMasses";
   const rng = createRng(plan.seed + 13);
+  const inkTexture = makeInkTexture(THREE, plan.seed + 29);
 
   for (let index = 0; index < TIER_DENSITY.cinematic.inkClouds; index += 1) {
-    const texture = makeInkTexture(THREE, plan.seed + index * 29);
     const cloud = new THREE.Sprite(new THREE.SpriteMaterial({
-      map: texture,
+      map: inkTexture,
       color: index % 5 === 0 ? 0x4d8596 : 0x1f596c,
       transparent: true,
       opacity: 0.22 + rng() * 0.2,

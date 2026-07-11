@@ -60,6 +60,7 @@ export async function createStarField({ canvas, intro, onError }) {
 
   function onContextLost(event) {
     event.preventDefault();
+    runtime?.pause();
     reportError(new Error("WebGL context lost"));
   }
 
