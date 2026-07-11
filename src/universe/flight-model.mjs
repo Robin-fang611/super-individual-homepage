@@ -3,6 +3,7 @@ import { rotateVector } from "./orientation.mjs";
 const MAX_STEP_SECONDS = 1 / 60;
 const MAX_FRAME_SECONDS = 0.25;
 const MAX_SUBSTEPS = 15;
+const RADIAL_TOLERANCE = Number.EPSILON * 8;
 
 const measureVector = (vector) => {
   const maximumComponent = Math.max(
@@ -54,6 +55,20 @@ const clampMagnitude = (vector, maximumMagnitude) => {
   return scale(measured.unit, maximumMagnitude);
 };
 
+const restoreFiniteComponent = (component, magnitude) => {
+  if (component === 0) return 0;
+  if (Math.abs(component) > Number.MAX_VALUE / magnitude) {
+    return Math.sign(component) * Number.MAX_VALUE;
+  }
+  return component * magnitude;
+};
+
+const restoreFiniteVector = (vector, magnitude) => ({
+  x: restoreFiniteComponent(vector.x, magnitude),
+  y: restoreFiniteComponent(vector.y, magnitude),
+  z: restoreFiniteComponent(vector.z, magnitude),
+});
+
 const smoothstep = (start, end, value) => {
   const progress = Math.min(
     1,
@@ -80,37 +95,51 @@ export function applySphericalBoundary(
   const measuredPosition = measureVector(position);
   const positionRadius = measuredPosition.magnitude;
   const normal = measuredPosition.unit ?? { x: 1, y: 0, z: 0 };
-  const boundarySpeedLimit = Math.min(
-    radius / Number.EPSILON,
-    Number.MAX_VALUE / 16,
-  );
-  const safeVelocity = clampMagnitude(velocity, boundarySpeedLimit);
-  const radialSpeed = dot(safeVelocity, normal);
-
-  let nextVelocity = safeVelocity;
-  if (radialSpeed > 0) {
-    const tangent = add(safeVelocity, scale(normal, -radialSpeed));
-    const outwardGain = smoothstep(radius, softStart, positionRadius);
-    nextVelocity = add(
-      tangent,
-      scale(normal, radialSpeed * outwardGain),
-    );
-  }
-
-  let nextPosition = position;
   const maximumRadius = radius - epsilon;
+  let nextPosition = position;
   if (positionRadius > maximumRadius) {
     nextPosition = scale(normal, maximumRadius);
-    const remainingOutwardSpeed = dot(nextVelocity, normal);
-    if (remainingOutwardSpeed > 0) {
-      nextVelocity = add(
-        nextVelocity,
-        scale(normal, -remainingOutwardSpeed),
-      );
-    }
   }
 
-  return { position: nextPosition, velocity: nextVelocity };
+  const velocityMagnitude = Math.max(
+    Math.abs(velocity.x),
+    Math.abs(velocity.y),
+    Math.abs(velocity.z),
+    1,
+  );
+  const scaleVelocityComponent = (component) =>
+    Math.abs(component) === velocityMagnitude
+      ? Math.sign(component)
+      : component / velocityMagnitude;
+  const scaledVelocity = {
+    x: scaleVelocityComponent(velocity.x),
+    y: scaleVelocityComponent(velocity.y),
+    z: scaleVelocityComponent(velocity.z),
+  };
+  const scaledRadialSpeed = dot(scaledVelocity, normal);
+  if (
+    positionRadius < softStart ||
+    scaledRadialSpeed <= RADIAL_TOLERANCE
+  ) {
+    return { position: nextPosition, velocity };
+  }
+
+  const tangent = add(
+    scaledVelocity,
+    scale(normal, -scaledRadialSpeed),
+  );
+  const outwardGain =
+    positionRadius > maximumRadius
+      ? 0
+      : smoothstep(radius, softStart, positionRadius);
+  const nextScaledVelocity = add(
+    tangent,
+    scale(normal, scaledRadialSpeed * outwardGain),
+  );
+  return {
+    position: nextPosition,
+    velocity: restoreFiniteVector(nextScaledVelocity, velocityMagnitude),
+  };
 }
 
 export function createFlightState(options = {}) {

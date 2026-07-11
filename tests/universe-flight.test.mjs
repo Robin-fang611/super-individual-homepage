@@ -46,6 +46,48 @@ test("preserves inward velocity in the soft boundary zone", () => {
   assert.deepEqual(result.velocity, velocity);
 });
 
+test("preserves over-limit tangential velocity exactly", () => {
+  const velocity = { x: 0, y: Number.MAX_VALUE, z: 0 };
+  const result = applySphericalBoundary(
+    { x: 9.99, y: 0, z: 0 },
+    velocity,
+    boundary,
+  );
+
+  assert.equal(result.velocity, velocity);
+  assert.deepEqual(result.velocity, velocity);
+});
+
+test("preserves over-limit inward velocity exactly", () => {
+  const velocity = {
+    x: -Number.MAX_VALUE,
+    y: Number.MAX_VALUE,
+    z: 0,
+  };
+  const result = applySphericalBoundary(
+    { x: 9.99, y: 0, z: 0 },
+    velocity,
+    boundary,
+  );
+
+  assert.equal(result.velocity, velocity);
+  assert.deepEqual(result.velocity, velocity);
+});
+
+test("safely weakens only over-limit outward velocity", () => {
+  const result = applySphericalBoundary(
+    { x: 9.99, y: 0, z: 0 },
+    { x: Number.MAX_VALUE, y: Number.MAX_VALUE, z: 0 },
+    boundary,
+  );
+
+  assert.ok(Object.values(result.velocity).every(Number.isFinite));
+  assert.ok(result.velocity.x >= 0);
+  assert.ok(result.velocity.x < Number.MAX_VALUE);
+  assert.equal(result.velocity.y, Number.MAX_VALUE);
+  assert.equal(result.velocity.z, 0);
+});
+
 test("rejects an invalid spherical boundary configuration", () => {
   const position = { x: 0, y: 0, z: 0 };
   const velocity = { x: 0, y: 0, z: 0 };
