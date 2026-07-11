@@ -1,40 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import {
-  applyOrbitInput,
-  getNaturalBackdropSize,
-  getTrackpadOrbitDelta,
-} from "../src/star-field.mjs";
-
-test("converts trackpad two-axis scrolling into orbit movement", () => {
-  const delta = getTrackpadOrbitDelta({ deltaX: 120, deltaY: -80, ctrlKey: false });
-
-  assert.ok(delta.yaw > 0);
-  assert.ok(delta.pitch < 0);
-  assert.equal(delta.distance, 0);
-});
-
-test("treats pinch-style wheel input as distance instead of orbit", () => {
-  const delta = getTrackpadOrbitDelta({ deltaX: 0, deltaY: -45, ctrlKey: true });
-
-  assert.equal(delta.yaw, 0);
-  assert.equal(delta.pitch, 0);
-  assert.ok(delta.distance < 0);
-});
-
-test("lets vertical orbit pass beyond a full turn instead of clamping to a small arc", () => {
-  const cameraState = {
-    baseYaw: 0,
-    targetYaw: 0,
-    targetPitch: 0,
-    targetDistance: 6,
-  };
-
-  applyOrbitInput(cameraState, { yaw: 0, pitch: Math.PI * 2.2, distance: 0 });
-
-  assert.ok(cameraState.targetPitch > Math.PI * 2);
-});
+import { getNaturalBackdropSize } from "../src/star-field.mjs";
 
 test("uses a wide non-mirrored backdrop for natural panorama extension", () => {
   assert.deepEqual(getNaturalBackdropSize({ width: 1024, height: 512 }), {

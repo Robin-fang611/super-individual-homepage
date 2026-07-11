@@ -1,4 +1,7 @@
 import { createSceneStarLayout } from "./star-layout.mjs?v=3d-scene-25";
+import { createInputRouter } from "./universe/input-router.mjs";
+import { createFlightState } from "./universe/flight-model.mjs";
+import { createUniverseRuntime } from "./universe/runtime.mjs";
 
 const THREE_URL = "/assets/three.module.js";
 const BACKDROP_URL = "/assets/images/star-road-hero-composed.png";
@@ -32,13 +35,6 @@ const STRONG_HERO_VISUAL_PROFILE = Object.freeze({
   },
 });
 const MOBILE_QUERY = "(max-width: 760px)";
-const POINTER_YAW_SPEED = 0.0052;
-const POINTER_PITCH_SPEED = 0.0048;
-const TRACKPAD_YAW_SPEED = 0.0046;
-const TRACKPAD_PITCH_SPEED = 0.0046;
-const KEY_ORBIT_STEP = 0.16;
-const DISTANCE_WHEEL_SPEED = 0.0045;
-const DISTANCE_KEY_STEP = 0.35;
 let threeModulePromise;
 
 function loadThree() {
@@ -93,29 +89,6 @@ function loadTexture(THREE, url) {
       reject,
     );
   });
-}
-
-export function getTrackpadOrbitDelta(event) {
-  if (event.ctrlKey) {
-    return {
-      yaw: 0,
-      pitch: 0,
-      distance: event.deltaY * DISTANCE_WHEEL_SPEED,
-    };
-  }
-
-  return {
-    yaw: event.deltaX * TRACKPAD_YAW_SPEED,
-    pitch: event.deltaY * TRACKPAD_PITCH_SPEED,
-    distance: 0,
-  };
-}
-
-export function applyOrbitInput(cameraState, delta) {
-  cameraState.baseYaw += delta.yaw;
-  cameraState.targetYaw = cameraState.baseYaw + cameraState.autoYawOffset;
-  cameraState.targetPitch += delta.pitch;
-  cameraState.targetDistance += delta.distance;
 }
 
 export function getNaturalBackdropSize(image) {
@@ -1050,6 +1023,7 @@ export async function createStarField({
   layout,
   onSelect,
   onEnterRoad,
+  intro,
 }) {
   const THREE = await loadThree();
   const media = window.matchMedia(MOBILE_QUERY);
@@ -1071,19 +1045,6 @@ export async function createStarField({
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
   const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 28);
-  const cameraTarget = new THREE.Vector3(0.15, 0.05, -0.9);
-  const cameraState = {
-    yaw: -0.06,
-    pitch: 0.18,
-    distance: 6.1,
-    baseYaw: -0.06,
-    autoYawOffset: 0,
-    targetYaw: -0.06,
-    targetPitch: 0.18,
-    targetDistance: 6.1,
-    focus: cameraTarget.clone(),
-    targetFocus: cameraTarget.clone(),
-  };
 
   const glowTexture = makeGlowTexture(THREE);
   const particleTexture = makeStarParticleTexture(THREE);
@@ -1140,14 +1101,8 @@ export async function createStarField({
   const state = {
     activeStarId: null,
     hoveredStarId: null,
-    dragging: false,
-    lastManualInputAt: 0,
-    lastFrameTime: 0,
     enteredRoad: false,
     pointerStart: { x: 0, y: 0 },
-    lastPointer: { x: 0, y: 0 },
-    pressedKeys: new Set(),
-    raf: 0,
     disposed: false,
   };
 
@@ -1162,86 +1117,6 @@ export async function createStarField({
 
     state.enteredRoad = true;
     onEnterRoad?.();
-  }
-
-  function updateCameraLimits() {
-    const limits = sceneLayout.cameraLimits;
-    cameraState.targetDistance = clamp(
-      cameraState.targetDistance,
-      isMobile() ? limits.minDistance + 0.7 : limits.minDistance,
-      isMobile() ? limits.maxDistance + 1.1 : limits.maxDistance,
-    );
-    cameraState.targetFocus.x = clamp(
-      cameraState.targetFocus.x,
-      sceneLayout.bounds.minX + 0.55,
-      sceneLayout.bounds.maxX - 0.55,
-    );
-    cameraState.targetFocus.y = clamp(
-      cameraState.targetFocus.y,
-      sceneLayout.bounds.minY + 0.35,
-      sceneLayout.bounds.maxY - 0.35,
-    );
-    cameraState.targetFocus.z = clamp(
-      cameraState.targetFocus.z,
-      sceneLayout.bounds.minZ + 0.35,
-      sceneLayout.bounds.maxZ - 0.35,
-    );
-  }
-
-  function updateAutoRotation(time) {
-    const manualPauseMs = 2400;
-    const shouldPause = state.dragging
-      || state.pressedKeys.size > 0
-      || time - state.lastManualInputAt < manualPauseMs;
-    const deltaTime = state.lastFrameTime ? Math.min(time - state.lastFrameTime, 42) : 0;
-    state.lastFrameTime = time;
-
-    if (!shouldPause) {
-      cameraState.baseYaw += deltaTime * 0.000014;
-    }
-
-    cameraState.autoYawOffset += (0 - cameraState.autoYawOffset) * 0.012;
-    cameraState.targetYaw = cameraState.baseYaw + cameraState.autoYawOffset;
-  }
-
-  function updateKeyboardOrbit() {
-    if (state.pressedKeys.size === 0) {
-      return;
-    }
-
-    let yaw = 0;
-    let pitch = 0;
-    let distance = 0;
-
-    if (state.pressedKeys.has("arrowleft") || state.pressedKeys.has("a")) yaw -= KEY_ORBIT_STEP;
-    if (state.pressedKeys.has("arrowright") || state.pressedKeys.has("d")) yaw += KEY_ORBIT_STEP;
-    if (state.pressedKeys.has("arrowup") || state.pressedKeys.has("w")) pitch -= KEY_ORBIT_STEP;
-    if (state.pressedKeys.has("arrowdown") || state.pressedKeys.has("s")) pitch += KEY_ORBIT_STEP;
-    if (state.pressedKeys.has("q")) distance -= DISTANCE_KEY_STEP;
-    if (state.pressedKeys.has("e")) distance += DISTANCE_KEY_STEP;
-
-    if (yaw || pitch || distance) {
-      enterRoad();
-      state.lastManualInputAt = performance.now();
-      applyOrbitInput(cameraState, { yaw, pitch, distance });
-    }
-  }
-
-  function updateCamera() {
-    updateCameraLimits();
-    cameraState.yaw += (cameraState.targetYaw - cameraState.yaw) * 0.08;
-    cameraState.pitch += (cameraState.targetPitch - cameraState.pitch) * 0.08;
-    cameraState.distance += (cameraState.targetDistance - cameraState.distance) * 0.08;
-    cameraState.focus.lerp(cameraState.targetFocus, 0.08);
-
-    const distance = cameraState.distance;
-    const cosPitch = Math.cos(cameraState.pitch);
-    camera.position.set(
-      cameraState.focus.x + Math.sin(cameraState.yaw) * cosPitch * distance,
-      cameraState.focus.y + Math.sin(cameraState.pitch) * distance,
-      cameraState.focus.z + Math.cos(cameraState.yaw) * cosPitch * distance,
-    );
-    camera.lookAt(cameraState.focus);
   }
 
   function resize() {
@@ -1325,7 +1200,7 @@ export async function createStarField({
   function updateHover(event) {
     const star = pickStar(event);
     state.hoveredStarId = star?.id ?? null;
-    canvas.style.cursor = star ? "pointer" : state.dragging ? "grabbing" : "grab";
+    canvas.style.cursor = star ? "pointer" : "crosshair";
     return star;
   }
 
@@ -1336,61 +1211,21 @@ export async function createStarField({
 
     enterRoad();
     state.activeStarId = star.id;
-    const target = vectorFromPosition(THREE, star.position);
-    cameraState.targetFocus.copy(target);
-    cameraState.targetFocus.y += isMobile() ? 0.18 : 0.04;
-    cameraState.targetDistance = isMobile()
-      ? star.current ? 5.3 : 5.8
-      : star.current ? 4.2 : 4.8;
-    cameraState.baseYaw = isMobile()
-      ? -0.18
-      : star.current ? -0.12 : 0.1;
-    cameraState.targetYaw = cameraState.baseYaw + cameraState.autoYawOffset;
-    cameraState.targetPitch = isMobile()
-      ? 0.08
-      : star.current ? 0.2 : 0.14;
     window.setTimeout(() => onSelect?.(star), 130);
   }
 
-  function setHomeCamera() {
-    state.activeStarId = null;
-    const homeFocus = isMobile() ? sceneLayout.homeFocus.mobile : sceneLayout.homeFocus.desktop;
-    cameraState.targetFocus.set(homeFocus.x, homeFocus.y, homeFocus.z);
-    cameraState.targetDistance = isMobile() ? 7.8 : 6.1;
-    cameraState.baseYaw = isMobile() ? -0.12 : -0.06;
-    cameraState.targetYaw = cameraState.baseYaw + cameraState.autoYawOffset;
-    cameraState.targetPitch = isMobile() ? 0.12 : 0.18;
-  }
-
   function resetCamera() {
+    state.activeStarId = null;
     enterRoad();
-    setHomeCamera();
   }
 
   function onPointerDown(event) {
     enterRoad();
-    canvas.setPointerCapture?.(event.pointerId);
-    state.dragging = true;
-    state.lastManualInputAt = performance.now();
     state.pointerStart = { x: event.clientX, y: event.clientY };
-    state.lastPointer = { x: event.clientX, y: event.clientY };
-    canvas.style.cursor = "grabbing";
+    runtime.requestHandoff();
   }
 
   function onPointerMove(event) {
-    if (state.dragging) {
-      const deltaX = event.clientX - state.lastPointer.x;
-      const deltaY = event.clientY - state.lastPointer.y;
-      applyOrbitInput(cameraState, {
-        yaw: -deltaX * POINTER_YAW_SPEED,
-        pitch: deltaY * POINTER_PITCH_SPEED,
-        distance: 0,
-      });
-      state.lastManualInputAt = performance.now();
-      state.lastPointer = { x: event.clientX, y: event.clientY };
-      return;
-    }
-
     updateHover(event);
   }
 
@@ -1399,59 +1234,13 @@ export async function createStarField({
       event.clientX - state.pointerStart.x,
       event.clientY - state.pointerStart.y,
     );
-    state.dragging = false;
-    state.lastManualInputAt = performance.now();
-    canvas.releasePointerCapture?.(event.pointerId);
-
     const star = updateHover(event);
     if (moved < 5 && star) {
       focusStar(star);
     }
   }
 
-  function onWheel(event) {
-    event.preventDefault();
-    enterRoad();
-    state.lastManualInputAt = performance.now();
-    applyOrbitInput(cameraState, getTrackpadOrbitDelta(event));
-  }
-
-  function isOrbitKey(key) {
-    return [
-      "arrowleft",
-      "arrowright",
-      "arrowup",
-      "arrowdown",
-      "w",
-      "a",
-      "s",
-      "d",
-      "q",
-      "e",
-    ].includes(key.toLowerCase());
-  }
-
-  function onKeyDown(event) {
-    if (!isOrbitKey(event.key) || event.altKey || event.metaKey || event.ctrlKey) {
-      return;
-    }
-
-    event.preventDefault();
-    state.pressedKeys.add(event.key.toLowerCase());
-  }
-
-  function onKeyUp(event) {
-    state.pressedKeys.delete(event.key.toLowerCase());
-  }
-
-  function animate(time = 0) {
-    if (state.disposed) {
-      return;
-    }
-
-    updateAutoRotation(time);
-    updateKeyboardOrbit();
-    updateCamera();
+  function animateScene(time = 0) {
     dustField.rotation.y = time / 42000;
     dustField.rotation.x = Math.sin(time / 15000) * 0.018;
     deepField.rotation.y = time / 62000 + 0.5;
@@ -1494,21 +1283,50 @@ export async function createStarField({
     }
 
     updateDebugTargets();
-    renderer.render(scene, camera);
-    state.raf = window.requestAnimationFrame(animate);
   }
 
+  let runtime;
+  const inputRouter = createInputRouter({
+    target: canvas,
+    getViewport: () => ({
+      width: canvas.clientWidth || window.innerWidth,
+      height: canvas.clientHeight || window.innerHeight,
+    }),
+    onInput: () => runtime?.requestHandoff(),
+  });
+  const initialQuaternion = new THREE.Quaternion().setFromEuler(
+    new THREE.Euler(0.18, -0.06, 0, "YXZ"),
+  );
+  runtime = createUniverseRuntime({
+    THREE,
+    canvas,
+    camera,
+    scene,
+    renderer,
+    intro,
+    inputRouter,
+    initialFlightState: createFlightState({
+      position: { x: -0.2, y: 1.14, z: 5.1 },
+      quaternion: {
+        x: initialQuaternion.x,
+        y: initialQuaternion.y,
+        z: initialQuaternion.z,
+        w: initialQuaternion.w,
+      },
+    }),
+    onFrame: animateScene,
+    onError: (error) => console.error(error),
+  });
+
   function destroy() {
+    if (state.disposed) return;
     state.disposed = true;
-    window.cancelAnimationFrame(state.raf);
+    runtime.destroy();
     window.removeEventListener("resize", resize);
     canvas.removeEventListener("pointerdown", onPointerDown);
     canvas.removeEventListener("pointermove", onPointerMove);
     canvas.removeEventListener("pointerup", onPointerUp);
     canvas.removeEventListener("pointercancel", onPointerUp);
-    canvas.removeEventListener("wheel", onWheel);
-    window.removeEventListener("keydown", onKeyDown);
-    window.removeEventListener("keyup", onKeyUp);
     renderer.dispose();
   }
 
@@ -1517,15 +1335,12 @@ export async function createStarField({
   canvas.addEventListener("pointermove", onPointerMove);
   canvas.addEventListener("pointerup", onPointerUp);
   canvas.addEventListener("pointercancel", onPointerUp);
-  canvas.addEventListener("wheel", onWheel, { passive: false });
-  window.addEventListener("keydown", onKeyDown);
-  window.addEventListener("keyup", onKeyUp);
 
   resize();
-  setHomeCamera();
-  state.raf = window.requestAnimationFrame(animate);
+  runtime.start();
 
   return {
+    ...runtime,
     destroy,
     focusStar,
     resetCamera,

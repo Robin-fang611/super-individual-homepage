@@ -46,6 +46,14 @@ async function boot() {
     const layout = createStarLayout(stars);
 
     let starField = null;
+    const intro = createIntroController({
+      introElement,
+      appElement,
+      autoPlay: false,
+      onDone: () => {
+        window.__universeBoot = { step: "ready", records: records.length };
+      },
+    });
     const reader = createReadingOverlay({
       overlayElement: readingOverlay,
       contentElement: readingContent,
@@ -57,6 +65,7 @@ async function boot() {
     starField = await createStarField({
       canvas,
       layout,
+      intro,
       onSelect: (star) => {
         // 找到对应的 record
         const record = records.find((r) => r.id === star.file || r.id === `${star.date}-${star.title}`);
@@ -70,14 +79,6 @@ async function boot() {
       },
     });
     window.__starField = starField;
-
-    createIntroController({
-      introElement,
-      appElement,
-      onDone: () => {
-        window.__universeBoot = { step: "ready", records: records.length };
-      },
-    });
   } catch (error) {
     window.__universeBoot = {
       step: "error",
