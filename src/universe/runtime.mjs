@@ -8,6 +8,8 @@ import {
 
 const FIXED_DT = 1 / 120;
 const MAX_FRAME_SECONDS = 0.1;
+const DEFAULT_INTRO_DURATION_MS = 4300;
+const DEFAULT_HANDOFF_DURATION_MS = 400;
 const DEFAULT_FLIGHT_CONFIG = Object.freeze({
   lookSensitivity: 0.0038,
   maxSpeed: 3,
@@ -17,8 +19,6 @@ const DEFAULT_FLIGHT_CONFIG = Object.freeze({
   thrustScale: 0.012,
   boundary: { radius: 24, softStart: 20, epsilon: 0.001 },
 });
-
-const now = () => performance.now();
 
 export function createUniverseRuntime({
   THREE,
@@ -32,6 +32,10 @@ export function createUniverseRuntime({
   initialFlightState,
   onError,
   onFrame,
+  introDurationMs = DEFAULT_INTRO_DURATION_MS,
+  handoffDurationMs = DEFAULT_HANDOFF_DURATION_MS,
+  now = () => performance.now(),
+  matchMedia = globalThis.matchMedia?.bind(globalThis),
 }) {
   if (!THREE || !canvas || !camera || !scene || !renderer || !inputRouter) {
     throw new TypeError("UniverseRuntime requires a scene, camera, renderer, canvas, and input router");
@@ -53,7 +57,7 @@ export function createUniverseRuntime({
   let accumulator = 0;
   let previous = now();
   let introElapsedMs = 0;
-  let handoffStartedAt = null;
+  let handoffElapsedMs = 0;
   let flightState = initialFlightState ?? createFlightState();
   let experience = transitionExperience(createExperienceState(), { type: "LOADED" });
   experience = transitionExperience(experience, { type: "INTRO_STARTED" });
@@ -88,6 +92,14 @@ export function createUniverseRuntime({
     flightState = stepFlight(flightState, input, FIXED_DT, config);
   }
 
+  function beginHandoff(eventType) {
+    const previousMode = experience.mode;
+    experience = transitionExperience(experience, { type: eventType });
+    if (previousMode !== "handoff" && experience.mode === "handoff") {
+      handoffElapsedMs = 0;
+    }
+  }
+
   function frame(frameNow) {
     if (!running || destroyed) return;
 
@@ -102,10 +114,13 @@ export function createUniverseRuntime({
       }
 
       applyFlightState();
-      if (
-        experience.mode === "handoff" &&
-        frameNow - handoffStartedAt >= 500
-      ) {
+      if (experience.mode === "intro" && introElapsedMs >= introDurationMs) {
+        beginHandoff("INTRO_FINISHED");
+      }
+      if (experience.mode === "handoff") {
+        handoffElapsedMs += elapsed * 1000;
+      }
+      if (experience.mode === "handoff" && handoffElapsedMs >= handoffDurationMs) {
         experience = transitionExperience(experience, { type: "HANDOFF_FINISHED" });
       }
       intro?.setElapsed?.(introElapsedMs);
@@ -124,6 +139,9 @@ export function createUniverseRuntime({
     if (destroyed || running) return;
     running = true;
     previous = now();
+    if (matchMedia?.("(prefers-reduced-motion: reduce)")?.matches) {
+      beginHandoff("REDUCED_MOTION");
+    }
     inputRouter.activate();
     raf = requestAnimationFrame(frame);
   }
@@ -143,11 +161,7 @@ export function createUniverseRuntime({
   }
 
   function requestHandoff() {
-    const previousMode = experience.mode;
-    experience = transitionExperience(experience, { type: "USER_INPUT" });
-    if (previousMode !== "handoff" && experience.mode === "handoff") {
-      handoffStartedAt = now();
-    }
+    beginHandoff("USER_INPUT");
     inputRouter.activate();
   }
 
@@ -159,9 +173,9 @@ export function createUniverseRuntime({
       mode: experience.mode,
       handoff: handoffWeights(
         experience.mode === "handoff"
-          ? Math.min(500, now() - handoffStartedAt)
-          : 500,
-        500,
+          ? Math.min(handoffDurationMs, handoffElapsedMs)
+          : handoffDurationMs,
+        handoffDurationMs,
       ),
     };
   }
