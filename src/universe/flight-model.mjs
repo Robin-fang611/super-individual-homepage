@@ -1,9 +1,35 @@
 import { rotateVector } from "./orientation.mjs";
 
 const MAX_STEP_SECONDS = 1 / 60;
+const MAX_FRAME_SECONDS = 0.25;
+const MAX_SUBSTEPS = 15;
 
-const length = (vector) =>
-  Math.hypot(vector.x, vector.y, vector.z);
+const measureVector = (vector) => {
+  const maximumComponent = Math.max(
+    Math.abs(vector.x),
+    Math.abs(vector.y),
+    Math.abs(vector.z),
+  );
+  if (maximumComponent === 0) {
+    return { magnitude: 0, unit: null };
+  }
+  const scaled = {
+    x: vector.x / maximumComponent,
+    y: vector.y / maximumComponent,
+    z: vector.z / maximumComponent,
+  };
+  const scaledMagnitude = Math.hypot(scaled.x, scaled.y, scaled.z);
+  return {
+    magnitude: maximumComponent * scaledMagnitude,
+    unit: {
+      x: scaled.x / scaledMagnitude,
+      y: scaled.y / scaledMagnitude,
+      z: scaled.z / scaledMagnitude,
+    },
+  };
+};
+
+const length = (vector) => measureVector(vector).magnitude;
 
 const scale = (vector, factor) => ({
   x: vector.x * factor,
@@ -19,6 +45,14 @@ const add = (left, right) => ({
 
 const dot = (left, right) =>
   left.x * right.x + left.y * right.y + left.z * right.z;
+
+const clampMagnitude = (vector, maximumMagnitude) => {
+  const measured = measureVector(vector);
+  if (!measured.unit || measured.magnitude <= maximumMagnitude) {
+    return vector;
+  }
+  return scale(measured.unit, maximumMagnitude);
+};
 
 const smoothstep = (start, end, value) => {
   const progress = Math.min(
@@ -43,16 +77,19 @@ export function applySphericalBoundary(
   ) {
     throw new RangeError("invalid spherical boundary configuration");
   }
-  const positionRadius = length(position);
-  const normal =
-    positionRadius > 0
-      ? scale(position, 1 / positionRadius)
-      : { x: 1, y: 0, z: 0 };
-  const radialSpeed = dot(velocity, normal);
+  const measuredPosition = measureVector(position);
+  const positionRadius = measuredPosition.magnitude;
+  const normal = measuredPosition.unit ?? { x: 1, y: 0, z: 0 };
+  const boundarySpeedLimit = Math.min(
+    radius / Number.EPSILON,
+    Number.MAX_VALUE / 16,
+  );
+  const safeVelocity = clampMagnitude(velocity, boundarySpeedLimit);
+  const radialSpeed = dot(safeVelocity, normal);
 
-  let nextVelocity = velocity;
+  let nextVelocity = safeVelocity;
   if (radialSpeed > 0) {
-    const tangent = add(velocity, scale(normal, -radialSpeed));
+    const tangent = add(safeVelocity, scale(normal, -radialSpeed));
     const outwardGain = smoothstep(radius, softStart, positionRadius);
     nextVelocity = add(
       tangent,
@@ -108,19 +145,21 @@ const stepOnce = (state, input, dt, config) => {
     ),
     scale(up, input.moveUp ?? 0),
   );
-  const directionMagnitude = length(direction);
+  const measuredDirection = measureVector(direction);
+  const directionMagnitude = measuredDirection.magnitude;
   if (directionMagnitude > 1) {
-    direction = scale(direction, 1 / directionMagnitude);
+    direction = measuredDirection.unit;
   }
 
   const targetVelocity = scale(direction, config.maxSpeed);
   const responseRate =
     directionMagnitude > 0 ? config.accelRate : config.stopRate;
   const responseGain = 1 - Math.exp(-responseRate * dt);
-  let velocity = add(
-    state.velocity,
-    scale(add(targetVelocity, scale(state.velocity, -1)), responseGain),
-  );
+  const currentVelocity = clampMagnitude(state.velocity, config.maxSpeed);
+  let velocity = clampMagnitude(add(
+    currentVelocity,
+    scale(add(targetVelocity, scale(currentVelocity, -1)), responseGain),
+  ), config.maxSpeed);
   if (
     directionMagnitude === 0 &&
     length(velocity) < config.stopEpsilon
@@ -145,8 +184,12 @@ export function stepFlight(state, input, dt, config) {
   if (!Number.isFinite(dt) || dt < 0) {
     throw new RangeError("dt must be a finite, non-negative number");
   }
-  const stepCount = Math.max(1, Math.ceil(dt / MAX_STEP_SECONDS));
-  const stepDuration = dt / stepCount;
+  const simulatedDuration = Math.min(dt, MAX_FRAME_SECONDS);
+  const stepCount = Math.min(
+    MAX_SUBSTEPS,
+    Math.max(1, Math.ceil(simulatedDuration / MAX_STEP_SECONDS)),
+  );
+  const stepDuration = simulatedDuration / stepCount;
   let nextState = state;
   for (let index = 0; index < stepCount; index += 1) {
     nextState = stepOnce(nextState, input, stepDuration, config);

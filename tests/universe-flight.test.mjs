@@ -192,6 +192,27 @@ test("stepFlight keeps extreme outward motion inside the playable sphere", () =>
   assert.ok(next.velocity.x <= 1e-9);
 });
 
+test("keeps Number.MAX_VALUE velocity finite and bounded", () => {
+  const next = stepFlight(
+    createFlightState({
+      position: { x: 9.5, y: 0.25, z: -0.5 },
+      velocity: {
+        x: Number.MAX_VALUE,
+        y: Number.MAX_VALUE,
+        z: Number.MAX_VALUE,
+      },
+    }),
+    { moveRight: 0, moveForward: 0, moveUp: 0, thrust: 0 },
+    1 / 60,
+    config,
+  );
+
+  assert.ok(Object.values(next.position).every(Number.isFinite));
+  assert.ok(Object.values(next.velocity).every(Number.isFinite));
+  assert.ok(radiusOf(next.position) <= boundary.radius - boundary.epsilon + 1e-9);
+  assert.ok(speedOf(next.velocity) <= config.maxSpeed + 1e-9);
+});
+
 const simulate = (frequency) => {
   let state = createFlightState();
   const input = { moveRight: 0.6, moveForward: 0.8, moveUp: 0, thrust: 0 };
@@ -273,4 +294,16 @@ test("rejects a non-finite or negative timestep", () => {
   assert.throws(() => stepFlight(state, input, Number.NaN, config), RangeError);
   assert.throws(() => stepFlight(state, input, -1 / 60, config), RangeError);
   assert.throws(() => stepFlight(state, input, Infinity, config), RangeError);
+});
+
+test("clamps Number.MAX_VALUE timestep to bounded frame work", () => {
+  const state = createFlightState();
+  const input = { moveRight: 0.6, moveForward: 0.8, moveUp: 0, thrust: 0 };
+  const expected = stepFlight(state, input, 0.25, config);
+  const startedAt = performance.now();
+
+  const actual = stepFlight(state, input, Number.MAX_VALUE, config);
+
+  assert.deepEqual(actual, expected);
+  assert.ok(performance.now() - startedAt < 1000);
 });
