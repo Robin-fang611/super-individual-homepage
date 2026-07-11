@@ -1,0 +1,7 @@
+{
+  "size": "2560x1440",
+  "format": "png",
+  "target_opacity_css": 0.4,
+  "parallax_factor": 0.6,
+  "notes": "最前层星野。CSS透明度40%，上面还会覆盖Canvas，visible程度中等。"
+}

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Current site style route nodes</title>
+  <desc id="desc">Historical route node concept aligned with the existing site visual style.</desc>
+  <defs>
+    <linearGradient id="shade" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#02040b" stop-opacity=".66"/>
+      <stop offset=".52" stop-color="#02040b" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#02040b" stop-opacity=".36"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <image href="../images/star-road-hero-composed.png" x="0" y="0" width="1600" height="900" preserveAspectRatio="xMidYMid slice"/>
+  <rect width="1600" height="900" fill="url(#shade)"/>
+
+  <g filter="url(#glow)" opacity=".82">
+    <circle cx="706" cy="608" r="13" fill="#82dfff"/>
+    <circle cx="910" cy="508" r="9" fill="#b9f1ff"/>
+    <circle cx="1114" cy="386" r="8" fill="#d8b86a"/>
+    <circle cx="1270" cy="274" r="6" fill="#b9f1ff"/>
+  </g>
+
+  <g opacity=".55">
+    <ellipse cx="706" cy="608" rx="48" ry="13" fill="none" stroke="#b9f1ff" stroke-width="1.3" transform="rotate(-16 706 608)"/>
+    <ellipse cx="910" cy="508" rx="38" ry="10" fill="none" stroke="#82dfff" stroke-width="1" transform="rotate(-18 910 508)"/>
+    <ellipse cx="1114" cy="386" rx="34" ry="9" fill="none" stroke="#d8b86a" stroke-width="1" transform="rotate(-12 1114 386)"/>
+    <path d="M706 608 C804 564 826 554 910 508 C1004 456 1046 424 1114 386 C1180 348 1220 312 1270 274" fill="none" stroke="#b9f1ff" stroke-width="1.4" opacity=".28"/>
+  </g>
+
+  <g font-family="Inter, Microsoft YaHei UI, Arial, sans-serif" opacity=".56">
+    <text x="672" y="664" fill="#e2edff" font-size="20">2026</text>
+    <text x="884" y="556" fill="#e2edff" font-size="15">2025</text>
+    <text x="1090" y="430" fill="#e2edff" font-size="14">2024</text>
+  </g>
+
+  <g transform="translate(96 106)">
+    <text x="0" y="0" fill="#b9f1ff" font-family="Inter, Microsoft YaHei UI, Arial, sans-serif" font-size="15" letter-spacing="7" opacity=".68">NODE LANGUAGE</text>
+    <text x="0" y="58" fill="#f3f7ff" font-family="Microsoft YaHei UI, Inter, Arial, sans-serif" font-size="38" opacity=".88">历史节点只做轻提示</text>
+    <text x="0" y="100" fill="#e2edff" font-family="Microsoft YaHei UI, Inter, Arial, sans-serif" font-size="18" opacity=".52">不要抢现有星云和星路的主场；节点像被航道照亮的信标。</text>
+  </g>
+</svg>

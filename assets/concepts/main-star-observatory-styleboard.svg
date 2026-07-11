@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Robin main star observatory styleboard</title>
+  <desc id="desc">A flat concept art board for the main star domain observatory direction.</desc>
+  <defs>
+    <radialGradient id="bgGlow" cx="70%" cy="45%" r="58%">
+      <stop offset="0" stop-color="#153852"/>
+      <stop offset=".38" stop-color="#07182b"/>
+      <stop offset="1" stop-color="#02040b"/>
+    </radialGradient>
+    <radialGradient id="mainStar" cx="50%" cy="45%" r="50%">
+      <stop offset="0" stop-color="#f4fdff"/>
+      <stop offset=".16" stop-color="#b9f1ff"/>
+      <stop offset=".38" stop-color="#3d9ac2"/>
+      <stop offset=".7" stop-color="#0d3850"/>
+      <stop offset="1" stop-color="#03101c"/>
+    </radialGradient>
+    <radialGradient id="goldNode" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fff2b9"/>
+      <stop offset=".36" stop-color="#d8b86a"/>
+      <stop offset="1" stop-color="#6f5722"/>
+    </radialGradient>
+    <linearGradient id="route" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#82dfff" stop-opacity="0"/>
+      <stop offset=".42" stop-color="#b9f1ff" stop-opacity=".72"/>
+      <stop offset="1" stop-color="#d8b86a" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bgGlow)"/>
+  <rect width="1600" height="900" fill="#02040b" opacity=".18"/>
+
+  <g opacity=".48">
+    <circle cx="116" cy="106" r="1.8" fill="#eefbff"/>
+    <circle cx="248" cy="162" r="1.2" fill="#82dfff"/>
+    <circle cx="420" cy="84" r="1.4" fill="#eefbff"/>
+    <circle cx="514" cy="254" r="1.1" fill="#d8b86a"/>
+    <circle cx="1264" cy="130" r="1.8" fill="#eefbff"/>
+    <circle cx="1418" cy="256" r="1.3" fill="#82dfff"/>
+    <circle cx="1324" cy="684" r="1.1" fill="#eefbff"/>
+    <circle cx="1078" cy="756" r="1.5" fill="#d8b86a"/>
+    <circle cx="706" cy="744" r="1.2" fill="#82dfff"/>
+  </g>
+
+  <g opacity=".26">
+    <path d="M940 160 C1124 234 1288 248 1518 204" fill="none" stroke="#82dfff" stroke-width="24" stroke-linecap="round" opacity=".09"/>
+    <path d="M48 652 C238 562 444 566 608 636" fill="none" stroke="#b9f1ff" stroke-width="28" stroke-linecap="round" opacity=".06"/>
+    <path d="M1046 718 C1204 606 1398 590 1540 644" fill="none" stroke="#d8b86a" stroke-width="20" stroke-linecap="round" opacity=".06"/>
+  </g>
+
+  <g transform="translate(980 438)" filter="url(#softGlow)">
+    <circle r="178" fill="url(#mainStar)"/>
+    <circle r="226" fill="none" stroke="#82dfff" stroke-width="2" opacity=".36"/>
+    <ellipse rx="340" ry="96" fill="none" stroke="#b9f1ff" stroke-width="3" opacity=".42" transform="rotate(-14)"/>
+    <ellipse rx="430" ry="128" fill="none" stroke="#d8b86a" stroke-width="2" opacity=".24" transform="rotate(16)"/>
+    <ellipse rx="510" ry="150" fill="none" stroke="#82dfff" stroke-width="1" opacity=".16" transform="rotate(-32)"/>
+  </g>
+
+  <g transform="translate(980 438)">
+    <path d="M-54 238 L54 238 L32 96 L18 96 L10 8 L-10 8 L-18 96 L-32 96 Z" fill="#d8f7ff" opacity=".22"/>
+    <path d="M-10 -32 L10 -32 L5 224 L-5 224 Z" fill="#b9f1ff" opacity=".55"/>
+    <path d="M-118 250 L118 250 L82 284 L-82 284 Z" fill="#82dfff" opacity=".18"/>
+    <path d="M-182 284 L182 284" stroke="#b9f1ff" stroke-width="2" opacity=".42"/>
+    <path d="M0 -96 L0 246" stroke="#f4fdff" stroke-width="4" opacity=".54"/>
+    <path d="M0 -148 L0 -36" stroke="#d8b86a" stroke-width="2" opacity=".72"/>
+  </g>
+
+  <path d="M1014 512 C1112 470 1216 406 1348 316 C1412 272 1470 254 1542 246" fill="none" stroke="url(#route)" stroke-width="8" stroke-linecap="round" filter="url(#softGlow)" opacity=".72"/>
+  <path d="M1010 548 C1114 536 1238 516 1390 450" fill="none" stroke="#82dfff" stroke-width="2" stroke-dasharray="12 18" opacity=".42"/>
+
+  <g filter="url(#softGlow)">
+    <circle cx="1248" cy="392" r="11" fill="#82dfff"/>
+    <circle cx="1358" cy="312" r="8" fill="#b9f1ff"/>
+    <circle cx="1464" cy="262" r="12" fill="url(#goldNode)"/>
+  </g>
+
+  <g transform="translate(120 214)">
+    <text x="0" y="0" fill="#b9f1ff" font-family="Inter, Microsoft YaHei UI, Arial, sans-serif" font-size="20" letter-spacing="7" opacity=".72">PERSONAL STAR DOMAIN</text>
+    <text x="0" y="112" fill="#f3f7ff" font-family="Inter, Microsoft YaHei UI, Arial, sans-serif" font-size="112" font-weight="500">Robin</text>
+    <text x="4" y="176" fill="#e2edff" font-family="Microsoft YaHei UI, Inter, Arial, sans-serif" font-size="38" opacity=".72">星辰，进化之路</text>
+    <path d="M4 232 L306 232" stroke="#82dfff" stroke-width="1" opacity=".42"/>
+    <text x="4" y="276" fill="#e2edff" font-family="Microsoft YaHei UI, Inter, Arial, sans-serif" font-size="20" opacity=".52">主星域观测台 · 当前节点 · 2026</text>
+  </g>
+
+  <g transform="translate(122 742)" opacity=".7">
+    <rect x="0" y="0" width="248" height="42" rx="8" fill="#030812" opacity=".62" stroke="#82dfff" stroke-opacity=".18"/>
+    <circle cx="30" cy="21" r="6" fill="#82dfff"/>
+    <text x="52" y="27" fill="#e2edff" font-family="Inter, Microsoft YaHei UI, Arial, sans-serif" font-size="15" letter-spacing="4">WORLD ENTRY</text>
+  </g>
+</svg>

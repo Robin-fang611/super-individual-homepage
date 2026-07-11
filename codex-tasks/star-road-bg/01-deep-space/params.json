@@ -1,0 +1,7 @@
+{
+  "size": "2560x1440",
+  "format": "png",
+  "target_opacity_css": 0.3,
+  "parallax_factor": 0.1,
+  "notes": "最底层，几乎纯黑。CSS透明度30%，最终只有微弱可见度。"
+}

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Deep space route and beacon concept</title>
+  <desc id="desc">A flat concept art board for the route from the main domain to historical beacons.</desc>
+  <defs>
+    <radialGradient id="space" cx="58%" cy="50%" r="75%">
+      <stop offset="0" stop-color="#0e2a43"/>
+      <stop offset=".48" stop-color="#061326"/>
+      <stop offset="1" stop-color="#01030a"/>
+    </radialGradient>
+    <linearGradient id="lane" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#82dfff" stop-opacity="0"/>
+      <stop offset=".22" stop-color="#82dfff" stop-opacity=".14"/>
+      <stop offset=".5" stop-color="#b9f1ff" stop-opacity=".7"/>
+      <stop offset=".82" stop-color="#d8b86a" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#d8b86a" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#space)"/>
+  <g opacity=".45">
+    <circle cx="116" cy="110" r="1.5" fill="#eefbff"/>
+    <circle cx="220" cy="230" r="1.2" fill="#82dfff"/>
+    <circle cx="356" cy="80" r="1.2" fill="#eefbff"/>
+    <circle cx="514" cy="750" r="1.4" fill="#d8b86a"/>
+    <circle cx="872" cy="116" r="1.6" fill="#eefbff"/>
+    <circle cx="1128" cy="710" r="1.2" fill="#82dfff"/>
+    <circle cx="1416" cy="180" r="1.8" fill="#d8b86a"/>
+    <circle cx="1482" cy="734" r="1.2" fill="#eefbff"/>
+  </g>
+
+  <path d="M122 702 C330 616 478 566 638 494 C822 412 990 294 1190 244 C1322 210 1434 220 1540 258" fill="none" stroke="url(#lane)" stroke-width="52" stroke-linecap="round" opacity=".32" filter="url(#glow)"/>
+  <path d="M122 702 C330 616 478 566 638 494 C822 412 990 294 1190 244 C1322 210 1434 220 1540 258" fill="none" stroke="url(#lane)" stroke-width="8" stroke-linecap="round" opacity=".86"/>
+  <path d="M144 744 C382 678 560 624 746 550 C960 466 1168 380 1448 376" fill="none" stroke="#82dfff" stroke-width="2" stroke-dasharray="14 22" opacity=".36"/>
+  <path d="M136 654 C390 554 548 494 720 396 C922 280 1102 194 1348 142" fill="none" stroke="#b9f1ff" stroke-width="2" stroke-dasharray="8 26" opacity=".22"/>
+
+  <g filter="url(#glow)">
+    <g transform="translate(214 660)">
+      <circle r="34" fill="#82dfff" opacity=".9"/>
+      <ellipse rx="74" ry="20" fill="none" stroke="#b9f1ff" stroke-width="2" opacity=".42"/>
+      <text x="-30" y="76" fill="#e2edff" font-family="Inter, Arial, sans-serif" font-size="22" opacity=".68">2026</text>
+    </g>
+    <g transform="translate(690 472)">
+      <circle r="22" fill="#82dfff" opacity=".74"/>
+      <ellipse rx="54" ry="16" fill="none" stroke="#b9f1ff" stroke-width="2" opacity=".32" transform="rotate(-18)"/>
+      <text x="-26" y="62" fill="#e2edff" font-family="Inter, Arial, sans-serif" font-size="18" opacity=".54">2025</text>
+    </g>
+    <g transform="translate(1192 244)">
+      <circle r="18" fill="#d8b86a" opacity=".9"/>
+      <ellipse rx="48" ry="14" fill="none" stroke="#d8b86a" stroke-width="2" opacity=".36" transform="rotate(20)"/>
+      <text x="-24" y="56" fill="#e2edff" font-family="Inter, Arial, sans-serif" font-size="16" opacity=".5">2024</text>
+    </g>
+  </g>
+
+  <g opacity=".18">
+    <path d="M950 624 C1122 532 1280 528 1468 612" fill="none" stroke="#b9f1ff" stroke-width="22" stroke-linecap="round"/>
+    <path d="M252 230 C398 178 548 202 670 286" fill="none" stroke="#82dfff" stroke-width="20" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(100 104)">
+    <text x="0" y="0" fill="#b9f1ff" font-family="Inter, Microsoft YaHei UI, Arial, sans-serif" font-size="20" letter-spacing="6" opacity=".78">ROUTE SYSTEM</text>
+    <text x="0" y="58" fill="#f3f7ff" font-family="Microsoft YaHei UI, Inter, Arial, sans-serif" font-size="44">深空航道与历史信标</text>
+    <text x="0" y="98" fill="#e2edff" font-family="Microsoft YaHei UI, Inter, Arial, sans-serif" font-size="19" opacity=".58">当前节点更近、更亮；历史节点退远、变小、转暖金。</text>
+  </g>
+</svg>

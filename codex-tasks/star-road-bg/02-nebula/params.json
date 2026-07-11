@@ -1,0 +1,7 @@
+{
+  "size": "2560x1440",
+  "format": "png",
+  "target_opacity_css": 0.25,
+  "parallax_factor": 0.3,
+  "notes": "弥散冷色星云层。CSS透明度25%，负责空间纵深感的主视觉层。"
+}

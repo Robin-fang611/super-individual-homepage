@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Robin 的个人宇宙地图。" />
+    <meta name="theme-color" content="#02040b" />
+    <title>Robin | 个人宇宙地图</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%2302040b'/%3E%3Ccircle cx='32' cy='32' r='4' fill='%23b9f1ff'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./styles.css?v=universe-map-3" />
+  </head>
+  <body>
+    <main class="universe-app" id="universe-app" aria-label="Robin 的个人宇宙地图">
+      <section class="intro-screen" id="intro-screen" aria-live="polite">
+        <div class="intro-message" id="intro-message">
+          <p>这里是，我的世界</p>
+          <p class="intro-signature">——Robin</p>
+        </div>
+      </section>
+
+      <canvas id="universe-canvas" class="universe-canvas" aria-hidden="true"></canvas>
+
+      <section
+        class="reading-overlay"
+        id="reading-overlay"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
+      >
+        <button class="reading-close" id="reading-close" type="button" aria-label="关闭阅读">
+          ×
+        </button>
+        <article class="reading-content" id="reading-content" tabindex="-1"></article>
+      </section>
+    </main>
+
+    <noscript>
+      <section class="noscript-fallback">
+        <h1>Robin | 个人宇宙地图</h1>
+        <p>这个页面需要启用 JavaScript 才能展示宇宙地图。</p>
+      </section>
+    </noscript>
+
+    <script type="module" src="./src/app.mjs?v=universe-map-3"></script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "project": "Star Road Background 替换",
+  "assets": 3,
+  "replaces": [
+    "assets/images/star-road-open.png",
+    "assets/images/star-road-river.png",
+    "assets/images/star-road-hero-composed.png"
+  ],
+  "style": "low-contrast, cold-tone, desaturated, deep-space minimal",
+  "palette": ["#02040b", "#050a18", "#0d1b2a", "#1b2d45", "#1a1c2e", "#d8e6f0"],
+  "size": "2560x1440",
+  "format": "png",
+  "max_size_kb": 500,
+  "order": ["01-deep-space", "02-nebula", "03-star-field"]
+}

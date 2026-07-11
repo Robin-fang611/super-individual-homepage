@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Robin 3D World Style Review</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #02040b;
+        --panel: rgba(3, 8, 18, 0.72);
+        --line: rgba(130, 223, 255, 0.18);
+        --text: #f3f7ff;
+        --muted: rgba(226, 237, 255, 0.68);
+        --ice: #82dfff;
+        --gold: #d8b86a;
+        font-family: Inter, "Microsoft YaHei UI", "Microsoft YaHei", Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 72% 18%, rgba(130, 223, 255, 0.12), transparent 28%),
+          radial-gradient(circle at 18% 78%, rgba(216, 184, 106, 0.08), transparent 24%),
+          linear-gradient(145deg, #02040b 0%, #081426 48%, #02040b 100%);
+      }
+
+      main {
+        width: min(1180px, calc(100vw - 40px));
+        margin: 0 auto;
+        padding: 42px 0 64px;
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 24px;
+        align-items: end;
+        margin-bottom: 28px;
+      }
+
+      h1,
+      h2,
+      p {
+        margin: 0;
+      }
+
+      .eyebrow {
+        margin-bottom: 12px;
+        color: var(--ice);
+        font-size: 13px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 760px;
+        font-size: clamp(36px, 5vw, 68px);
+        line-height: 1.02;
+        font-weight: 520;
+      }
+
+      .summary {
+        max-width: 520px;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .direction {
+        padding: 12px 14px;
+        color: rgba(255, 246, 204, 0.86);
+        font-size: 13px;
+        letter-spacing: 0.12em;
+        border: 1px solid rgba(216, 184, 106, 0.26);
+        border-radius: 8px;
+        background: rgba(216, 184, 106, 0.08);
+      }
+
+      .grid {
+        display: grid;
+        gap: 22px;
+      }
+
+      .piece {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--panel);
+        box-shadow: 0 24px 68px rgba(0, 0, 0, 0.28);
+      }
+
+      .piece img {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #02040b;
+      }
+
+      .piece-body {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.55fr);
+        gap: 20px;
+        padding: 18px 20px 20px;
+        border-top: 1px solid rgba(130, 223, 255, 0.12);
+      }
+
+      h2 {
+        font-size: 22px;
+        font-weight: 520;
+      }
+
+      .piece-body p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .notes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .notes span {
+        padding: 6px 9px;
+        color: rgba(226, 237, 255, 0.76);
+        font-size: 12px;
+        border: 1px solid rgba(130, 223, 255, 0.16);
+        border-radius: 999px;
+        background: rgba(130, 223, 255, 0.06);
+      }
+
+      @media (max-width: 820px) {
+        header,
+        .piece-body {
+          grid-template-columns: 1fr;
+        }
+
+        main {
+          width: min(100vw - 28px, 1180px);
+          padding-top: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">Style Review</p>
+          <h1>Robin 主星域观测台 平面美术风格稿 · 现站风格版</h1>
+        </div>
+        <div class="direction">A 方案 · 主星域观测台</div>
+      </header>
+
+      <p class="summary">
+        这组素材改为贴合当前网站：沿用现有深空星云、星尘和能量流，只补充克制的观测台、节点和航道提示。确认后再把它们拆成 Three.js 几何体、材质、粒子和镜头动线。
+      </p>
+
+      <div class="grid" style="margin-top: 30px">
+        <section class="piece">
+          <img src="./current-site-style-main-world.png" alt="主星域观测台主视觉风格稿" />
+          <div class="piece-body">
+            <div>
+              <h2>主视觉：主星域观测台</h2>
+              <div class="notes">
+                <span>第一屏构图</span>
+                <span>品牌锚点</span>
+                <span>右侧主星域</span>
+              </div>
+            </div>
+            <p>验证首页第一眼是否仍然属于当前网站：保留现有星云和星路，只让观测台作为近景入口出现。</p>
+          </div>
+        </section>
+
+        <section class="piece">
+          <img src="./current-site-style-observatory-detail.png" alt="观测台地标细节风格稿" />
+          <div class="piece-body">
+            <div>
+              <h2>地标：观测台存在感</h2>
+              <div class="notes">
+                <span>细塔</span>
+                <span>光柱</span>
+                <span>双层能量环</span>
+              </div>
+            </div>
+            <p>验证观测台不要抢画面：它只提供当前节点的“存在感”，3D 里用轻量几何体嵌入星云。</p>
+          </div>
+        </section>
+
+        <section class="piece">
+          <img src="./current-site-style-route-nodes.png" alt="深空航道与历史信标风格稿" />
+          <div class="piece-body">
+            <div>
+              <h2>路径：轻量历史节点</h2>
+              <div class="notes">
+                <span>时间方向</span>
+                <span>历史节点</span>
+                <span>远近层次</span>
+              </div>
+            </div>
+            <p>验证节点不要像 UI 标记贴上去，而要像被星路照亮的信标，弱标签、弱轮廓、保留现有空间质感。</p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
