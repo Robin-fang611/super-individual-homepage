@@ -16,6 +16,26 @@ test("natural intro completion enters handoff without user input", () => {
   }
 });
 
+test("natural intro waits a full handoff duration before becoming active", () => {
+  const harness = createRuntimeHarness({ handoffDurationMs: 400 });
+
+  try {
+    harness.runtime.start();
+    harness.runFrame(100);
+    harness.runFrame(200);
+    harness.runFrame(300);
+    harness.runFrame(400);
+    harness.runFrame(499);
+
+    assert.equal(harness.runtime.getSnapshot().mode, "handoff");
+
+    harness.runFrame(500);
+    assert.equal(harness.runtime.getSnapshot().mode, "active");
+  } finally {
+    harness.restore();
+  }
+});
+
 test("user input enters the same handoff state", () => {
   const harness = createRuntimeHarness();
 
@@ -41,6 +61,24 @@ test("reduced motion enters handoff when the runtime starts", () => {
   }
 });
 
+test("reduced motion dismisses intro and completes the same handoff", () => {
+  const harness = createRuntimeHarness({ reducedMotion: true });
+
+  try {
+    harness.runtime.start();
+    assert.equal(harness.intro.skipCalls, 1);
+
+    harness.runFrame(100);
+    harness.runFrame(200);
+    harness.runFrame(300);
+    harness.runFrame(400);
+
+    assert.equal(harness.runtime.getSnapshot().mode, "active");
+  } finally {
+    harness.restore();
+  }
+});
+
 test("handoff reaches active after its configured duration", () => {
   const harness = createRuntimeHarness();
 
@@ -57,7 +95,7 @@ test("handoff reaches active after its configured duration", () => {
   }
 });
 
-function createRuntimeHarness({ reducedMotion = false } = {}) {
+function createRuntimeHarness({ reducedMotion = false, handoffDurationMs = 300 } = {}) {
   let clock = 0;
   const frames = installFakeAnimationFrames();
   const inputRouter = {
@@ -68,6 +106,13 @@ function createRuntimeHarness({ reducedMotion = false } = {}) {
       return { lookX: 0, lookY: 0, thrust: 0, moveRight: 0, moveForward: 0, moveUp: 0 };
     },
   };
+  const intro = {
+    skipCalls: 0,
+    setElapsed() {},
+    skip() {
+      this.skipCalls += 1;
+    },
+  };
   const runtime = createUniverseRuntime({
     THREE: createFakeThree(),
     canvas: {},
@@ -75,14 +120,16 @@ function createRuntimeHarness({ reducedMotion = false } = {}) {
     scene: createGroup(),
     renderer: { render() {} },
     inputRouter,
+    intro,
     introDurationMs: 100,
-    handoffDurationMs: 300,
+    handoffDurationMs,
     now: () => clock,
     matchMedia: () => ({ matches: reducedMotion }),
   });
 
   return {
     runtime,
+    intro,
     runFrame(timestamp) {
       clock = timestamp;
       frames.runNext(timestamp);

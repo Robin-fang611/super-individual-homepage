@@ -57,6 +57,7 @@ export function createUniverseRuntime({
   let accumulator = 0;
   let previous = now();
   let introElapsedMs = 0;
+  let introDone = false;
   let handoffElapsedMs = 0;
   let flightState = initialFlightState ?? createFlightState();
   let experience = transitionExperience(createExperienceState(), { type: "LOADED" });
@@ -97,7 +98,14 @@ export function createUniverseRuntime({
     experience = transitionExperience(experience, { type: eventType });
     if (previousMode !== "handoff" && experience.mode === "handoff") {
       handoffElapsedMs = 0;
+      if (!introDone) {
+        introDone = true;
+        intro?.skip?.();
+      }
+      return true;
     }
+
+    return false;
   }
 
   function frame(frameNow) {
@@ -107,23 +115,26 @@ export function createUniverseRuntime({
       const elapsed = Math.min(MAX_FRAME_SECONDS, Math.max(0, (frameNow - previous) / 1000));
       previous = frameNow;
       accumulator += elapsed;
-      introElapsedMs += elapsed * 1000;
       while (accumulator >= FIXED_DT) {
         step();
         accumulator -= FIXED_DT;
       }
 
       applyFlightState();
-      if (experience.mode === "intro" && introElapsedMs >= introDurationMs) {
-        beginHandoff("INTRO_FINISHED");
+      let handoffStartedThisFrame = false;
+      if (!introDone) {
+        introElapsedMs += elapsed * 1000;
+        intro?.setElapsed?.(introElapsedMs);
+        if (experience.mode === "intro" && introElapsedMs >= introDurationMs) {
+          handoffStartedThisFrame = beginHandoff("INTRO_FINISHED");
+        }
       }
-      if (experience.mode === "handoff") {
+      if (experience.mode === "handoff" && !handoffStartedThisFrame) {
         handoffElapsedMs += elapsed * 1000;
       }
       if (experience.mode === "handoff" && handoffElapsedMs >= handoffDurationMs) {
         experience = transitionExperience(experience, { type: "HANDOFF_FINISHED" });
       }
-      intro?.setElapsed?.(introElapsedMs);
       onFrame?.(frameNow, { flightState, experience });
       renderer.render(scene, camera);
       raf = requestAnimationFrame(frame);
