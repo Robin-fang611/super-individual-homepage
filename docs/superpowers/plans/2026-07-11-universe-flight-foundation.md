@@ -39,7 +39,7 @@ import { normalizeWheelDelta, wheelToInput } from "../src/universe/input-router.
 
 test("normalizes line and page wheel deltas to pixels", () => {
   assert.deepEqual(normalizeWheelDelta({ deltaX: 2, deltaY: 3, deltaMode: 1 }, { width: 1200, height: 800 }), { x: 32, y: 48 });
-  assert.deepEqual(normalizeWheelDelta({ deltaX: 1, deltaY: -1, deltaMode: 2 }, { width: 1200, height: 800 }), { x: 1200, y: -800 });
+  assert.deepEqual(normalizeWheelDelta({ deltaX: 1, deltaY: -1, deltaMode: 2 }, { width: 1200, height: 800 }), { x: 240, y: -240 });
 });
 
 test("maps two-finger scroll to look and ctrl-wheel pinch to thrust", () => {
