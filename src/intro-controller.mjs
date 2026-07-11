@@ -12,7 +12,6 @@ export function getIntroPhase(elapsedMs) {
 
 export function createIntroController({ introElement, appElement, onDone, durationMs = 4300 }) {
   let completed = false;
-  const start = performance.now();
 
   function applyPhase(phase) {
     introElement.dataset.phase = phase;
@@ -25,22 +24,12 @@ export function createIntroController({ introElement, appElement, onDone, durati
     }
   }
 
-  function tick(now) {
-    const elapsed = now - start;
-    const phase = getIntroPhase(elapsed);
-    applyPhase(phase);
-
-    if (elapsed < durationMs) {
-      requestAnimationFrame(tick);
-    } else {
-      applyPhase("done");
-    }
-  }
-
   applyPhase("black");
-  requestAnimationFrame(tick);
 
   return {
+    setElapsed(elapsedMs) {
+      applyPhase(elapsedMs >= durationMs ? "done" : getIntroPhase(elapsedMs));
+    },
     skip() {
       applyPhase("done");
     },
