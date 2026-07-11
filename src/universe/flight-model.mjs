@@ -3,7 +3,6 @@ import { rotateVector } from "./orientation.mjs";
 const MAX_STEP_SECONDS = 1 / 60;
 const MAX_FRAME_SECONDS = 0.25;
 const MAX_SUBSTEPS = 15;
-const RADIAL_TOLERANCE = Number.EPSILON * 8;
 
 const measureVector = (vector) => {
   const maximumComponent = Math.max(
@@ -119,7 +118,7 @@ export function applySphericalBoundary(
   const scaledRadialSpeed = dot(scaledVelocity, normal);
   if (
     positionRadius < softStart ||
-    scaledRadialSpeed <= RADIAL_TOLERANCE
+    scaledRadialSpeed <= 0
   ) {
     return { position: nextPosition, velocity };
   }

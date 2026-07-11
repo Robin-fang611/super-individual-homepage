@@ -88,6 +88,30 @@ test("safely weakens only over-limit outward velocity", () => {
   assert.equal(result.velocity.z, 0);
 });
 
+test("does not ignore a tiny positive scaled outward component", () => {
+  const velocity = { x: 1e292, y: Number.MAX_VALUE, z: 0 };
+  const softened = applySphericalBoundary(
+    { x: 9.99, y: 0, z: 0 },
+    velocity,
+    boundary,
+  );
+  const stopped = applySphericalBoundary(
+    { x: 10, y: 0, z: 0 },
+    velocity,
+    boundary,
+  );
+
+  assert.ok(softened.velocity.x >= 0);
+  assert.ok(softened.velocity.x < velocity.x);
+  assert.ok(stopped.velocity.x <= 0);
+  for (const result of [softened, stopped]) {
+    assert.ok(Object.values(result.velocity).every(Number.isFinite));
+    assert.ok(
+      Math.abs(result.velocity.y - velocity.y) / velocity.y < 1e-15,
+    );
+  }
+});
+
 test("rejects an invalid spherical boundary configuration", () => {
   const position = { x: 0, y: 0, z: 0 };
   const velocity = { x: 0, y: 0, z: 0 };
