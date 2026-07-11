@@ -50,13 +50,13 @@ function drawWatercolor(context, width, height, seed, palette) {
     const ry = height * (0.05 + rng() * 0.16);
     const color = palette[pass % palette.length];
     const alpha = 0.035 + rng() * 0.08;
-    const gradient = context.createRadialGradient(x, y, 0, x, y, Math.max(rx, ry));
-    gradient.addColorStop(0, `${color}${Math.round(alpha * 255).toString(16).padStart(2, "0")}`);
-    gradient.addColorStop(0.55, `${color}${Math.round(alpha * 90).toString(16).padStart(2, "0")}`);
-    gradient.addColorStop(1, "#00000000");
     context.save();
     context.translate(x, y);
     context.scale(rx / Math.max(rx, ry), ry / Math.max(rx, ry));
+    const gradient = context.createRadialGradient(0, 0, 0, 0, 0, Math.max(rx, ry));
+    gradient.addColorStop(0, `${color}${Math.round(alpha * 255).toString(16).padStart(2, "0")}`);
+    gradient.addColorStop(0.55, `${color}${Math.round(alpha * 90).toString(16).padStart(2, "0")}`);
+    gradient.addColorStop(1, "#00000000");
     context.fillStyle = gradient;
     context.beginPath();
     context.arc(0, 0, Math.max(rx, ry), 0, Math.PI * 2);
