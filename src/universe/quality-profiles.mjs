@@ -1,0 +1,63 @@
+const profile = (value) => Object.freeze(value);
+
+export const QUALITY_ORDER = Object.freeze([
+  "performance",
+  "balanced",
+  "high",
+  "cinematic",
+]);
+
+export const QUALITY_PROFILES = Object.freeze({
+  performance: profile({
+    name: "performance",
+    worldSeed: 611,
+    dprMax: 1,
+    renderScale: [0.7, 1],
+    inkMode: "slices",
+    inkSteps: 0,
+    accentRatio: 0.2,
+    bloomScale: 0,
+    viewDistance: 0.55,
+    gpuBudgetMiB: 96,
+    assetTier: "core",
+  }),
+  balanced: profile({
+    name: "balanced",
+    worldSeed: 611,
+    dprMax: 1.25,
+    renderScale: [0.8, 1],
+    inkMode: "hybrid",
+    inkSteps: 18,
+    accentRatio: 0.45,
+    bloomScale: 0.25,
+    viewDistance: 0.75,
+    gpuBudgetMiB: 160,
+    assetTier: "balanced",
+  }),
+  high: profile({
+    name: "high",
+    worldSeed: 611,
+    dprMax: 1.5,
+    renderScale: [0.85, 1],
+    inkMode: "volume",
+    inkSteps: 32,
+    accentRatio: 0.75,
+    bloomScale: 0.5,
+    viewDistance: 1,
+    gpuBudgetMiB: 256,
+    assetTier: "high",
+  }),
+  cinematic: profile({
+    name: "cinematic",
+    worldSeed: 611,
+    dprMax: 2,
+    renderScale: [0.9, 1],
+    inkMode: "volume",
+    inkSteps: 52,
+    accentRatio: 1,
+    bloomScale: 0.75,
+    viewDistance: 1.2,
+    gpuBudgetMiB: 384,
+    assetTier: "cinematic",
+  }),
+});
