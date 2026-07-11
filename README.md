@@ -1,71 +1,52 @@
-# Robin Personal Star Road
+# Robin · 水墨宇宙
 
-Robin 的个人星路首页原型：`星辰，进化之路`。
+一个无缝的第一人称三维个人主页底座。玩家身处半径固定的宇宙球体内，可自由飞行；靠近边界时仅减弱向外速度，并保留沿边界滑行与完整环视。
 
-第一版是纯静态项目，不需要构建步骤，也不需要安装依赖。内容节点放在 `content/stars/`，每颗星是一份带 frontmatter 的 Markdown 文件。
+当前阶段刻意不放内容节点：先把可沉浸探索的世界做好，后续再把个人记录安放为世界地标。
+
+## 操作
+
+- 触控板双指横向 / 纵向：第一人称观察
+- 触控板捏合：向前 / 向后飞行
+- `WASD`：前后左右；`Space` / `E`：上升；`Shift` / `Q`：下降
+- 自动入场结束后交出控制权；任意输入可提前接管
+
+不提供鼠标交互或移动端模式，这是当前版本的明确范围。
+
+## 画质策略
+
+页面根据 WebGL 能力、可用内存、CPU 线程数选择初始档位：性能、均衡、高、电影。持续出现长帧时，自动模式只会逐级降低画质；手动档位会写入浏览器本地存储并始终优先。
+
+所有档位使用相同世界种子（`611`），因此降低画质不会改变世界的空间结构，只减少水墨团块、银色星屑和像素密度。
 
 ## 本地预览
 
-由于页面会通过 `fetch` 读取 Markdown 节点，不建议直接双击 `index.html` 打开。使用本地静态服务器：
+这是纯静态项目，无需安装或构建。请使用任意静态服务器，不要直接双击 `index.html`：
 
-```powershell
-python -m http.server 8788
+```sh
+python3 -m http.server 8788
 ```
 
-打开：
+打开 `http://localhost:8788`。
 
-```text
-http://localhost:8788
-```
+## 验证
 
-## 验证命令
-
-```powershell
-node --test tests/star-content.test.mjs tests/star-layout.test.mjs
+```sh
+node --test tests/*.test.mjs
 node scripts/validate-content.mjs
 ```
 
-预期结果：
+## 部署到 Cloudflare Pages
 
-- 解析和布局测试全部通过。
-- 内容验证输出 `Validated 3 public star nodes.`
+- Framework preset：`None`
+- Build command：留空
+- Build output directory：`/`
+- Root directory：仓库根目录
+- 生产分支：`master`
+- 功能分支：自动生成预览部署
 
-## 内容维护
+部署前运行上面的两条验证命令。该站点在浏览器本地渲染三维画面，服务器只负责分发静态文件；CDN 与普通静态托管即可满足需求。
 
-新增星星时：
+## 原始项目
 
-1. 在 `content/stars/` 新增一份 Markdown 文件。
-2. 在 `content/stars/index.json` 里加入文件名。
-3. 运行 `node scripts/validate-content.mjs`。
-
-最小字段：
-
-```markdown
----
-title: "节点标题"
-date: "2026-06-09"
-year: 2026
-type: "milestone"
-summary: "一句话摘要。"
-visibility: "public"
-current: false
----
-```
-
-同一时间只保留一颗 `current: true` 的当前星。
-
-## Cloudflare Pages
-
-Cloudflare Pages 设置：
-
-- Framework preset: `None`
-- Build command: 留空
-- Build output directory: `/`
-- Root directory: 仓库根目录
-
-部署前确认：
-
-```powershell
-node --test tests/star-content.test.mjs tests/star-layout.test.mjs
-node scripts/validate-content.mjs
-```
+原“星路”版本保留在归档分支 `archive/original-star-road-3d`。保留其 Markdown 内容读取、验证与阅读层能力；旧的轨道相机、圆柱背景和高密度粒子渲染不再进入当前主线。
