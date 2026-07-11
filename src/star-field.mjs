@@ -27,7 +27,7 @@ function rendererCapabilities(renderer) {
  * The current homepage deliberately starts without content nodes. The old record
  * reader remains intact and can later attach landmarks to this world.
  */
-export async function createStarField({ canvas, intro }) {
+export async function createStarField({ canvas, intro, onError }) {
   const THREE = await loadThree();
   const renderer = new THREE.WebGLRenderer({
     canvas,
@@ -53,6 +53,15 @@ export async function createStarField({ canvas, intro }) {
   const frameMonitor = createFrameMonitor();
   const state = { disposed: false, lastFrameTime: 0 };
   let runtime;
+
+  function reportError(error) {
+    onError?.(error);
+  }
+
+  function onContextLost(event) {
+    event.preventDefault();
+    reportError(new Error("WebGL context lost"));
+  }
 
   function applyProfile(nextProfile) {
     activeProfile = nextProfile;
@@ -105,7 +114,10 @@ export async function createStarField({ canvas, intro }) {
       quaternion: initialQuaternion,
     }),
     onFrame: animateWorld,
-    onError: (error) => console.error(error),
+    onError: (error) => {
+      console.error(error);
+      reportError(error);
+    },
   });
 
   function setQuality(name) {
@@ -127,10 +139,12 @@ export async function createStarField({ canvas, intro }) {
     state.disposed = true;
     runtime.destroy();
     window.removeEventListener("resize", resize);
+    canvas.removeEventListener("webglcontextlost", onContextLost);
     renderer.dispose();
   }
 
   window.addEventListener("resize", resize);
+  canvas.addEventListener("webglcontextlost", onContextLost);
   resize();
   runtime.start();
 

@@ -573,6 +573,58 @@ a {
   touch-action: none;
 }
 
+.universe-app[data-render-mode="fallback"] .universe-canvas,
+.universe-app[data-render-mode="fallback"] .intro-screen {
+  display: none;
+}
+
+.universe-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: rgba(227, 240, 241, 0.92);
+  background:
+    radial-gradient(ellipse at 64% 42%, rgba(30, 93, 108, 0.48), transparent 31%),
+    radial-gradient(ellipse at 31% 62%, rgba(9, 34, 49, 0.92), transparent 42%),
+    #010407;
+}
+
+.universe-fallback__ink {
+  position: absolute;
+  width: min(82vw, 900px);
+  aspect-ratio: 1.8;
+  opacity: 0.84;
+  filter: blur(1px);
+  background:
+    radial-gradient(ellipse at 32% 52%, rgba(87, 148, 160, 0.54), transparent 11%),
+    radial-gradient(ellipse at 58% 38%, rgba(38, 105, 122, 0.66), transparent 23%),
+    radial-gradient(ellipse at 74% 62%, rgba(101, 148, 156, 0.26), transparent 14%);
+  transform: rotate(-9deg) scale(1.36);
+}
+
+.universe-fallback__content {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  max-width: min(360px, calc(100vw - 48px));
+  text-align: center;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.8);
+}
+
+.universe-fallback__content p {
+  margin: 0;
+  font-size: clamp(23px, 4vw, 38px);
+  font-weight: 400;
+}
+
+.universe-fallback__content span {
+  color: rgba(194, 215, 219, 0.68);
+  font-size: 14px;
+}
+
 .intro-screen {
   position: fixed;
   inset: 0;

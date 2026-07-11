@@ -10,3 +10,12 @@ test("exploration shell has no visible nav, labels, or years", () => {
   assert.match(html, /id="reading-overlay"/);
   assert.doesNotMatch(html, /hidden-nav|interaction-hint|星路导航|STAR ROAD|2026/);
 });
+
+test("includes a static ink fallback for unavailable WebGL", () => {
+  const html = readFileSync("index.html", "utf8");
+  const app = readFileSync("src/app.mjs", "utf8");
+
+  assert.match(html, /id="universe-fallback"/);
+  assert.match(app, /showFallback/);
+  assert.match(app, /onError:/);
+});

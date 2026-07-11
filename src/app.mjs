@@ -9,9 +9,16 @@ function requireElement(selector) {
 const appElement = requireElement("#universe-app");
 const introElement = requireElement("#intro-screen");
 const canvas = requireElement("#universe-canvas");
+const fallbackElement = requireElement("#universe-fallback");
 const readingOverlay = requireElement("#reading-overlay");
 const readingContent = requireElement("#reading-content");
 const readingClose = requireElement("#reading-close");
+
+function showFallback() {
+  appElement.dataset.renderMode = "fallback";
+  introElement.setAttribute("aria-hidden", "true");
+  fallbackElement.hidden = false;
+}
 
 async function boot() {
   try {
@@ -77,9 +84,11 @@ async function boot() {
       onEnterRoad: () => {
         console.log("Entered star road");
       },
+      onError: showFallback,
     });
     window.__starField = starField;
   } catch (error) {
+    showFallback();
     window.__universeBoot = {
       step: "error",
       message: error?.message ?? String(error),
