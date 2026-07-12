@@ -7,7 +7,6 @@ export const INK_COLOR_GRADE = Object.freeze({
   cloudPrimary: 0x4d8d88,
   cloudDeep: 0x1f5a5c,
   riverSilver: 0xcbe8df,
-  edgeTeal: 0x2b7774,
   vortexTeal: 0x2f7774,
   goldGlint: 0xd7bd78,
 });

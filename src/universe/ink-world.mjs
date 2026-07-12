@@ -51,7 +51,6 @@ export function getInkWorldPlan(profile) {
     radius: WORLD_RADIUS,
     inkClouds: density.inkClouds,
     silverGlints: density.silverGlints,
-    riverStrands: 13,
     vortexRings: 7,
   });
 }
@@ -140,43 +139,6 @@ function createInkClouds(THREE, plan) {
     cloud.userData.qualityIndex = index;
     cloud.userData.phase = index * 0.73;
     group.add(cloud);
-  }
-  return group;
-}
-
-function createRiver(THREE, plan) {
-  const group = new THREE.Group();
-  group.name = "FlowingInkRiver";
-  const curve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(-4.5, -3.1, 8.4),
-    new THREE.Vector3(-1.5, -1.4, 3.2),
-    new THREE.Vector3(1.1, -0.4, -2.2),
-    new THREE.Vector3(3.4, 1.2, -7.8),
-    new THREE.Vector3(1.2, 3.7, -14),
-  ]);
-
-  for (let strand = 0; strand < plan.riverStrands; strand += 1) {
-    const points = [];
-    const offset = (strand - (plan.riverStrands - 1) / 2) * 0.11;
-    for (let index = 0; index <= 110; index += 1) {
-      const t = index / 110;
-      const point = curve.getPoint(t);
-      const tangent = curve.getTangent(t).normalize();
-      const side = new THREE.Vector3(-tangent.z, 0, tangent.x).normalize();
-      const weave = Math.sin(t * Math.PI * (3 + strand * 0.14) + strand) * 0.09;
-      points.push(point.add(side.multiplyScalar(offset + weave)));
-    }
-    const material = new THREE.LineBasicMaterial({
-      color: strand % 5 === 0 ? INK_COLOR_GRADE.riverSilver : INK_COLOR_GRADE.edgeTeal,
-      transparent: true,
-      opacity: strand % 5 === 0 ? 0.22 : 0.12,
-      depthWrite: false,
-      blending: THREE.NormalBlending,
-    });
-    const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), material);
-    line.name = `FlyWhiteRiverEdge-${strand}`;
-    line.userData.phase = strand * 0.47;
-    group.add(line);
   }
   return group;
 }
@@ -273,10 +235,9 @@ function createInkUniverseWorldFromPanorama({ THREE, profile, panorama }) {
   );
   sky.name = "InkSkyShell";
   const clouds = createInkClouds(THREE, plan);
-  const river = createRiver(THREE, plan);
   const vortex = createVortex(THREE, plan);
   const glints = createSilverGlints(THREE, plan);
-  group.add(sky, clouds, river, vortex, glints);
+  group.add(sky, clouds, vortex, glints);
   let disposed = false;
 
   function setQuality(nextProfile) {
@@ -293,7 +254,6 @@ function createInkUniverseWorldFromPanorama({ THREE, profile, panorama }) {
   function update(time) {
     clouds.rotation.y = time * 0.000006;
     vortex.rotation.z = time * 0.000025;
-    river.rotation.y = Math.sin(time * 0.00012) * 0.035;
     for (const cloud of clouds.children) {
       cloud.material.rotation += Math.sin(time * 0.0002 + cloud.userData.phase) * 0.00004;
     }

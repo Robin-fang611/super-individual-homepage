@@ -29,18 +29,16 @@ test("keeps the panorama sky shell safely beyond the reachable flight boundary",
   assert.ok(plan.radius > FLIGHT_BOUNDARY_RADIUS);
 });
 
-test("uses ink masses and restrained glints instead of a particle-heavy sky", () => {
+test("uses ink masses and restrained glints instead of a particle-heavy sky or route", () => {
   const plan = getInkWorldPlan(QUALITY_PROFILES.high);
 
   assert.equal(plan.inkClouds > plan.silverGlints / 4, true);
-  assert.equal(plan.riverStrands, 13);
   assert.equal(plan.vortexRings, 7);
 });
 
-test("keeps only restrained fly-white river edges in every quality tier", async () => {
+test("does not build a foreground river or visible route lines", async () => {
   for (const profile of Object.values(QUALITY_PROFILES)) {
     const plan = getInkWorldPlan(profile);
-    assert.equal(plan.riverStrands, 13);
     assert.equal(plan.vortexRings, 7);
     assert.ok(plan.inkClouds >= 8);
   }
@@ -48,7 +46,8 @@ test("keeps only restrained fly-white river edges in every quality tier", async 
   const source = await readFile(new URL("../src/universe/ink-world.mjs", import.meta.url), "utf8");
   assert.doesNotMatch(source, /TubeGeometry/);
   assert.doesNotMatch(source, /InkRiverRibbon/);
-  assert.match(source, /FlyWhiteRiverEdge/);
+  assert.doesNotMatch(source, /FlyWhiteRiverEdge/);
+  assert.doesNotMatch(source, /createRiver/);
 });
 
 test("uses the panorama sky shell instead of a procedural canvas sky", async () => {
