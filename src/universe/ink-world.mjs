@@ -1,4 +1,5 @@
 import { getInkPanoramaAsset, loadInkPanorama } from "./ink-panorama.mjs";
+import { INK_COLOR_GRADE } from "./ink-color-grade.mjs";
 import { PANORAMA_SHELL_RADIUS } from "./world-constants.mjs";
 
 const WORLD_RADIUS = PANORAMA_SHELL_RADIUS;
@@ -98,7 +99,12 @@ function drawWatercolor(context, width, height, seed, palette) {
 
 function makeInkTexture(THREE, seed) {
   return canvasTexture(THREE, 512, 512, (context, width, height) => {
-    drawWatercolor(context, width, height, seed, ["#153f52", "#0b2737", "#276276", "#071722"]);
+    drawWatercolor(context, width, height, seed, [
+      INK_COLOR_GRADE.inkMistPrimary,
+      INK_COLOR_GRADE.inkMistDeep,
+      INK_COLOR_GRADE.inkMistBright,
+      INK_COLOR_GRADE.inkMistShadow,
+    ]);
     context.globalCompositeOperation = "destination-out";
     const rng = createRng(seed + 31);
     for (let index = 0; index < 11; index += 1) {
@@ -124,7 +130,7 @@ function createInkClouds(THREE, plan) {
     const layout = INK_MASS_LAYOUT[index];
     const cloud = new THREE.Sprite(new THREE.SpriteMaterial({
       map: inkTexture,
-      color: layout.tone === 0 ? 0x4d8596 : 0x1f596c,
+      color: layout.tone === 0 ? INK_COLOR_GRADE.cloudPrimary : INK_COLOR_GRADE.cloudDeep,
       transparent: true,
       opacity: 0.18 + layout.tone * 0.025 + rng() * 0.04,
       depthWrite: false,
@@ -167,7 +173,7 @@ function createRiver(THREE, plan) {
       const ribbon = new THREE.Mesh(
         new THREE.TubeGeometry(strandCurve, 96, 0.16 + (strand % 3) * 0.025, 6, false),
         new THREE.MeshBasicMaterial({
-          color: strand === 6 ? 0x427d88 : 0x174857,
+          color: strand === 6 ? INK_COLOR_GRADE.riverTeal : INK_COLOR_GRADE.riverDeep,
           transparent: true,
           opacity: strand === 6 ? 0.19 : 0.14,
           depthWrite: false,
@@ -181,7 +187,7 @@ function createRiver(THREE, plan) {
       continue;
     }
     const material = new THREE.LineBasicMaterial({
-      color: strand % 5 === 0 ? 0x9ab8c0 : 0x1d7387,
+      color: strand % 5 === 0 ? INK_COLOR_GRADE.riverSilver : INK_COLOR_GRADE.edgeTeal,
       transparent: true,
       opacity: strand % 5 === 0 ? 0.22 : 0.12,
       depthWrite: false,
@@ -217,7 +223,7 @@ function createVortex(THREE, plan) {
     const line = new THREE.Line(
       new THREE.BufferGeometry().setFromPoints(points),
       new THREE.LineBasicMaterial({
-        color: ring === 0 ? 0xc0d1d4 : 0x2a788c,
+        color: ring === 0 ? INK_COLOR_GRADE.riverSilver : INK_COLOR_GRADE.vortexTeal,
         transparent: true,
         opacity: ring === 0 ? 0.26 : 0.14,
         depthWrite: false,
@@ -232,6 +238,9 @@ function createSilverGlints(THREE, plan) {
   const count = TIER_DENSITY.cinematic.silverGlints;
   const rng = createRng(plan.seed + 101);
   const positions = new Float32Array(count * 3);
+  const colors = new Float32Array(count * 3);
+  const silver = new THREE.Color(INK_COLOR_GRADE.riverSilver);
+  const gold = new THREE.Color(INK_COLOR_GRADE.goldGlint);
   for (let index = 0; index < count; index += 1) {
     const phi = Math.acos(1 - 2 * rng());
     const theta = rng() * Math.PI * 2;
@@ -239,12 +248,17 @@ function createSilverGlints(THREE, plan) {
     positions[index * 3] = Math.sin(phi) * Math.cos(theta) * radius;
     positions[index * 3 + 1] = Math.cos(phi) * radius;
     positions[index * 3 + 2] = Math.sin(phi) * Math.sin(theta) * radius;
+    const color = index % 17 === 0 ? gold : silver;
+    colors[index * 3] = color.r;
+    colors[index * 3 + 1] = color.g;
+    colors[index * 3 + 2] = color.b;
   }
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
   geometry.setDrawRange(0, plan.silverGlints);
   const points = new THREE.Points(geometry, new THREE.PointsMaterial({
-    color: 0xd6e4e6,
+    vertexColors: true,
     size: 0.045,
     transparent: true,
     opacity: 0.55,
@@ -272,6 +286,7 @@ function createInkUniverseWorldFromPanorama({ THREE, profile, panorama }) {
     new THREE.SphereGeometry(plan.radius, 96, 64),
     new THREE.MeshBasicMaterial({
       map: panorama,
+      color: INK_COLOR_GRADE.skyTint,
       side: THREE.BackSide,
       depthWrite: false,
     }),
