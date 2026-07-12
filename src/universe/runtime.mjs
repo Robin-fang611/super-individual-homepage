@@ -1,5 +1,6 @@
 import { createFlightState, stepFlight } from "./flight-model.mjs";
 import { applyLookDelta } from "./orientation.mjs";
+import { FLIGHT_BOUNDARY_RADIUS } from "./world-constants.mjs";
 import {
   createExperienceState,
   handoffWeights,
@@ -17,7 +18,7 @@ const DEFAULT_FLIGHT_CONFIG = Object.freeze({
   stopRate: 7,
   stopEpsilon: 0.001,
   thrustScale: 0.012,
-  boundary: { radius: 24, softStart: 20, epsilon: 0.001 },
+  boundary: { radius: FLIGHT_BOUNDARY_RADIUS, softStart: 20, epsilon: 0.001 },
 });
 
 export function createUniverseRuntime({

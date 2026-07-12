@@ -4,6 +4,10 @@ import { readFile } from "node:fs/promises";
 
 import { createInkUniverseWorld, getInkWorldPlan } from "../src/universe/ink-world.mjs";
 import { QUALITY_PROFILES } from "../src/universe/quality-profiles.mjs";
+import {
+  FLIGHT_BOUNDARY_RADIUS,
+  PANORAMA_SHELL_CLEARANCE,
+} from "../src/universe/world-constants.mjs";
 
 test("keeps every quality tier in the same ink universe while scaling visual density", () => {
   const performance = getInkWorldPlan(QUALITY_PROFILES.performance);
@@ -15,6 +19,14 @@ test("keeps every quality tier in the same ink universe while scaling visual den
   assert.equal(performance.silverGlints < cinematic.silverGlints, true);
   assert.equal(performance.silverGlints <= 72, true);
   assert.equal(cinematic.silverGlints <= 72, true);
+});
+
+test("keeps the panorama sky shell safely beyond the reachable flight boundary", () => {
+  const plan = getInkWorldPlan(QUALITY_PROFILES.balanced);
+
+  assert.ok(PANORAMA_SHELL_CLEARANCE > 0);
+  assert.equal(plan.radius, FLIGHT_BOUNDARY_RADIUS + PANORAMA_SHELL_CLEARANCE);
+  assert.ok(plan.radius > FLIGHT_BOUNDARY_RADIUS);
 });
 
 test("uses ink masses and restrained glints instead of a particle-heavy sky", () => {

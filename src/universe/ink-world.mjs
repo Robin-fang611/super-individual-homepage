@@ -1,6 +1,7 @@
 import { getInkPanoramaAsset, loadInkPanorama } from "./ink-panorama.mjs";
+import { PANORAMA_SHELL_RADIUS } from "./world-constants.mjs";
 
-const WORLD_RADIUS = 23.6;
+const WORLD_RADIUS = PANORAMA_SHELL_RADIUS;
 const TIER_DENSITY = Object.freeze({
   core: { inkClouds: 8, silverGlints: 24 },
   balanced: { inkClouds: 12, silverGlints: 38 },
