@@ -1,3 +1,5 @@
+import { getInkPanoramaAsset, loadInkPanorama } from "./ink-panorama.mjs";
+
 const WORLD_RADIUS = 23.6;
 const TIER_DENSITY = Object.freeze({
   core: { inkClouds: 8, silverGlints: 24 },
@@ -63,31 +65,6 @@ function drawWatercolor(context, width, height, seed, palette) {
     context.fill();
     context.restore();
   }
-}
-
-function makeSkyTexture(THREE, seed) {
-  return canvasTexture(THREE, 1536, 768, (context, width, height) => {
-    const base = context.createLinearGradient(0, 0, 0, height);
-    base.addColorStop(0, "#02050b");
-    base.addColorStop(0.42, "#071827");
-    base.addColorStop(0.7, "#03101c");
-    base.addColorStop(1, "#010306");
-    context.fillStyle = base;
-    context.fillRect(0, 0, width, height);
-    drawWatercolor(context, width, height, seed, ["#123c55", "#0c2b3c", "#21566d", "#071824"]);
-
-    const rng = createRng(seed + 701);
-    context.globalCompositeOperation = "screen";
-    for (let index = 0; index < 24; index += 1) {
-      const x = rng() * width;
-      const y = rng() * height;
-      const radius = 1 + rng() * 1.5;
-      context.fillStyle = `rgba(220, 238, 244, ${0.08 + rng() * 0.16})`;
-      context.beginPath();
-      context.arc(x, y, radius, 0, Math.PI * 2);
-      context.fill();
-    }
-  });
 }
 
 function makeInkTexture(THREE, seed) {
@@ -235,14 +212,15 @@ function createSilverGlints(THREE, plan) {
   return points;
 }
 
-export function createInkUniverseWorld({ THREE, profile }) {
+export async function createInkUniverseWorld({ THREE, profile }) {
   const group = new THREE.Group();
   group.name = "InkUniverseWorld";
   const plan = getInkWorldPlan(profile);
+  const panorama = await loadInkPanorama(THREE, profile);
   const sky = new THREE.Mesh(
-    new THREE.SphereGeometry(plan.radius, 48, 28),
+    new THREE.SphereGeometry(plan.radius, 96, 64),
     new THREE.MeshBasicMaterial({
-      map: makeSkyTexture(THREE, plan.seed),
+      map: panorama,
       side: THREE.BackSide,
       depthWrite: false,
     }),
@@ -253,9 +231,13 @@ export function createInkUniverseWorld({ THREE, profile }) {
   const vortex = createVortex(THREE, plan);
   const glints = createSilverGlints(THREE, plan);
   group.add(sky, clouds, river, vortex, glints);
+  let disposed = false;
 
   function setQuality(nextProfile) {
     const nextPlan = getInkWorldPlan(nextProfile);
+    const nextPanorama = getInkPanoramaAsset(nextProfile);
+    panorama.anisotropy = Math.max(1, Math.min(4, Math.round(nextPanorama.resolution / 1024)));
+    panorama.needsUpdate = true;
     for (const cloud of clouds.children) {
       cloud.visible = cloud.userData.qualityIndex < nextPlan.inkClouds;
     }
@@ -271,6 +253,24 @@ export function createInkUniverseWorld({ THREE, profile }) {
     }
   }
 
+  function dispose() {
+    if (disposed) return;
+    disposed = true;
+    const textures = new Set();
+    group.traverse((object) => {
+      object.geometry?.dispose?.();
+      const materials = Array.isArray(object.material) ? object.material : [object.material];
+      for (const material of materials) {
+        if (!material) continue;
+        if (material.map && !textures.has(material.map)) {
+          textures.add(material.map);
+          material.map.dispose?.();
+        }
+        material.dispose?.();
+      }
+    });
+  }
+
   setQuality(profile);
-  return Object.freeze({ group, setQuality, update });
+  return Object.freeze({ group, setQuality, update, dispose });
 }

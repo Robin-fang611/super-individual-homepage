@@ -47,7 +47,7 @@ export async function createStarField({ canvas, intro, onError }) {
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x02080e, 0.018);
   const camera = new THREE.PerspectiveCamera(70, 1, 0.1, 32);
-  const inkWorld = createInkUniverseWorld({ THREE, profile: activeProfile });
+  const inkWorld = await createInkUniverseWorld({ THREE, profile: activeProfile });
   scene.add(inkWorld.group);
 
   const frameMonitor = createFrameMonitor();
@@ -141,6 +141,7 @@ export async function createStarField({ canvas, intro, onError }) {
     runtime.destroy();
     window.removeEventListener("resize", resize);
     canvas.removeEventListener("webglcontextlost", onContextLost);
+    inkWorld.dispose();
     renderer.dispose();
   }
 

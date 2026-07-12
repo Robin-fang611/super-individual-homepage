@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 
 import { getInkWorldPlan } from "../src/universe/ink-world.mjs";
 import { QUALITY_PROFILES } from "../src/universe/quality-profiles.mjs";
@@ -22,4 +23,11 @@ test("uses ink masses and restrained glints instead of a particle-heavy sky", ()
   assert.equal(plan.inkClouds > plan.silverGlints / 4, true);
   assert.equal(plan.riverStrands, 13);
   assert.equal(plan.vortexRings, 7);
+});
+
+test("uses the panorama sky shell instead of a procedural canvas sky", async () => {
+  const source = await readFile(new URL("../src/universe/ink-world.mjs", import.meta.url), "utf8");
+
+  assert.match(source, /loadInkPanorama/);
+  assert.doesNotMatch(source, /makeSkyTexture/);
 });
