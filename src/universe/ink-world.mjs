@@ -36,8 +36,6 @@ const INK_MASS_LAYOUT = Object.freeze([
   { position: [-1.9, 9.6, -19.4], scale: [8.5, 3.9], rotation: 0.39, tone: 1 },
 ]);
 
-const RIBBON_STRANDS = new Set([2, 6, 10]);
-
 function createRng(seed) {
   let state = seed >>> 0;
   return () => {
@@ -167,24 +165,6 @@ function createRiver(THREE, plan) {
       const side = new THREE.Vector3(-tangent.z, 0, tangent.x).normalize();
       const weave = Math.sin(t * Math.PI * (3 + strand * 0.14) + strand) * 0.09;
       points.push(point.add(side.multiplyScalar(offset + weave)));
-    }
-    const strandCurve = new THREE.CatmullRomCurve3(points);
-    if (RIBBON_STRANDS.has(strand)) {
-      const ribbon = new THREE.Mesh(
-        new THREE.TubeGeometry(strandCurve, 96, 0.16 + (strand % 3) * 0.025, 6, false),
-        new THREE.MeshBasicMaterial({
-          color: strand === 6 ? INK_COLOR_GRADE.riverTeal : INK_COLOR_GRADE.riverDeep,
-          transparent: true,
-          opacity: strand === 6 ? 0.19 : 0.14,
-          depthWrite: false,
-          side: THREE.DoubleSide,
-          blending: THREE.NormalBlending,
-        }),
-      );
-      ribbon.name = `InkRiverRibbon-${strand}`;
-      ribbon.userData.phase = strand * 0.47;
-      group.add(ribbon);
-      continue;
     }
     const material = new THREE.LineBasicMaterial({
       color: strand % 5 === 0 ? INK_COLOR_GRADE.riverSilver : INK_COLOR_GRADE.edgeTeal,
