@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-import { getInkWorldPlan } from "../src/universe/ink-world.mjs";
+import { createInkUniverseWorld, getInkWorldPlan } from "../src/universe/ink-world.mjs";
 import { QUALITY_PROFILES } from "../src/universe/quality-profiles.mjs";
 
 test("keeps every quality tier in the same ink universe while scaling visual density", () => {
@@ -30,4 +30,29 @@ test("uses the panorama sky shell instead of a procedural canvas sky", async () 
 
   assert.match(source, /loadInkPanorama/);
   assert.doesNotMatch(source, /makeSkyTexture/);
+});
+
+test("releases an already loaded panorama when world construction fails", async () => {
+  const failure = new Error("sphere construction failed");
+  let panoramaDisposals = 0;
+  const panorama = { dispose: () => { panoramaDisposals += 1; } };
+  const THREE = {
+    SRGBColorSpace: "srgb",
+    LinearMipmapLinearFilter: "mipmap",
+    LinearFilter: "linear",
+    RepeatWrapping: "repeat",
+    TextureLoader: class {
+      load(url, onLoad) { onLoad(panorama); }
+    },
+    Group: class {},
+    SphereGeometry: class {
+      constructor() { throw failure; }
+    },
+  };
+
+  await assert.rejects(
+    createInkUniverseWorld({ THREE, profile: QUALITY_PROFILES.balanced }),
+    failure,
+  );
+  assert.equal(panoramaDisposals, 1);
 });

@@ -27,14 +27,30 @@ function rendererCapabilities(renderer) {
  * The current homepage deliberately starts without content nodes. The old record
  * reader remains intact and can later attach landmarks to this world.
  */
-export async function createStarField({ canvas, intro, onError }) {
-  const THREE = await loadThree();
+export async function createStarField({
+  canvas,
+  intro,
+  onError,
+  loadThreeModule = loadThree,
+  createWorld = createInkUniverseWorld,
+}) {
+  const THREE = await loadThreeModule();
   const renderer = new THREE.WebGLRenderer({
     canvas,
     antialias: true,
     alpha: false,
     powerPreference: "high-performance",
   });
+
+  try {
+    return await initializeStarField({ THREE, canvas, intro, onError, renderer, createWorld });
+  } catch (error) {
+    renderer.dispose();
+    throw error;
+  }
+}
+
+async function initializeStarField({ THREE, canvas, intro, onError, renderer, createWorld }) {
   renderer.setClearColor(0x010306, 1);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
@@ -47,7 +63,7 @@ export async function createStarField({ canvas, intro, onError }) {
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x02080e, 0.018);
   const camera = new THREE.PerspectiveCamera(70, 1, 0.1, 32);
-  const inkWorld = await createInkUniverseWorld({ THREE, profile: activeProfile });
+  const inkWorld = await createWorld({ THREE, profile: activeProfile });
   scene.add(inkWorld.group);
 
   const frameMonitor = createFrameMonitor();

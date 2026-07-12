@@ -213,10 +213,19 @@ function createSilverGlints(THREE, plan) {
 }
 
 export async function createInkUniverseWorld({ THREE, profile }) {
+  const panorama = await loadInkPanorama(THREE, profile);
+  try {
+    return createInkUniverseWorldFromPanorama({ THREE, profile, panorama });
+  } catch (error) {
+    panorama.dispose?.();
+    throw error;
+  }
+}
+
+function createInkUniverseWorldFromPanorama({ THREE, profile, panorama }) {
   const group = new THREE.Group();
   group.name = "InkUniverseWorld";
   const plan = getInkWorldPlan(profile);
-  const panorama = await loadInkPanorama(THREE, profile);
   const sky = new THREE.Mesh(
     new THREE.SphereGeometry(plan.radius, 96, 64),
     new THREE.MeshBasicMaterial({
