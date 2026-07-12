@@ -4,6 +4,7 @@ import { createInkUniverseWorld } from "./universe/ink-world.mjs";
 import { createFlightState } from "./universe/flight-model.mjs";
 import { createQualityController } from "./universe/quality-controller.mjs";
 import { createUniverseRuntime } from "./universe/runtime.mjs";
+import { CAMERA_FAR_PLANE } from "./universe/world-constants.mjs";
 
 const THREE_URL = "/assets/three.module.js";
 let threeModulePromise;
@@ -62,7 +63,7 @@ async function initializeStarField({ THREE, canvas, intro, onError, renderer, cr
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x02080e, 0.018);
-  const camera = new THREE.PerspectiveCamera(70, 1, 0.1, 32);
+  const camera = new THREE.PerspectiveCamera(70, 1, 0.1, CAMERA_FAR_PLANE);
   const inkWorld = await createWorld({ THREE, profile: activeProfile });
   scene.add(inkWorld.group);
 

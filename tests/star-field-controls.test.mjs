@@ -2,6 +2,11 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createStarField } from "../src/star-field.mjs";
+import {
+  CAMERA_FAR_PLANE,
+  FLIGHT_BOUNDARY_RADIUS,
+  PANORAMA_SHELL_RADIUS,
+} from "../src/universe/world-constants.mjs";
 
 test("builds the visual scene from the ink world and adaptive quality controller", async () => {
   const source = await readFile(new URL("../src/star-field.mjs", import.meta.url), "utf8");
@@ -11,6 +16,13 @@ test("builds the visual scene from the ink world and adaptive quality controller
   assert.match(source, /createFrameMonitor/);
   assert.doesNotMatch(source, /createStarRiver/);
   assert.doesNotMatch(source, /camera\.lookAt\(focus\)/);
+});
+
+test("camera far plane covers the opposite panorama shell from every reachable position", async () => {
+  const source = await readFile(new URL("../src/star-field.mjs", import.meta.url), "utf8");
+
+  assert.ok(CAMERA_FAR_PLANE > FLIGHT_BOUNDARY_RADIUS + PANORAMA_SHELL_RADIUS);
+  assert.match(source, /CAMERA_FAR_PLANE/);
 });
 
 test("releases the renderer and rethrows when panorama world creation fails", async (context) => {
