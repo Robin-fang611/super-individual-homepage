@@ -25,6 +25,19 @@ test("uses ink masses and restrained glints instead of a particle-heavy sky", ()
   assert.equal(plan.vortexRings, 7);
 });
 
+test("keeps a substantial ink river and vortex in every quality tier", async () => {
+  for (const profile of Object.values(QUALITY_PROFILES)) {
+    const plan = getInkWorldPlan(profile);
+    assert.equal(plan.riverStrands, 13);
+    assert.equal(plan.vortexRings, 7);
+    assert.ok(plan.inkClouds >= 8);
+  }
+
+  const source = await readFile(new URL("../src/universe/ink-world.mjs", import.meta.url), "utf8");
+  assert.match(source, /TubeGeometry/);
+  assert.match(source, /InkRiverRibbon/);
+});
+
 test("uses the panorama sky shell instead of a procedural canvas sky", async () => {
   const source = await readFile(new URL("../src/universe/ink-world.mjs", import.meta.url), "utf8");
 
