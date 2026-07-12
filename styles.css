@@ -592,6 +592,10 @@ a {
     #010407;
 }
 
+.universe-fallback[hidden] {
+  display: none;
+}
+
 .universe-fallback__ink {
   position: absolute;
   width: min(82vw, 900px);

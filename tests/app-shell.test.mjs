@@ -14,8 +14,10 @@ test("exploration shell has no visible nav, labels, or years", () => {
 test("includes a static ink fallback for unavailable WebGL", () => {
   const html = readFileSync("index.html", "utf8");
   const app = readFileSync("src/app.mjs", "utf8");
+  const styles = readFileSync("styles.css", "utf8");
 
   assert.match(html, /id="universe-fallback"/);
   assert.match(app, /showFallback/);
   assert.match(app, /onError:/);
+  assert.match(styles, /\.universe-fallback\[hidden\]\s*\{\s*display:\s*none/);
 });
