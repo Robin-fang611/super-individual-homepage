@@ -1,15 +1,25 @@
-const PANORAMA_URL = "/assets/images/ink-universe-panorama-v1.png";
-const RESOLUTIONS = Object.freeze({
-  performance: 1024,
-  balanced: 1536,
-  high: 2048,
-  cinematic: 3072,
+const PANORAMA_ASSETS = Object.freeze({
+  performance: Object.freeze({
+    url: "/assets/images/ink-universe-panorama-v1-performance.png",
+    resolution: 1024,
+  }),
+  balanced: Object.freeze({
+    url: "/assets/images/ink-universe-panorama-v1-balanced.png",
+    resolution: 1536,
+  }),
+  high: Object.freeze({
+    url: "/assets/images/ink-universe-panorama-v1-high.png",
+    resolution: 2048,
+  }),
+  cinematic: Object.freeze({
+    url: "/assets/images/ink-universe-panorama-v1-cinematic.png",
+    resolution: 3072,
+  }),
 });
 
 export function getInkPanoramaAsset(profile) {
   return Object.freeze({
-    url: PANORAMA_URL,
-    resolution: RESOLUTIONS[profile.name] ?? RESOLUTIONS.balanced,
+    ...(PANORAMA_ASSETS[profile.name] ?? PANORAMA_ASSETS.balanced),
     worldSeed: profile.worldSeed,
   });
 }
