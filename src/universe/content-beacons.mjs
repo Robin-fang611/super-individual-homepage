@@ -186,6 +186,7 @@ export function createContentBeacons({ THREE, layout }) {
       ring,
       label,
       hovered: false,
+      visited: false,
     });
   }
 
@@ -238,16 +239,30 @@ export function createContentBeacons({ THREE, layout }) {
     return beaconDefs.find((d) => d.star.id === id || d.star.file === id);
   }
 
+  function markVisited(id) {
+    const def = getDefByStarId(id);
+    if (def && !def.visited) {
+      def.visited = true;
+    }
+  }
+
   function update(time, _camera, experience) {
     const userActive = experience && (experience.mode === "active" || experience.mode === "handoff");
     for (const def of beaconDefs) {
       const pulse = 1 + Math.sin(time * 0.0009 + def.star.position.x * 1.7) * 0.05;
       if (!def.hovered) {
+        const visitedScale = def.visited ? 1.06 : 1;
         def.glow.scale.set(
-          def.cfg.glowSize * pulse,
-          def.cfg.glowSize * pulse,
+          def.cfg.glowSize * pulse * visitedScale,
+          def.cfg.glowSize * pulse * visitedScale,
           1,
         );
+      }
+      // 已访问星标：基辉光提升（微光常亮）
+      if (def.visited) {
+        def.glow.material.opacity = def.hovered
+          ? Math.min(0.92, def.cfg.glowOpacity * 1.6)
+          : Math.min(0.92, def.cfg.glowOpacity * 1.35);
       }
       // Fade labels when user is actively flying (reduce visual clutter)
       if (def.tier === "core" && def.cfg.labelAlways && !def.hovered) {
@@ -277,6 +292,7 @@ export function createContentBeacons({ THREE, layout }) {
     hitTest,
     applyHover,
     getDefByStarId,
+    markVisited,
     update,
     dispose,
   };
