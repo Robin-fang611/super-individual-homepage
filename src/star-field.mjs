@@ -1,6 +1,7 @@
 import { createFrameMonitor } from "./universe/frame-monitor.mjs";
 import { createInputRouter } from "./universe/input-router.mjs";
 import { createInkUniverseWorld } from "./universe/ink-world.mjs";
+import { buildIntroFlightPath } from "./universe/intro-flight-path.mjs";
 import { createFlightState, stepFlight } from "./universe/flight-model.mjs";
 import { createQualityController } from "./universe/quality-controller.mjs";
 import { createUniverseRuntime } from "./universe/runtime.mjs";
@@ -179,6 +180,17 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
   const initialQuaternion = new THREE.Quaternion().setFromEuler(
     new THREE.Euler(0.08, -0.14, 0, "YXZ"),
   );
+  const initialFlightState = createFlightState({
+    position: { x: -0.2, y: 0.8, z: 5.4 },
+    quaternion: initialQuaternion,
+  });
+  const introPath = layout?.sceneStars?.length
+    ? buildIntroFlightPath({
+        start: initialFlightState.position,
+        stars: layout.sceneStars,
+        boundaryRadius: FLIGHT_BOUNDARY_RADIUS,
+      })
+    : null;
   runtime = createUniverseRuntime({
     THREE,
     canvas,
@@ -187,10 +199,8 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
     renderer,
     intro,
     inputRouter,
-    initialFlightState: createFlightState({
-      position: { x: -0.2, y: 0.8, z: 5.4 },
-      quaternion: initialQuaternion,
-    }),
+    introPath,
+    initialFlightState,
     onFrame: animateWorld,
     onError: (error) => {
       console.error(error);

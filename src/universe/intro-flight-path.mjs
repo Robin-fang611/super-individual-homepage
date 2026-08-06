@@ -1,27 +1,16 @@
 // 纯向量数学，不依赖 THREE，方便测试
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
-function catmullRom(points, t) {
-  const count = points.length;
-  if (count === 1) return points[0];
-  const scaled = t * (count - 1);
-  const index = Math.min(count - 2, Math.floor(scaled));
-  const local = scaled - index;
-  const p0 = points[Math.max(0, index - 1)];
-  const p1 = points[index];
-  const p2 = points[index + 1];
-  const p3 = points[Math.min(count - 1, index + 2)];
-  const t2 = local * local;
-  const t3 = t2 * local;
-  return {
-    x: 0.5 * ((2 * p1.x) + (-p0.x + p2.x) * local + (2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x) * t2 + (-p0.x + 3 * p1.x - 3 * p2.x + p3.x) * t3),
-    y: 0.5 * ((2 * p1.y) + (-p0.y + p2.y) * local + (2 * p0.y - 5 * p1.y + 4 * p2.y - p3.y) * t2 + (-p0.y + 3 * p1.y - 3 * p2.y + p3.y) * t3),
-    z: 0.5 * ((2 * p1.z) + (-p0.z + p2.z) * local + (2 * p0.z - 5 * p1.z + 4 * p2.z - p3.z) * t2 + (-p0.z + 3 * p1.z - 3 * p2.z + p3.z) * t3),
-  };
-}
-
 function pointDistance(a, b) {
   return Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
+}
+
+function lerp(a, b, t) {
+  return {
+    x: a.x + (b.x - a.x) * t,
+    y: a.y + (b.y - a.y) * t,
+    z: a.z + (b.z - a.z) * t,
+  };
 }
 
 function lookAtQuaternion(position, target) {
@@ -76,18 +65,25 @@ function lookAtQuaternion(position, target) {
   return { x: qx / norm, y: qy / norm, z: qz / norm, w: qw / norm };
 }
 
+function smoothstep(a, b, value) {
+  const t = clamp((value - a) / (b - a), 0, 1);
+  return t * t * (3 - 2 * t);
+}
+
 /**
- * 生成开场飞行路径：掠过每一颗星的前方，最后停在 current 星正面。
- * 纯向量采样，不含 THREE；末尾 settle 段减速到 0，与 handoff 无缝衔接。
+ * 生成开场飞行路径：逐段直线掠过每一颗星前方，最后 settle 到 current 星正面。
+ * 段时长按弧长分配；末尾 settle 段减速到 0，与 handoff 无缝衔接。
+ * 纯向量采样，不含 THREE。
  */
 export function buildIntroFlightPath({ start, stars, boundaryRadius = Infinity }) {
-  const ordered = [...stars].sort((a, b) => (a.current ? -1 : 0) - (b.current ? -1 : 0));
-  const current = ordered.find((star) => star.current) ?? ordered[0];
+  // 掠过顺序：从远处节点到当前星（sceneStars 是 current 优先，反转得到 远→近）
+  const ordered = [...stars].reverse();
+  const current = stars.find((star) => star.current) ?? stars[0];
   if (!current) {
     return { durationMs: 0, pointAt: () => ({ position: start, lookAt: { x: 0, y: 0, z: -1 } }) };
   }
 
-  // 飞掠点：每颗星前方 1.6 倍半径处（朝观察者方向偏移），终点为 current 星正面
+  // 控制点：起点 → 每颗星的飞掠点 → current 星正面
   const controlPoints = [start];
   for (const star of ordered) {
     const direction = {
@@ -96,13 +92,11 @@ export function buildIntroFlightPath({ start, stars, boundaryRadius = Infinity }
       z: start.z - star.position.z,
     };
     const length = Math.hypot(direction.x, direction.y, direction.z) || 1;
-    const offset = 1.6;
     let point = {
-      x: star.position.x + (direction.x / length) * offset,
-      y: star.position.y + (direction.y / length) * offset,
-      z: star.position.z + (direction.z / length) * offset,
+      x: star.position.x + (direction.x / length) * 1.8,
+      y: star.position.y + (direction.y / length) * 1.8,
+      z: star.position.z + (direction.z / length) * 1.8,
     };
-    // 钳制在飞行边界内
     const dist = Math.hypot(point.x, point.y, point.z);
     if (dist > boundaryRadius) {
       const scale = boundaryRadius / dist;
@@ -110,8 +104,6 @@ export function buildIntroFlightPath({ start, stars, boundaryRadius = Infinity }
     }
     controlPoints.push(point);
   }
-
-  // 终点：current 星正面（homeFocus 思路：略靠近观察者、略低）
   const finalPosition = {
     x: current.position.x - 0.18,
     y: current.position.y - 0.02,
@@ -119,7 +111,7 @@ export function buildIntroFlightPath({ start, stars, boundaryRadius = Infinity }
   };
   controlPoints.push(finalPosition);
 
-  // 段时长按弧长比例分配，末尾 15% 减速 settle
+  // 段弧长
   const segmentLengths = [];
   let totalLength = 0;
   for (let index = 0; index < controlPoints.length - 1; index += 1) {
@@ -131,16 +123,21 @@ export function buildIntroFlightPath({ start, stars, boundaryRadius = Infinity }
     return { durationMs: 0, pointAt: () => ({ position: finalPosition, lookAt: current.position }) };
   }
 
-  const settleRatio = 0.15;
-  const settleStart = 1 - settleRatio;
-  const speedAt = (progress) => {
-    // 前 85% 匀速，后 15% 减速到 0（缓出）
-    if (progress < settleStart) return 1;
-    const settleProgress = (progress - settleStart) / settleRatio;
-    return 1 - settleProgress * settleProgress;
-  };
+  // 速度曲线：前 85% 匀速，后 15% 减速到 0（smoothstep 缓出）
+  const SETTLE_RATIO = 0.15;
+  const settleStart = 1 - SETTLE_RATIO;
 
-  // 弧长参数化：progress -> 沿路径的距离
+  // 归一化速度（弧长占比/时间占比）
+  const baseSpeed = 1 / settleStart; // 匀速段速度（占总弧长比例 per 时间比例）
+  function distanceAt(progress) {
+    if (progress < settleStart) return progress * settleStart * totalLength * baseSpeed;
+    const settleProgress = (progress - settleStart) / SETTLE_RATIO;
+    const settleDistance = totalLength * SETTLE_RATIO * (2 * settleProgress - settleProgress * settleProgress);
+    return totalLength * settleStart + settleDistance;
+  }
+  // distanceAt(0)=0, distanceAt(settleStart)=totalLength*settleStart, distanceAt(1)=totalLength*settleStart + totalLength*SETTLE_RATIO = totalLength ✓
+
+  // 弧长 → 位置：逐段定位 + 线性插值
   const cumulative = [];
   let running = 0;
   for (const length of segmentLengths) {
@@ -148,28 +145,29 @@ export function buildIntroFlightPath({ start, stars, boundaryRadius = Infinity }
     cumulative.push(running);
   }
 
-  function distanceAt(progress) {
-    // 先按速度曲线积分得到目标距离（近似：匀速段线性，settle 段减速）
-    if (progress < settleStart) {
-      return (progress / settleStart) * totalLength * settleStart;
-    }
-    const settleProgress = (progress - settleStart) / settleRatio;
-    const settleDistance = totalLength * settleRatio * (settleProgress * (2 - settleProgress));
-    return totalLength * settleStart + settleDistance;
-  }
-
-  function sample(progress) {
-    const clamped = clamp(progress, 0, 1);
-    const targetDistance = distanceAt(clamped);
+  function positionAt(distance) {
     let segmentIndex = 0;
-    while (segmentIndex < cumulative.length - 1 && cumulative[segmentIndex] < targetDistance) {
+    while (segmentIndex < cumulative.length - 1 && cumulative[segmentIndex] < distance) {
       segmentIndex += 1;
     }
     const segmentStart = segmentIndex === 0 ? 0 : cumulative[segmentIndex - 1];
     const segmentLength = segmentLengths[segmentIndex];
-    const local = segmentLength === 0 ? 0 : (targetDistance - segmentStart) / segmentLength;
-    const position = catmullRom(controlPoints, (segmentIndex + local) / (controlPoints.length - 1));
-    const lookTarget = ordered[Math.min(ordered.length - 1, segmentIndex + 1)].position;
+    const local = segmentLength === 0 ? 0 : clamp((distance - segmentStart) / segmentLength, 0, 1);
+    return lerp(controlPoints[segmentIndex], controlPoints[segmentIndex + 1], local);
+  }
+
+  function sample(progress) {
+    const clamped = clamp(progress, 0, 1);
+    const distance = distanceAt(clamped);
+    const position = positionAt(distance);
+
+    // lookAt：指向当前段的目标星（段 0 是起点→第一颗星，其余段指向各自星标）
+    let segmentIndex = 0;
+    while (segmentIndex < cumulative.length - 1 && cumulative[segmentIndex] < distance) {
+      segmentIndex += 1;
+    }
+    const starIndex = Math.min(segmentIndex, ordered.length - 1);
+    const lookTarget = ordered[starIndex].position;
     return {
       position,
       lookAt: lookTarget,
@@ -177,12 +175,8 @@ export function buildIntroFlightPath({ start, stars, boundaryRadius = Infinity }
     };
   }
 
-  const speedSum = segmentLengths.reduce((sum, length, index) => {
-    const startProgress = index / (controlPoints.length - 1);
-    return sum + speedAt(startProgress) * length;
-  }, 0);
-  const baseDuration = speedSum > 0 ? totalLength / (speedSum / totalLength) : 0;
-  const durationMs = Math.max(2600, baseDuration * 900);
+  // 时长：总弧长 × 每单位弧长的毫秒数（速度设定，3 星路径约 8s）
+  const durationMs = Math.max(3200, totalLength * 420);
 
   return { durationMs, pointAt: sample };
 }

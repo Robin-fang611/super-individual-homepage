@@ -31,6 +31,7 @@ export function createUniverseRuntime({
   inputRouter,
   flightConfig = {},
   initialFlightState,
+  introPath,
   onError,
   onFrame,
   introDurationMs = DEFAULT_INTRO_DURATION_MS,
@@ -46,6 +47,9 @@ export function createUniverseRuntime({
   rig.name = "PlayerRig";
   rig.add(camera);
   scene.add(rig);
+
+  const pathProbe = introPath ? new THREE.Object3D() : null;
+  const introDuration = introPath?.durationMs ?? introDurationMs;
 
   const config = {
     ...DEFAULT_FLIGHT_CONFIG,
@@ -126,7 +130,22 @@ export function createUniverseRuntime({
       if (!introDone) {
         introElapsedMs += elapsed * 1000;
         intro?.setElapsed?.(introElapsedMs);
-        if (experience.mode === "intro" && introElapsedMs >= introDurationMs) {
+        if (experience.mode === "intro" && introPath && pathProbe) {
+          const sample = introPath.pointAt(introElapsedMs / introDuration);
+          pathProbe.position.set(sample.position.x, sample.position.y, sample.position.z);
+          pathProbe.lookAt(sample.lookAt.x, sample.lookAt.y, sample.lookAt.z);
+          flightState = {
+            position: { ...sample.position },
+            velocity: { x: 0, y: 0, z: 0 },
+            quaternion: {
+              x: pathProbe.quaternion.x,
+              y: pathProbe.quaternion.y,
+              z: pathProbe.quaternion.z,
+              w: pathProbe.quaternion.w,
+            },
+          };
+        }
+        if (experience.mode === "intro" && introElapsedMs >= introDuration) {
           handoffStartedThisFrame = beginHandoff("INTRO_FINISHED");
         }
       }
