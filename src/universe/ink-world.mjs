@@ -2,8 +2,6 @@ import { getInkPanoramaAsset, loadInkPanorama } from "./ink-panorama.mjs";
 import { INK_COLOR_GRADE } from "./ink-color-grade.mjs";
 import { PANORAMA_SHELL_RADIUS } from "./world-constants.mjs";
 import { createContentBeacons } from "./content-beacons.mjs";
-import { createConstellationLines } from "./constellation-lines.mjs";
-import { createGuideStream } from "./guide-stream.mjs";
 
 const WORLD_RADIUS = PANORAMA_SHELL_RADIUS;
 const TIER_DENSITY = Object.freeze({
@@ -249,23 +247,6 @@ function createInkUniverseWorldFromPanorama({ THREE, profile, panorama, layout }
     group.add(beacons.group);
   }
 
-  // Constellation lines between stars
-  const constellation = layout?.sceneStars?.length
-    ? createConstellationLines({ THREE, stars: layout.sceneStars })
-    : null;
-  if (constellation) {
-    group.add(constellation.group);
-  }
-
-  // Guide stream: from current star toward next unvisited star
-  const currentStar = layout?.sceneStars?.find((star) => star.current) ?? layout?.sceneStars?.[0];
-  const guideStream = currentStar
-    ? createGuideStream({ THREE, stars: layout.sceneStars, currentId: currentStar.id })
-    : null;
-  if (guideStream) {
-    group.add(guideStream.group);
-  }
-
   let disposed = false;
 
   function setQuality(nextProfile) {
@@ -288,18 +269,6 @@ function createInkUniverseWorldFromPanorama({ THREE, profile, panorama, layout }
     if (beacons) {
       beacons.update(time, camera, experience);
     }
-    if (guideStream) {
-      guideStream.update(time);
-    }
-  }
-
-  function markVisited(id) {
-    if (beacons) {
-      beacons.markVisited?.(id);
-    }
-    if (guideStream) {
-      guideStream.markVisited(id);
-    }
   }
 
   function dispose() {
@@ -307,12 +276,6 @@ function createInkUniverseWorldFromPanorama({ THREE, profile, panorama, layout }
     disposed = true;
     if (beacons) {
       beacons.dispose();
-    }
-    if (constellation) {
-      constellation.dispose();
-    }
-    if (guideStream) {
-      guideStream.dispose();
     }
     const textures = new Set();
     group.traverse((object) => {
@@ -330,5 +293,5 @@ function createInkUniverseWorldFromPanorama({ THREE, profile, panorama, layout }
   }
 
   setQuality(profile);
-  return Object.freeze({ group, setQuality, update, dispose, markVisited, getBeacons: () => beacons });
+  return Object.freeze({ group, setQuality, update, dispose, getBeacons: () => beacons });
 }

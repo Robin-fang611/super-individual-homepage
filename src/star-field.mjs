@@ -1,7 +1,6 @@
 import { createFrameMonitor } from "./universe/frame-monitor.mjs";
 import { createInputRouter } from "./universe/input-router.mjs";
 import { createInkUniverseWorld } from "./universe/ink-world.mjs";
-import { buildIntroFlightPath } from "./universe/intro-flight-path.mjs";
 import { createFlightState, stepFlight } from "./universe/flight-model.mjs";
 import { createQualityController } from "./universe/quality-controller.mjs";
 import { createUniverseRuntime } from "./universe/runtime.mjs";
@@ -72,11 +71,6 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
 
   const frameMonitor = createFrameMonitor();
   const state = { disposed: false, lastFrameTime: 0, paused: false };
-  const visited = new Set();
-  const currentStar = layout?.sceneStars?.find((star) => star.current) ?? layout?.sceneStars?.[0];
-  if (currentStar?.id) {
-    visited.add(currentStar.id);
-  }
   let runtime;
   let pointerX = -9999;
   let pointerY = -9999;
@@ -163,9 +157,6 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
 
     const hit = beacons.hitTest(camera, getViewport(), event.clientX, event.clientY);
     if (hit) {
-      // Mark star as visited (brightens beacon, advances guide stream)
-      visited.add(hit.star.id ?? hit.star.file);
-      inkWorld.markVisited?.(hit.star.id ?? hit.star.file);
       // Save current flight state before jumping
       const rig = scene.getObjectByName("PlayerRig");
       if (rig) {
@@ -188,17 +179,6 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
   const initialQuaternion = new THREE.Quaternion().setFromEuler(
     new THREE.Euler(0.08, -0.14, 0, "YXZ"),
   );
-  const initialFlightState = createFlightState({
-    position: { x: -0.2, y: 0.8, z: 5.4 },
-    quaternion: initialQuaternion,
-  });
-  const introPath = layout?.sceneStars?.length
-    ? buildIntroFlightPath({
-        start: initialFlightState.position,
-        stars: layout.sceneStars,
-        boundaryRadius: FLIGHT_BOUNDARY_RADIUS,
-      })
-    : null;
   runtime = createUniverseRuntime({
     THREE,
     canvas,
@@ -207,8 +187,10 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
     renderer,
     intro,
     inputRouter,
-    introPath,
-    initialFlightState,
+    initialFlightState: createFlightState({
+      position: { x: -0.2, y: 0.8, z: 5.4 },
+      quaternion: initialQuaternion,
+    }),
     onFrame: animateWorld,
     onError: (error) => {
       console.error(error);
@@ -274,8 +256,6 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
     getQuality: () => quality.snapshot(),
     setQuality,
     useAutomaticQuality,
-    getVisited: () => new Set(visited),
-    getCurrentStarId: () => currentStar?.id ?? null,
     _inkWorld: inkWorld,
     _onSelect: onSelect,
   };

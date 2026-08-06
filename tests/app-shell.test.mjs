@@ -9,7 +9,7 @@ test("exploration shell contains core exploration elements", () => {
   assert.match(html, /id="universe-canvas"/);
   assert.match(html, /id="reading-overlay"/);
   assert.match(html, /id="star-compass"/);
-  assert.doesNotMatch(html, /interaction-hint/);
+  assert.match(html, /id="interaction-hint"/);
 });
 
 test("includes a static ink fallback for unavailable WebGL", () => {

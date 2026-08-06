@@ -31,7 +31,6 @@ export function createUniverseRuntime({
   inputRouter,
   flightConfig = {},
   initialFlightState,
-  introPath,
   onError,
   onFrame,
   introDurationMs = DEFAULT_INTRO_DURATION_MS,
@@ -47,9 +46,6 @@ export function createUniverseRuntime({
   rig.name = "PlayerRig";
   rig.add(camera);
   scene.add(rig);
-
-  const pathProbe = introPath ? new THREE.Object3D() : null;
-  const introDuration = introPath?.durationMs ?? introDurationMs;
 
   const config = {
     ...DEFAULT_FLIGHT_CONFIG,
@@ -105,23 +101,6 @@ export function createUniverseRuntime({
       handoffElapsedMs = 0;
       if (!introDone) {
         introDone = true;
-        // 保留路径终点的位置与朝向，防止移交瞬间镜头跳回初始朝向
-        if (pathProbe) {
-          flightState = {
-            position: {
-              x: pathProbe.position.x,
-              y: pathProbe.position.y,
-              z: pathProbe.position.z,
-            },
-            velocity: { x: 0, y: 0, z: 0 },
-            quaternion: {
-              x: camera.quaternion.x,
-              y: camera.quaternion.y,
-              z: camera.quaternion.z,
-              w: camera.quaternion.w,
-            },
-          };
-        }
         intro?.skip?.();
       }
       return true;
@@ -147,24 +126,7 @@ export function createUniverseRuntime({
       if (!introDone) {
         introElapsedMs += elapsed * 1000;
         intro?.setElapsed?.(introElapsedMs);
-        if (experience.mode === "intro" && introPath && pathProbe) {
-          const sample = introPath.pointAt(introElapsedMs / introDuration);
-          // 用相机自身的 lookAt（-z 朝目标），避免手工四元数约定错误
-          camera.position.set(sample.position.x, sample.position.y, sample.position.z);
-          camera.lookAt(sample.lookAt.x, sample.lookAt.y, sample.lookAt.z);
-          pathProbe.position.set(sample.position.x, sample.position.y, sample.position.z);
-          flightState = {
-            position: { ...sample.position },
-            velocity: { x: 0, y: 0, z: 0 },
-            quaternion: {
-              x: camera.quaternion.x,
-              y: camera.quaternion.y,
-              z: camera.quaternion.z,
-              w: camera.quaternion.w,
-            },
-          };
-        }
-        if (experience.mode === "intro" && introElapsedMs >= introDuration) {
+        if (experience.mode === "intro" && introElapsedMs >= introDurationMs) {
           handoffStartedThisFrame = beginHandoff("INTRO_FINISHED");
         }
       }

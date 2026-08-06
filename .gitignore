@@ -2,5 +2,3 @@
 .preview-server*.log
 .superpowers/
 .worktrees/
-node_modules/
-shot-*.mjs
