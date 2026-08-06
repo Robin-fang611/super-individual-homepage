@@ -14,15 +14,16 @@ function lerp(a, b, t) {
 }
 
 function lookAtQuaternion(position, target) {
-  const forward = {
-    x: target.x - position.x,
-    y: target.y - position.y,
-    z: target.z - position.z,
+  // 相机语义：-z 轴指向 target
+  const back = {
+    x: position.x - target.x,
+    y: position.y - target.y,
+    z: position.z - target.z,
   };
-  const length = Math.hypot(forward.x, forward.y, forward.z) || 1;
-  const fx = forward.x / length;
-  const fy = forward.y / length;
-  const fz = forward.z / length;
+  const length = Math.hypot(back.x, back.y, back.z) || 1;
+  const fx = back.x / length;
+  const fy = back.y / length;
+  const fz = back.z / length;
   const up = { x: 0, y: 1, z: 0 };
   const rightX = up.y * fz - up.z * fy;
   const rightY = up.z * fx - up.x * fz;

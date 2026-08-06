@@ -105,6 +105,23 @@ export function createUniverseRuntime({
       handoffElapsedMs = 0;
       if (!introDone) {
         introDone = true;
+        // 保留路径终点的位置与朝向，防止移交瞬间镜头跳回初始朝向
+        if (pathProbe) {
+          flightState = {
+            position: {
+              x: pathProbe.position.x,
+              y: pathProbe.position.y,
+              z: pathProbe.position.z,
+            },
+            velocity: { x: 0, y: 0, z: 0 },
+            quaternion: {
+              x: camera.quaternion.x,
+              y: camera.quaternion.y,
+              z: camera.quaternion.z,
+              w: camera.quaternion.w,
+            },
+          };
+        }
         intro?.skip?.();
       }
       return true;
@@ -132,16 +149,18 @@ export function createUniverseRuntime({
         intro?.setElapsed?.(introElapsedMs);
         if (experience.mode === "intro" && introPath && pathProbe) {
           const sample = introPath.pointAt(introElapsedMs / introDuration);
+          // 用相机自身的 lookAt（-z 朝目标），避免手工四元数约定错误
+          camera.position.set(sample.position.x, sample.position.y, sample.position.z);
+          camera.lookAt(sample.lookAt.x, sample.lookAt.y, sample.lookAt.z);
           pathProbe.position.set(sample.position.x, sample.position.y, sample.position.z);
-          pathProbe.lookAt(sample.lookAt.x, sample.lookAt.y, sample.lookAt.z);
           flightState = {
             position: { ...sample.position },
             velocity: { x: 0, y: 0, z: 0 },
             quaternion: {
-              x: pathProbe.quaternion.x,
-              y: pathProbe.quaternion.y,
-              z: pathProbe.quaternion.z,
-              w: pathProbe.quaternion.w,
+              x: camera.quaternion.x,
+              y: camera.quaternion.y,
+              z: camera.quaternion.z,
+              w: camera.quaternion.w,
             },
           };
         }

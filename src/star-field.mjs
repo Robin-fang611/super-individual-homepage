@@ -72,6 +72,11 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
 
   const frameMonitor = createFrameMonitor();
   const state = { disposed: false, lastFrameTime: 0, paused: false };
+  const visited = new Set();
+  const currentStar = layout?.sceneStars?.find((star) => star.current) ?? layout?.sceneStars?.[0];
+  if (currentStar?.id) {
+    visited.add(currentStar.id);
+  }
   let runtime;
   let pointerX = -9999;
   let pointerY = -9999;
@@ -158,6 +163,9 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
 
     const hit = beacons.hitTest(camera, getViewport(), event.clientX, event.clientY);
     if (hit) {
+      // Mark star as visited (brightens beacon, advances guide stream)
+      visited.add(hit.star.id ?? hit.star.file);
+      inkWorld.markVisited?.(hit.star.id ?? hit.star.file);
       // Save current flight state before jumping
       const rig = scene.getObjectByName("PlayerRig");
       if (rig) {
@@ -266,6 +274,8 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
     getQuality: () => quality.snapshot(),
     setQuality,
     useAutomaticQuality,
+    getVisited: () => new Set(visited),
+    getCurrentStarId: () => currentStar?.id ?? null,
     _inkWorld: inkWorld,
     _onSelect: onSelect,
   };
