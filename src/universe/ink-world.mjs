@@ -2,6 +2,7 @@ import { getInkPanoramaAsset, loadInkPanorama } from "./ink-panorama.mjs";
 import { INK_COLOR_GRADE } from "./ink-color-grade.mjs";
 import { PANORAMA_SHELL_RADIUS } from "./world-constants.mjs";
 import { createContentBeacons } from "./content-beacons.mjs";
+import { createConstellationLines } from "./constellation-lines.mjs";
 
 const WORLD_RADIUS = PANORAMA_SHELL_RADIUS;
 const TIER_DENSITY = Object.freeze({
@@ -247,6 +248,14 @@ function createInkUniverseWorldFromPanorama({ THREE, profile, panorama, layout }
     group.add(beacons.group);
   }
 
+  // Constellation lines between stars
+  const constellation = layout?.sceneStars?.length
+    ? createConstellationLines({ THREE, stars: layout.sceneStars })
+    : null;
+  if (constellation) {
+    group.add(constellation.group);
+  }
+
   let disposed = false;
 
   function setQuality(nextProfile) {
@@ -276,6 +285,9 @@ function createInkUniverseWorldFromPanorama({ THREE, profile, panorama, layout }
     disposed = true;
     if (beacons) {
       beacons.dispose();
+    }
+    if (constellation) {
+      constellation.dispose();
     }
     const textures = new Set();
     group.traverse((object) => {

@@ -48,6 +48,7 @@ async function boot() {
 
     // 将 records 转换为 scene star layout 格式
     const stars = records.map((record) => ({
+      id: record.id,
       file: record.id,
       date: record.date,
       title: record.title,
