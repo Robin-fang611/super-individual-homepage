@@ -1,5 +1,5 @@
 {
-  "cycle": 1,
-  "nextHypothesis": "粒子分层已落地，下一轮聚焦背景天穹色温分层（DESIGN-ENHANCE-PLAN Level 1）：在现有全景天穹之上叠加 2-3 层低透明多中心径向渐变（靛蓝/紫灰气韵 + 右上暖色星云 patch），强化深空'色彩呼吸'，且不新增依赖、不改动 ice-blue/gold token 语义。",
+  "cycle": 3,
+  "nextHypothesis": "背景天穹色温分层已落地，下一轮聚焦星芒纹理（DESIGN-ENHANCE-PLAN Level 3）：给重要星路节点增加一个 Canvas 绘制的衍射星芒 Sprite，仅在 hover/active 时显现，透明度随星体呼吸律动，让'发光点'升级为'恒星'，且不新增依赖、不改渲染管线。",
   "lastRun": "2026-08-06"
 }

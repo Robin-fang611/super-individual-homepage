@@ -57,6 +57,15 @@ test("uses the panorama sky shell instead of a procedural canvas sky", async () 
   assert.doesNotMatch(source, /makeSkyTexture/);
 });
 
+test("keeps the panorama as the primary sky but layers a color-temperature tint shell on top", async () => {
+  const source = await readFile(new URL("../src/universe/ink-world.mjs", import.meta.url), "utf8");
+
+  // 色温层是叠加（supplement），不替换全景天穹。
+  assert.match(source, /createSkyTemperatureShell/);
+  assert.match(source, /InkSkyTintShell/);
+  assert.match(source, /group\.add\(sky, skyTint/);
+});
+
 test("releases an already loaded panorama when world construction fails", async () => {
   const failure = new Error("sphere construction failed");
   let panoramaDisposals = 0;

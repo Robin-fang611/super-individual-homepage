@@ -2,6 +2,7 @@ import { getInkPanoramaAsset, loadInkPanorama } from "./ink-panorama.mjs";
 import { INK_COLOR_GRADE } from "./ink-color-grade.mjs";
 import { PANORAMA_SHELL_RADIUS } from "./world-constants.mjs";
 import { createContentBeacons } from "./content-beacons.mjs";
+import { createSkyTemperatureShell } from "./ink-sky-tint.mjs";
 
 const WORLD_RADIUS = PANORAMA_SHELL_RADIUS;
 const TIER_DENSITY = Object.freeze({
@@ -262,10 +263,17 @@ function createInkUniverseWorldFromPanorama({ THREE, profile, panorama, layout }
     }),
   );
   sky.name = "InkSkyShell";
+  // Level 1 · 背景天穹色温分层：在 panorama 内层叠加低透明多中心径向渐变壳。
+  const skyTint = createSkyTemperatureShell(THREE, {
+    radius: plan.radius * 0.985,
+    seed: plan.seed,
+    canvasTexture,
+  });
+  skyTint.name = "InkSkyTintShell";
   const clouds = createInkClouds(THREE, plan);
   const vortex = createVortex(THREE, plan);
   const glints = createSilverGlints(THREE, plan);
-  group.add(sky, clouds, vortex, glints);
+  group.add(sky, skyTint, clouds, vortex, glints);
 
   // Content beacons
   let beacons = null;
