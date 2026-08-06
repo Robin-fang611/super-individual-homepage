@@ -15,8 +15,11 @@ const compassMenu = requireElement("#compass-menu");
 const fallbackElement = requireElement("#universe-fallback");
 const readingOverlay = requireElement("#reading-overlay");
 const readingContent = requireElement("#reading-content");
-const readingClose = requireElement("#reading-close");
-const hintElement = requireElement("#interaction-hint");
+    const readingClose = requireElement("#reading-close");
+    const hintElement = requireElement("#interaction-hint");
+    const realmNav = requireElement("#realm-nav");
+    const realmInner = requireElement("#realm-inner");
+    const realmInteractive = requireElement("#realm-interactive");
 
 function showFallback() {
   appElement.dataset.renderMode = "fallback";
@@ -31,6 +34,7 @@ async function boot() {
       { loadRecords },
       { createIntroController },
       { createReadingOverlay },
+      { createRealmSwitch },
       { createStarField },
       { createSceneStarLayout },
       { createExplorationHint },
@@ -38,6 +42,7 @@ async function boot() {
       import("./record-content.mjs?v=universe-map-3"),
       import("./intro-controller.mjs?v=universe-map-3"),
       import("./reading-overlay.mjs?v=universe-map-3"),
+      import("./realm-switch.mjs?v=universe-map-3"),
       import("./star-field.mjs?v=3d-scene-25"),
       import("./star-layout.mjs?v=3d-scene-25"),
       import("./exploration-hint.mjs?v=universe-map-3"),
@@ -73,6 +78,7 @@ async function boot() {
       closeButton: readingClose,
       onClose: () => starField?.resume?.(),
     });
+    window.__reader = reader;
     const hint = createExplorationHint({
       element: hintElement,
       delayMs: 1400,
@@ -98,6 +104,14 @@ async function boot() {
       onError: showFallback,
     });
     window.__starField = starField;
+
+    createRealmSwitch({
+      appElement,
+      starField,
+      navElement: realmNav,
+      innerElement: realmInner,
+      interactiveElement: realmInteractive,
+    });
 
     // Hero HUD fade on user exploration
     let heroFaded = false;

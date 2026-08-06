@@ -46,6 +46,12 @@
         </ul>
       </nav>
 
+      <nav class="realm-nav" id="realm-nav" aria-label="境界切换">
+        <button class="realm-pill is-active" data-realm="road" type="button">星路</button>
+        <button class="realm-pill" data-realm="inner" type="button">内心</button>
+        <button class="realm-pill" data-realm="interactive" type="button">互动</button>
+      </nav>
+
       <p class="interaction-hint" id="interaction-hint" aria-hidden="true">
         触控板环视 · 捏合飞行 · 点击星标阅读
       </p>
@@ -69,6 +75,34 @@
           ×
         </button>
         <article class="reading-content" id="reading-content" tabindex="-1"></article>
+      </section>
+
+      <section class="realm-layer realm-inner" id="realm-inner" aria-hidden="true" hidden>
+        <div class="realm-inner__veil" aria-hidden="true"></div>
+        <div class="realm-inner__core">
+          <p class="realm-inner__kicker">内心世界 · INNER</p>
+          <h2 class="realm-inner__title">心核</h2>
+          <p class="realm-inner__lead">向下潜入，这里收着未说出口的星思。</p>
+          <div class="inner-thoughts" id="inner-thoughts"></div>
+        </div>
+      </section>
+
+      <section class="realm-layer realm-interactive" id="realm-interactive" aria-hidden="true" hidden>
+        <div class="realm-interactive__veil" aria-hidden="true"></div>
+        <div class="realm-interactive__panel">
+          <p class="realm-interactive__kicker">互动空间 · 访客星屑</p>
+          <h2 class="realm-interactive__title">留下一颗星屑</h2>
+          <p class="realm-interactive__lead">路过的人，都能在宇宙里留一点光。</p>
+          <p class="stardust-meta">已有 <span class="stardust-total">0</span> 颗星屑在宇宙里</p>
+          <form class="stardust-form" id="stardust-form">
+            <textarea class="stardust-input" id="stardust-input" maxlength="140" rows="2" placeholder="写一句想留下的话…"></textarea>
+            <div class="stardust-row">
+              <span class="stardust-count" id="stardust-count">0 / 140</span>
+              <button class="stardust-send" id="stardust-send" type="submit">点亮</button>
+            </div>
+          </form>
+          <div class="stardust-cloud" id="stardust-cloud" aria-live="polite"></div>
+        </div>
       </section>
     </main>
 

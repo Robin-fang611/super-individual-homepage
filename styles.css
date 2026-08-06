@@ -950,3 +950,320 @@ a {
     height: 40px;
   }
 }
+
+/* ===== Realm Navigation (three realms) ===== */
+.realm-nav {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  z-index: 7;
+  display: flex;
+  gap: 6px;
+  padding: 6px;
+  transform: translateX(-50%);
+  background: rgba(4, 10, 22, 0.46);
+  border: 1px solid rgba(165, 222, 234, 0.18);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+}
+
+.realm-pill {
+  min-width: 64px;
+  padding: 9px 18px;
+  color: rgba(226, 237, 255, 0.66);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.realm-pill:hover {
+  color: var(--text);
+  background: rgba(130, 223, 255, 0.08);
+}
+
+.realm-pill.is-active {
+  color: rgba(244, 250, 255, 0.96);
+  background: rgba(130, 223, 255, 0.12);
+  border-color: rgba(185, 241, 255, 0.34);
+}
+
+.realm-pill:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Realm layers overlay the dimmed star scene */
+.realm-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.realm-layer[hidden] {
+  display: none;
+}
+
+.realm-layer:not([hidden]) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Dim the 3D scene when focused on another realm */
+.universe-app[data-realm="inner"] .universe-canvas,
+.universe-app[data-realm="interactive"] .universe-canvas {
+  opacity: 0.22;
+  filter: blur(3px);
+  transition:
+    opacity var(--duration-normal) var(--ease-out),
+    filter var(--duration-normal) var(--ease-out);
+}
+
+.universe-app[data-realm="inner"] .hero-hud,
+.universe-app[data-realm="interactive"] .hero-hud,
+.universe-app[data-realm="inner"] .star-compass,
+.universe-app[data-realm="interactive"] .star-compass,
+.universe-app[data-realm="inner"] .interaction-hint,
+.universe-app[data-realm="interactive"] .interaction-hint {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Inner world */
+.realm-inner__veil,
+.realm-interactive__veil {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 42%, rgba(12, 30, 44, 0.42), rgba(2, 4, 11, 0.82) 60%);
+}
+
+.realm-inner__core {
+  position: relative;
+  align-self: center;
+  justify-self: center;
+  width: min(560px, calc(100vw - 48px));
+  max-height: 76svh;
+  overflow: auto;
+  padding: 24px;
+  text-align: center;
+}
+
+.realm-inner__kicker {
+  margin: 0;
+  color: rgba(216, 184, 106, 0.7);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.realm-inner__title {
+  margin: 10px 0 8px;
+  font-size: clamp(30px, 5vw, 46px);
+  font-weight: 500;
+  color: rgba(244, 250, 255, 0.95);
+}
+
+.realm-inner__lead {
+  margin: 0 0 22px;
+  color: rgba(226, 237, 255, 0.6);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.inner-thoughts {
+  display: grid;
+  gap: 12px;
+  text-align: left;
+}
+
+.inner-thought {
+  padding: 16px 18px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  backdrop-filter: blur(14px);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.inner-thought:hover {
+  border-color: rgba(216, 184, 106, 0.4);
+  transform: translateY(-1px);
+}
+
+.inner-thought__date {
+  margin: 0 0 6px;
+  color: rgba(216, 184, 106, 0.6);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.inner-thought__title {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(244, 250, 255, 0.94);
+}
+
+.inner-thought__summary {
+  margin: 0;
+  color: rgba(226, 237, 255, 0.68);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.inner-thought__body {
+  margin: 12px 0 0;
+  color: rgba(226, 237, 255, 0.8);
+  font-size: 14px;
+  line-height: 1.85;
+  white-space: pre-wrap;
+}
+
+.realm-empty {
+  color: rgba(226, 237, 255, 0.5);
+  text-align: center;
+}
+
+/* Interactive space */
+.realm-interactive__panel {
+  position: relative;
+  align-self: center;
+  justify-self: center;
+  width: min(560px, calc(100vw - 48px));
+  max-height: 80svh;
+  overflow: auto;
+  padding: 26px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(16px);
+}
+
+.realm-interactive__kicker {
+  margin: 0;
+  color: rgba(185, 241, 255, 0.66);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.realm-interactive__title {
+  margin: 10px 0 8px;
+  font-size: clamp(26px, 4.4vw, 40px);
+  font-weight: 500;
+  color: rgba(244, 250, 255, 0.95);
+}
+
+.realm-interactive__lead {
+  margin: 0 0 8px;
+  color: rgba(226, 237, 255, 0.6);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.stardust-meta {
+  margin: 0 0 16px;
+  color: rgba(185, 241, 255, 0.5);
+  font-size: 13px;
+}
+
+.stardust-form {
+  display: grid;
+  gap: 10px;
+}
+
+.stardust-input {
+  width: 100%;
+  padding: 12px 14px;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  background: rgba(2, 4, 11, 0.5);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-md);
+  resize: vertical;
+}
+
+.stardust-input:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.stardust-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stardust-count {
+  color: rgba(226, 237, 255, 0.42);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+.stardust-send {
+  min-height: 38px;
+  padding: 0 20px;
+  color: var(--text);
+  font-size: 14px;
+  background: rgba(130, 223, 255, 0.12);
+  border: 1px solid rgba(185, 241, 255, 0.34);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.stardust-send:hover {
+  background: rgba(130, 223, 255, 0.2);
+}
+
+.stardust-send:active {
+  transform: scale(0.98);
+}
+
+.stardust-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.stardust-chip {
+  padding: 8px 12px;
+  color: rgba(226, 237, 255, 0.82);
+  font-size: 13px;
+  line-height: 1.5;
+  background: rgba(130, 223, 255, 0.06);
+  border: 1px solid rgba(130, 223, 255, 0.16);
+  border-radius: 999px;
+  max-width: 100%;
+}
+
+@media (max-width: 760px) {
+  .realm-nav {
+    bottom: 14px;
+  }
+
+  .realm-pill {
+    min-width: 54px;
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+}
