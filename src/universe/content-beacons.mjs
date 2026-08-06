@@ -1,4 +1,10 @@
 import { INK_COLOR_GRADE } from "./ink-color-grade.mjs";
+import { makeStarSpriteTexture, createStarSprite } from "./ink-star-sprite.mjs";
+
+// 尊重"减少动态效果"偏好：桌面 hover 星芒增强在开启时停止呼吸律动。
+const REDUCED_MOTION =
+  (typeof window !== "undefined" && typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches) || false;
 
 const BEACON_TIERS = Object.freeze({
   core: {
@@ -118,6 +124,8 @@ export function createContentBeacons({ THREE, layout }) {
 
   const glowTexture = makeGlowTexture(THREE);
   const ringTexture = makeRingTexture(THREE);
+  // Level 3 · 衍射星芒纹理：全节点共享一次（与 glow/ring 同理），由 dispose 统一释放。
+  const starTexture = makeStarSpriteTexture(THREE);
 
   const beaconDefs = [];
 
@@ -177,6 +185,19 @@ export function createContentBeacons({ THREE, layout }) {
     beaconGroup.add(glow, ring, label);
     group.add(beaconGroup);
 
+    // Level 3 · 衍射星芒 Sprite：仅 core / key 重要节点挂一份，默认隐藏，hover 时显现。
+    // 核心节点更克制（更淡、更小）以避开与 glow+ring+label 叠加过曝。
+    let starSprite = null;
+    if (tier === "core" || tier === "key") {
+      const starScale = cfg.glowSize * (tier === "core" ? 1.4 : 1.8);
+      starSprite = createStarSprite(THREE, {
+        texture: starTexture,
+        color: cfg.glowColor,
+        scale: starScale,
+      });
+      beaconGroup.add(starSprite);
+    }
+
     beaconDefs.push({
       star,
       tier,
@@ -185,6 +206,7 @@ export function createContentBeacons({ THREE, layout }) {
       glow,
       ring,
       label,
+      starSprite,
       hovered: false,
     });
   }
@@ -231,6 +253,12 @@ export function createContentBeacons({ THREE, layout }) {
         def.label.visible = active;
         def.label.material.opacity = active ? 0.56 : def.cfg.labelOpacity;
       }
+
+      // Level 3 · 星芒仅在 hover/active 显现；进入时给一个初始不透明度，避免首帧不可见。
+      if (def.starSprite) {
+        def.starSprite.visible = active;
+        def.starSprite.material.opacity = active ? 0.6 : 0;
+      }
     }
   }
 
@@ -253,14 +281,27 @@ export function createContentBeacons({ THREE, layout }) {
       if (def.tier === "core" && def.cfg.labelAlways && !def.hovered) {
         def.label.material.opacity = userActive ? def.cfg.labelOpacity * 0.5 : def.cfg.labelOpacity;
       }
+
+      // Level 3 · 星芒透明度随星体呼吸律动（仅 hover 时生效；减少动态时停止呼吸）。
+      if (def.starSprite && def.starSprite.visible) {
+        if (REDUCED_MOTION) {
+          def.starSprite.material.opacity = 0.55;
+        } else {
+          const breath = 0.6 + Math.sin(time * 0.0019 + def.star.position.x * 1.3) * 0.22;
+          const ceiling = def.tier === "core" ? 0.55 : 0.72;
+          def.starSprite.material.opacity = Math.max(0.32, Math.min(ceiling, breath));
+        }
+      }
     }
   }
 
   function dispose() {
     const textures = new Set();
     for (const def of beaconDefs) {
-      for (const key of ["glow", "ring", "label"]) {
-        const mat = def[key].material;
+      for (const key of ["glow", "ring", "label", "starSprite"]) {
+        const obj = def[key];
+        if (!obj) continue;
+        const mat = obj.material;
         if (mat.map && !textures.has(mat.map)) {
           textures.add(mat.map);
           mat.map.dispose();

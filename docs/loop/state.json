@@ -1,5 +1,5 @@
 {
-  "cycle": 3,
-  "nextHypothesis": "背景天穹色温分层已落地，下一轮聚焦星芒纹理（DESIGN-ENHANCE-PLAN Level 3）：给重要星路节点增加一个 Canvas 绘制的衍射星芒 Sprite，仅在 hover/active 时显现，透明度随星体呼吸律动，让'发光点'升级为'恒星'，且不新增依赖、不改渲染管线。",
+  "cycle": 4,
+  "nextHypothesis": "星芒纹理（Level 3）已落地。下一轮聚焦雾层重做（DESIGN-ENHANCE-PLAN Level 4）：现有水墨雾是均匀半透明 Sprite 像薄纱，改为多层叠加工艺——每层不同大小/透明度/色温，并增 2-3 个'墨核'（更浓核心区）让雾气有聚散感，漂移动画增加 Z 轴浮动。继续不新增依赖、不改渲染管线、不改 ice-blue/gold token。",
   "lastRun": "2026-08-06"
 }
