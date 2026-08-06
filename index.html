@@ -23,6 +23,29 @@
 
       <canvas id="universe-canvas" class="universe-canvas" aria-hidden="true"></canvas>
 
+      <section class="hero-hud" id="hero-hud" aria-hidden="true">
+        <p class="hero-kicker">星辰 · 进化之路</p>
+        <h1 class="hero-name">Robin</h1>
+        <p class="hero-subtitle">
+          这里是，我的世界。
+          <span class="hero-signature">—— 一个进化者的深空星图</span>
+        </p>
+      </section>
+
+      <nav class="star-compass" id="star-compass" aria-label="星图导航">
+        <button class="compass-toggle" id="compass-toggle" type="button" aria-label="打开星图导航">
+          <span class="compass-icon">
+            <span class="compass-ring-nav"></span>
+            <span class="compass-core-nav"></span>
+          </span>
+        </button>
+        <ul class="compass-menu" id="compass-menu" role="list">
+          <li><button class="compass-anchor" data-nav="origin" type="button">星路入口</button></li>
+          <li><button class="compass-anchor" data-nav="current" type="button">当前</button></li>
+          <li><button class="compass-anchor" data-nav="past" type="button">远处节点</button></li>
+        </ul>
+      </nav>
+
       <section class="universe-fallback" id="universe-fallback" hidden aria-live="polite">
         <div class="universe-fallback__ink" aria-hidden="true"></div>
         <div class="universe-fallback__content">

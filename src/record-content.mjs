@@ -74,6 +74,7 @@ export function parseRecordMarkdown(markdown, file = "inline.md") {
     summary: fields.summary ?? "",
     importance: Number.isFinite(importance) ? Math.min(Math.max(importance, 0), 1) : 0.5,
     visibility: fields.visibility,
+    current: fields.current === true,
     body: body.trim(),
   });
 }

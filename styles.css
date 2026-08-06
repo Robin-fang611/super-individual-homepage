@@ -85,67 +85,6 @@ a {
 }
 
 /* ===== Main Stage ===== */
-.star-road-app {
-  position: relative;
-  width: 100vw;
-  height: 100svh;
-  overflow: hidden;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(2, 4, 11, 0.88) 0%,
-      rgba(2, 4, 11, 0.46) 28%,
-      rgba(2, 4, 11, 0.02) 58%,
-      rgba(2, 4, 11, 0.16) 100%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(2, 4, 11, 0.12) 0%,
-      rgba(2, 4, 11, 0) 44%,
-      rgba(2, 4, 11, 0.34) 100%
-    ),
-    linear-gradient(145deg, #07111f 0%, #050914 44%, #02040b 100%);
-  isolation: isolate;
-}
-
-.star-road-app::before,
-.star-road-app::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  pointer-events: none;
-}
-
-.star-road-app::before {
-  opacity: 0.1;
-  background-image:
-    radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.54) 0 1px,
-      transparent 1.4px
-    ),
-    radial-gradient(
-      circle,
-      rgba(216, 184, 106, 0.44) 0 1px,
-      transparent 1.5px
-    );
-  background-position: 0 0, 42px 68px;
-  background-size: 240px 280px, 360px 420px;
-}
-
-.star-road-app::after {
-  background:
-    radial-gradient(
-      ellipse at 54% 46%,
-      rgba(184, 231, 245, 0.11),
-      transparent 34%
-    ),
-    radial-gradient(
-      ellipse at center,
-      transparent 0%,
-      rgba(0, 0, 0, 0.32) 88%
-    );
-}
 
 /* ===== Star Canvas ===== */
 .star-canvas {
@@ -505,10 +444,6 @@ a {
     overflow: auto;
   }
 
-  .star-road-app {
-    min-height: 100svh;
-  }
-
   .hero-title {
     top: 132px;
     right: var(--space-xl);
@@ -571,6 +506,170 @@ a {
   cursor: crosshair;
   overscroll-behavior: none;
   touch-action: none;
+}
+
+/* ===== Hero HUD (left dark-field overlay) ===== */
+.hero-hud {
+  position: absolute;
+  top: clamp(132px, 24vh, 210px);
+  left: clamp(30px, 8vw, 126px);
+  z-index: 3;
+  max-width: min(400px, calc(100vw - 60px));
+  pointer-events: none;
+  user-select: none;
+  transition:
+    opacity 820ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 820ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-hud.is-exploring {
+  opacity: 0.32;
+  transform: translateY(-6px);
+}
+
+.hero-hud .hero-kicker {
+  margin: 0 0 10px;
+  color: rgba(185, 241, 255, 0.58);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero-hud .hero-name {
+  margin: 0;
+  font-size: clamp(56px, 7.4vw, 98px);
+  font-weight: 500;
+  line-height: 0.94;
+  color: rgba(244, 250, 255, 0.94);
+  text-shadow:
+    0 0 30px rgba(2, 4, 11, 0.72),
+    0 0 42px rgba(130, 223, 255, 0.14);
+}
+
+.hero-hud .hero-subtitle {
+  margin: 18px 0 0;
+  color: rgba(226, 237, 255, 0.66);
+  font-size: clamp(17px, 2vw, 26px);
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.hero-hud .hero-signature {
+  display: block;
+  margin-top: 6px;
+  color: rgba(226, 237, 255, 0.42);
+  font-size: 0.68em;
+}
+
+/* ===== Star Compass Navigation ===== */
+.star-compass {
+  position: absolute;
+  top: var(--space-xl);
+  right: var(--space-xl);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.compass-toggle {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  color: var(--ice-strong);
+  background: rgba(4, 10, 22, 0.44);
+  border: 1px solid rgba(165, 222, 234, 0.22);
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(80, 179, 221, 0.1);
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.compass-toggle:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 24px rgba(80, 179, 221, 0.24);
+  border-color: rgba(165, 222, 234, 0.44);
+}
+
+.compass-toggle:active {
+  transform: scale(0.94);
+}
+
+.compass-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.compass-ring-nav {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.82;
+}
+
+.compass-core-nav {
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 50%;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.compass-menu {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: rgba(5, 11, 24, 0.62);
+  border: 1px solid rgba(165, 222, 234, 0.14);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.star-compass.is-open .compass-menu {
+  display: flex;
+}
+
+.compass-anchor {
+  display: block;
+  width: 100%;
+  min-width: 120px;
+  padding: 8px 14px;
+  color: rgba(226, 237, 255, 0.68);
+  font-size: 13px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.compass-anchor:hover {
+  color: rgba(244, 250, 255, 0.94);
+  background: rgba(130, 223, 255, 0.08);
+}
+
+.compass-anchor:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: -2px;
 }
 
 .universe-app[data-render-mode="fallback"] .universe-canvas,

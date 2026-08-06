@@ -1,4 +1,0 @@
-star-road-hero-composed.png:120242
-star-road-open.png:129466
-star-road-river.png:115636
-star-road-vortex.png:2558720

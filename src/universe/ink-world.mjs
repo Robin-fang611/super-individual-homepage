@@ -1,6 +1,7 @@
 import { getInkPanoramaAsset, loadInkPanorama } from "./ink-panorama.mjs";
 import { INK_COLOR_GRADE } from "./ink-color-grade.mjs";
 import { PANORAMA_SHELL_RADIUS } from "./world-constants.mjs";
+import { createContentBeacons } from "./content-beacons.mjs";
 
 const WORLD_RADIUS = PANORAMA_SHELL_RADIUS;
 const TIER_DENSITY = Object.freeze({
@@ -210,17 +211,17 @@ function createSilverGlints(THREE, plan) {
   return points;
 }
 
-export async function createInkUniverseWorld({ THREE, profile }) {
+export async function createInkUniverseWorld({ THREE, profile, layout }) {
   const panorama = await loadInkPanorama(THREE, profile);
   try {
-    return createInkUniverseWorldFromPanorama({ THREE, profile, panorama });
+    return createInkUniverseWorldFromPanorama({ THREE, profile, panorama, layout });
   } catch (error) {
     panorama.dispose?.();
     throw error;
   }
 }
 
-function createInkUniverseWorldFromPanorama({ THREE, profile, panorama }) {
+function createInkUniverseWorldFromPanorama({ THREE, profile, panorama, layout }) {
   const group = new THREE.Group();
   group.name = "InkUniverseWorld";
   const plan = getInkWorldPlan(profile);
@@ -238,6 +239,14 @@ function createInkUniverseWorldFromPanorama({ THREE, profile, panorama }) {
   const vortex = createVortex(THREE, plan);
   const glints = createSilverGlints(THREE, plan);
   group.add(sky, clouds, vortex, glints);
+
+  // Content beacons
+  let beacons = null;
+  if (layout && layout.sceneStars && layout.sceneStars.length > 0) {
+    beacons = createContentBeacons({ THREE, layout });
+    group.add(beacons.group);
+  }
+
   let disposed = false;
 
   function setQuality(nextProfile) {
@@ -251,17 +260,23 @@ function createInkUniverseWorldFromPanorama({ THREE, profile, panorama }) {
     glints.geometry.setDrawRange(0, nextPlan.silverGlints);
   }
 
-  function update(time) {
+  function update(time, camera, experience) {
     clouds.rotation.y = time * 0.000006;
     vortex.rotation.z = time * 0.000025;
     for (const cloud of clouds.children) {
       cloud.material.rotation += Math.sin(time * 0.0002 + cloud.userData.phase) * 0.00004;
+    }
+    if (beacons) {
+      beacons.update(time, camera, experience);
     }
   }
 
   function dispose() {
     if (disposed) return;
     disposed = true;
+    if (beacons) {
+      beacons.dispose();
+    }
     const textures = new Set();
     group.traverse((object) => {
       object.geometry?.dispose?.();
@@ -278,5 +293,5 @@ function createInkUniverseWorldFromPanorama({ THREE, profile, panorama }) {
   }
 
   setQuality(profile);
-  return Object.freeze({ group, setQuality, update, dispose });
+  return Object.freeze({ group, setQuality, update, dispose, getBeacons: () => beacons });
 }
