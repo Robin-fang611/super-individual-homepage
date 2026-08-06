@@ -177,38 +177,65 @@ function createVortex(THREE, plan) {
   return group;
 }
 
+// 三层星尘：前景大星（亮、含暖金）→ 中景密度 → 背景小星尘（暗、远），制造景深。
+// 各层容量固定，drawRange 随画质档位按比例缩放（与原有单点云行为一致，且不越界）。
+const GLINT_LAYERS = Object.freeze([
+  { key: "fg",  cap: 14, size: 0.09,  opacity: 0.85, radiusMin: 9,  radiusMax: 12, goldChance: 0.13 },
+  { key: "mid", cap: 24, size: 0.045, opacity: 0.55, radiusMin: 12, radiusMax: 16, goldChance: 0.06 },
+  { key: "bg",  cap: 40, size: 0.018, opacity: 0.30, radiusMin: 16, radiusMax: 21, goldChance: 0.03 },
+]);
+const GLINT_TOTAL_CAP = GLINT_LAYERS.reduce((sum, layer) => sum + layer.cap, 0);
+
 function createSilverGlints(THREE, plan) {
-  const count = TIER_DENSITY.cinematic.silverGlints;
-  const rng = createRng(plan.seed + 101);
-  const positions = new Float32Array(count * 3);
-  const colors = new Float32Array(count * 3);
+  const group = new THREE.Group();
+  group.name = "SilverGlints";
   const silver = new THREE.Color(INK_COLOR_GRADE.riverSilver);
   const gold = new THREE.Color(INK_COLOR_GRADE.goldGlint);
-  for (let index = 0; index < count; index += 1) {
-    const phi = Math.acos(1 - 2 * rng());
-    const theta = rng() * Math.PI * 2;
-    const radius = 10 + rng() * 11;
-    positions[index * 3] = Math.sin(phi) * Math.cos(theta) * radius;
-    positions[index * 3 + 1] = Math.cos(phi) * radius;
-    positions[index * 3 + 2] = Math.sin(phi) * Math.sin(theta) * radius;
-    const color = index % 17 === 0 ? gold : silver;
-    colors[index * 3] = color.r;
-    colors[index * 3 + 1] = color.g;
-    colors[index * 3 + 2] = color.b;
+  const layers = GLINT_LAYERS.map((layer, layerIndex) => {
+    const positions = new Float32Array(layer.cap * 3);
+    const colors = new Float32Array(layer.cap * 3);
+    const rng = createRng((plan.seed ?? 611) + 101 + layerIndex * 37);
+    for (let index = 0; index < layer.cap; index += 1) {
+      const phi = Math.acos(1 - 2 * rng());
+      const theta = rng() * Math.PI * 2;
+      const radius = layer.radiusMin + rng() * (layer.radiusMax - layer.radiusMin);
+      positions[index * 3] = Math.sin(phi) * Math.cos(theta) * radius;
+      positions[index * 3 + 1] = Math.cos(phi) * radius;
+      positions[index * 3 + 2] = Math.sin(phi) * Math.sin(theta) * radius;
+      const color = rng() < layer.goldChance ? gold : silver;
+      colors[index * 3] = color.r;
+      colors[index * 3 + 1] = color.g;
+      colors[index * 3 + 2] = color.b;
+    }
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    geometry.setDrawRange(0, layer.cap);
+    const material = new THREE.PointsMaterial({
+      vertexColors: true,
+      size: layer.size,
+      transparent: true,
+      opacity: layer.opacity,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const points = new THREE.Points(geometry, material);
+    points.name = `glints-${layer.key}`;
+    group.add(points);
+    return { points, cap: layer.cap };
+  });
+  group.userData.layers = layers;
+  group.userData.totalCap = GLINT_TOTAL_CAP;
+  applyGlintQuality(group, plan.silverGlints);
+  return group;
+}
+
+function applyGlintQuality(glintsGroup, silverGlints) {
+  const totalCap = glintsGroup.userData.totalCap;
+  for (const entry of glintsGroup.userData.layers) {
+    const draw = Math.round((entry.cap / totalCap) * silverGlints);
+    entry.points.geometry.setDrawRange(0, Math.max(0, Math.min(entry.cap, draw)));
   }
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-  geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-  geometry.setDrawRange(0, plan.silverGlints);
-  const points = new THREE.Points(geometry, new THREE.PointsMaterial({
-    vertexColors: true,
-    size: 0.045,
-    transparent: true,
-    opacity: 0.55,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-  }));
-  return points;
 }
 
 export async function createInkUniverseWorld({ THREE, profile, layout }) {
@@ -257,7 +284,7 @@ function createInkUniverseWorldFromPanorama({ THREE, profile, panorama, layout }
     for (const cloud of clouds.children) {
       cloud.visible = cloud.userData.qualityIndex < nextPlan.inkClouds;
     }
-    glints.geometry.setDrawRange(0, nextPlan.silverGlints);
+    applyGlintQuality(glints, nextPlan.silverGlints);
   }
 
   function update(time, camera, experience) {
