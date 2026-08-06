@@ -1,0 +1,41 @@
+{
+  "url": "http://localhost:8788",
+  "total": 6,
+  "passed": 4,
+  "failed": 2,
+  "ok": false,
+  "checks": [
+    {
+      "name": "default realm is road",
+      "ok": false,
+      "detail": "data-realm=undefined"
+    },
+    {
+      "name": "inner & interactive layers hidden on road",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "switch to inner",
+      "ok": true,
+      "detail": "data-realm=inner"
+    },
+    {
+      "name": "inner layer visible",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "inner thoughts loaded",
+      "ok": true,
+      "detail": "2 cards"
+    },
+    {
+      "name": "script executed without throwing",
+      "ok": false,
+      "detail": "TimeoutError: Waiting failed: 5000ms exceeded"
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": []
+}

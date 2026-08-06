@@ -1,0 +1,1760 @@
+[0806/144803.757807:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for browser/global.
+[0806/144803.758029:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for browser/*.
+[0806/144803.758055:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for /main.
+[0806/144803.758064:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for /io.
+[0806/144803.769196:VERBOSE1:content/browser/first_party_sets/first_party_sets_handler_impl_instance.cc:270] Empty path. Failed initializing First-Party Sets database.
+[0806/144803.777059:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for gpu-process/global.
+[0806/144803.777051:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for utility.net..workService/global.
+[0806/144803.777246:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for gpu-process/*.
+[0806/144803.777256:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for utility.netwo..etworkService/*.
+[0806/144803.777258:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for gpu-process/amsc.
+[0806/144803.777265:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for utility.netw..tworkService/amsc.
+[0806/144803.777270:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for gpu-process/main.
+[0806/144803.777276:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for utility/main.
+[0806/144803.777281:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for gpu-process/io.
+[0806/144803.777287:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for utility/io.
+[0806/144803.777429:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for gpu-process/main.
+[0806/144803.777431:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for utility.netw..tworkService/main.
+[0806/144803.780566:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for browser/io.
+[0806/144803.783155:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for renderer/global.
+[0806/144803.783410:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for renderer/*.
+[0806/144803.783418:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for renderer/amsc.
+[0806/144803.783423:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for renderer/main.
+[0806/144803.783430:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for renderer/io.
+[0806/144803.783573:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for renderer/main.
+[0806/144803.783926:INFO:third_party/webrtc/rtc_base/cpu_info.cc:77] Available number of cores: 10
+[0806/144803.806544:VERBOSE1:components/viz/service/main/viz_main_impl.cc:87] VizNullHypothesis is disabled (not a warning)
+[0806/144803.813809:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for renderer/global.
+[0806/144803.813976:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for renderer/*.
+[0806/144803.813983:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for renderer/amsc.
+[0806/144803.813988:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for renderer/main.
+[0806/144803.813992:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for renderer/io.
+[0806/144803.814101:VERBOSE1:base/allocator/scheduler_loop_quarantine_config.cc:168] No entry found for renderer/main.
+[0806/144803.814588:INFO:third_party/webrtc/rtc_base/cpu_info.cc:77] Available number of cores: 10
+[0806/144803.826250:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/
+[0806/144803.829593:VERBOSE1:content/browser/back_forward_cache/back_forward_cache_impl.cc:858] BackForwardCacheImpl::GetCurrentBackForwardCacheEligibility: about:blank : No: HTTP status is not OK, scheme is not HTTP or HTTPS, Browsing instance is not swapped, BackForwardCache is not supported by delegate
+[0806/144803.829624:VERBOSE1:content/browser/back_forward_cache/back_forward_cache_impl.cc:858] BackForwardCacheImpl::GetCompleteBackForwardCacheEligibilityForReporting: about:blank : No: HTTP status is not OK, scheme is not HTTP or HTTPS, Browsing instance is not swapped, BackForwardCache is not supported by delegate
+[0806/144803.829778:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/styles.css?v=ink-universe-1
+[0806/144803.830166:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/app.mjs?v=universe-map-3
+[0806/144803.843888:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/record-content.mjs?v=universe-map-3\" matches with no entries and thus is not mapped."
+[0806/144803.843979:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/intro-controller.mjs?v=universe-map-3\" matches with no entries and thus is not mapped."
+[0806/144803.844008:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/reading-overlay.mjs?v=universe-map-3\" matches with no entries and thus is not mapped."
+[0806/144803.844027:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/realm-switch.mjs?v=universe-map-3\" matches with no entries and thus is not mapped."
+[0806/144803.844043:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/star-field.mjs?v=3d-scene-25\" matches with no entries and thus is not mapped."
+[0806/144803.844060:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/star-layout.mjs?v=3d-scene-25\" matches with no entries and thus is not mapped."
+[0806/144803.844075:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/exploration-hint.mjs?v=universe-map-3\" matches with no entries and thus is not mapped."
+[0806/144803.844104:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/record-content.mjs?v=universe-map-3
+[0806/144803.844366:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/intro-controller.mjs?v=universe-map-3
+[0806/144803.844444:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/reading-overlay.mjs?v=universe-map-3
+[0806/144803.844516:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/realm-switch.mjs?v=universe-map-3
+[0806/144803.844584:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/star-field.mjs?v=3d-scene-25
+[0806/144803.844648:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/star-layout.mjs?v=3d-scene-25
+[0806/144803.844706:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/exploration-hint.mjs?v=universe-map-3
+[0806/144803.850380:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/record-content.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.850529:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/frame-monitor.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.850539:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/input-router.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.850556:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/ink-world.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.850562:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/flight-model.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.850570:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/quality-controller.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.850576:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/runtime.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.850581:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/world-constants.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.852305:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/record-content.mjs
+[0806/144803.852526:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/universe/frame-monitor.mjs
+[0806/144803.852748:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/universe/input-router.mjs
+[0806/144803.852942:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/universe/ink-world.mjs
+[0806/144803.853071:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/universe/flight-model.mjs
+[0806/144803.853191:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/universe/quality-controller.mjs
+[0806/144803.853309:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/universe/runtime.mjs
+[0806/144803.853389:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/universe/world-constants.mjs
+[0806/144803.854990:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/capability-guard.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.855011:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/quality-profiles.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.855224:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/ink-panorama.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.855236:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/ink-color-grade.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.855241:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/world-constants.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.855245:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/content-beacons.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.855246:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/universe/capability-guard.mjs
+[0806/144803.855446:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/universe/quality-profiles.mjs
+[0806/144803.855479:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/orientation.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.855576:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/universe/ink-panorama.mjs
+[0806/144803.855638:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/universe/ink-color-grade.mjs
+[0806/144803.855694:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/universe/content-beacons.mjs
+[0806/144803.855727:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/universe/orientation.mjs
+[0806/144803.856046:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/flight-model.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.856054:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/orientation.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.856058:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/world-constants.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.856062:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/experience-state.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.856242:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/src/universe/experience-state.mjs
+[0806/144803.858900:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/src/universe/ink-color-grade.mjs\" matches with no entries and thus is not mapped."
+[0806/144803.859355:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/content/records/index.json
+[0806/144803.859969:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/content/records/2026-06-15-test-signal.md
+[0806/144803.860651:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/content/records/2025-01-01-test-memory.md
+[0806/144803.861089:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/content/records/2024-01-01-test-origin.md
+[0806/144803.861654:VERBOSE1:third_party/blink/renderer/core/script/modulator_impl_base.cc:141] "Import Map: \"http://localhost:8789/assets/three.module.js\" matches with no entries and thus is not mapped."
+[0806/144803.861724:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/assets/three.module.js
+[0806/144803.872528:ERROR:gpu/command_buffer/service/gles2_cmd_decoder_passthrough.cc:1210] []Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader flag to opt in to lower security guarantees for trusted content.
+[0806/144803.877935:INFO:CONSOLE:0] "[]Automatic fallback to software WebGL has been deprecated. Please use the --enable-unsafe-swiftshader flag to opt in to lower security guarantees for trusted content.", source: http://localhost:8789/ (0)
+[0806/144803.877967:VERBOSE1:net/base/network_delegate.cc:38] NetworkDelegate::NotifyBeforeURLRequest: http://localhost:8789/assets/images/ink-universe-panorama-v1-high.png
+[0806/144803.883087:ERROR:gpu/command_buffer/service/gl_utils.cc:430] [.WebGL-0x11400586000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[0806/144803.911121:INFO:CONSOLE:0] "[.WebGL-0x11400586000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8789/ (0)
+[0806/144803.959717:ERROR:gpu/command_buffer/service/gl_utils.cc:430] [.WebGL-0x11400586000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[0806/144804.239792:INFO:CONSOLE:0] "[.WebGL-0x11400586000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8789/ (0)
+[0806/144804.240946:ERROR:gpu/command_buffer/service/gl_utils.cc:430] [.WebGL-0x11400586000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[0806/144804.262454:INFO:CONSOLE:0] "[.WebGL-0x11400586000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8789/ (0)
+[0806/144804.263403:ERROR:gpu/command_buffer/service/gl_utils.cc:430] [.WebGL-0x11400586000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[0806/144804.284881:INFO:CONSOLE:0] "[.WebGL-0x11400586000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: http://localhost:8789/ (0)
+[0806/145329.315379:VERBOSE1:content/browser/renderer_host/media/media_stream_manager.cc:1519] video capture: VideoCaptureManager::OnScreenLocked
+[0806/145342.593011:ERROR:components/headless/command_handler/headless_command_handler.cc:390] Unexpected renderer destruction.
+[0806/145342.605085:VERBOSE1:base/metrics/statistics_recorder.cc:631] Collections of all histograms
+Histogram: Accessibility.ManuallyEnabled recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: BackForwardCache.History.EntryMatch recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: BackForwardCache.NewPageNavHasPotentialMatch recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: BackForwardCache.NewPageNavHasPotentialMatchWithNoSubframes recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Browser.MainThreadsCongestion recorded 10 samples, mean = 0.0 (flags = 0x1)
+0  ----------O                                                               (10 = 100.0%)
+1  ... 
+
+Histogram: Browser.MainThreadsCongestion.Initial recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Browser.MainThreadsCongestion.Periodic recorded 9 samples, mean = 0.0 (flags = 0x1)
+0  ---------O                                                                (9 = 100.0%)
+1  ... 
+
+Histogram: Browser.MainThreadsCongestion.RunningOnly recorded 11 samples, mean = 0.0 (flags = 0x1)
+0  -----------O                                                              (11 = 100.0%)
+1  ... 
+
+Histogram: Browser.MainThreadsCongestion.RunningOnly.Initial recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Browser.MainThreadsCongestion.RunningOnly.Periodic recorded 9 samples, mean = 0.0 (flags = 0x1)
+0  ---------O                                                                (9 = 100.0%)
+1  ... 
+
+Histogram: BrowserRenderProcessHost.Cleanup.DelayReason recorded 8 samples, mean = 6.8 (flags = 0x1)
+0  --O                                                                       (2 = 25.0%)
+1  ... 
+9  ------O                                                                   (6 = 75.0%) {25.0%}
+10 ... 
+
+Histogram: BrowserRenderProcessHost.Cleanup.Total recorded 8 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  --------O                                                                 (8 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: BrowserRenderProcessHost.MaxOutermostMainFrames recorded 1 samples, mean = 2.0 (flags = 0x1)
+0  ... 
+2  -O                                                                        (1 = 100.0%) {0.0%}
+3  ... 
+
+Histogram: BrowserRenderProcessHost.NoSparePresentReason2 recorded 2 samples, mean = 5.5 (flags = 0x1)
+0  ... 
+3  -O                                                                        (1 = 50.0%) {0.0%}
+4  ... 
+8  -O                                                                        (1 = 50.0%) {50.0%}
+9  ... 
+
+Histogram: BrowserRenderProcessHost.NoSpareRenderer.AllocationSource.NotEnabled recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: BrowserRenderProcessHost.NoSpareRenderer.AllocationSource.NotYetCreatedFirstLaunch recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: BrowserRenderProcessHost.SiteInstanceRenderProcessAssignment recorded 2 samples, mean = 3.0 (flags = 0x1)
+0  ... 
+3  --O                                                                       (2 = 100.0%) {0.0%}
+4  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: BrowserRenderProcessHost.SpareCount recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: BrowserRenderProcessHost.SpareProcessMaybeTakeAction recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: ChildProcess.Killed2 recorded 1 samples, mean = 6.0 (flags = 0x1)
+0  ... 
+6  -O                                                                        (1 = 100.0%) {0.0%}
+7  ... 
+
+Histogram: ClientHints.CriticalCHRestart recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: ClientHints.FetchLatency_PrefRead recorded 4 samples, mean = 0.0 (flags = 0x1)
+0  ----O                                                                     (4 = 100.0%)
+1  ... 
+
+Histogram: ClientHints.FetchLatency_PrerenderHost recorded 4 samples, mean = 0.0 (flags = 0x1)
+0  ----O                                                                     (4 = 100.0%)
+1  ... 
+
+Histogram: ClientHints.FetchLatency_Total recorded 4 samples, mean = 0.0 (flags = 0x1)
+0  ----O                                                                     (4 = 100.0%)
+1  ... 
+
+Histogram: Compositing.Browser.CompositorFrame.Quads recorded 3 samples, mean = 2.0 (flags = 0x1)
+0  ... 
+2  ---O                                                                      (3 = 100.0%) {0.0%}
+3  ... 
+
+Histogram: Compositing.Browser.LayersUpdateTime recorded 4 samples, mean = 9.5 (flags = 0x1)
+0   O                                                                         (0 = 0.0%)
+1   -O                                                                        (1 = 25.0%) {0.0%}
+2   ... 
+4   -O                                                                        (1 = 25.0%) {25.0%}
+6   -O                                                                        (1 = 25.0%) {50.0%}
+8   ... 
+21  -O                                                                        (1 = 25.0%) {75.0%}
+29  ... 
+
+Histogram: Compositing.ResourcePool.PeakMemoryUsage recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Compositing.ResourcePool.PeakResourceCount recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Content.SharedWorker.Service.LastClientCheckTime recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Cookie.FirstPartySets.Browser.DelayedQueriesCount recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 100.0%) {0.0%}
+2  ... 
+
+Histogram: Cookie.FirstPartySets.Browser.MostDelayedQueryDelta recorded 1 samples, mean = 8.0 (flags = 0x1)
+0  ... 
+8  -O                                                                        (1 = 100.0%) {0.0%}
+10 ... 
+
+Histogram: GPU.BlocklistEntriesApplied recorded 1 samples (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+
+Histogram: GPU.BlocklistFeatureTestResults.Accelerated2dCanvas recorded 1 samples, mean = 3.0 (flags = 0x1)
+0  ... 
+3  -O                                                                        (1 = 100.0%) {0.0%}
+4  ... 
+
+Histogram: GPU.BlocklistFeatureTestResults.GpuCompositing recorded 1 samples, mean = 2.0 (flags = 0x1)
+0  ... 
+2  -O                                                                        (1 = 100.0%) {0.0%}
+3  ... 
+
+Histogram: GPU.BlocklistFeatureTestResults.GpuRasterization recorded 1 samples, mean = 2.0 (flags = 0x1)
+0  ... 
+2  -O                                                                        (1 = 100.0%) {0.0%}
+3  ... 
+
+Histogram: GPU.BlocklistFeatureTestResults.Webgl recorded 1 samples, mean = 3.0 (flags = 0x1)
+0  ... 
+3  -O                                                                        (1 = 100.0%) {0.0%}
+4  ... 
+
+Histogram: GPU.BlocklistFeatureTestResults.Webgl2 recorded 1 samples, mean = 3.0 (flags = 0x1)
+0  ... 
+3  -O                                                                        (1 = 100.0%) {0.0%}
+4  ... 
+
+Histogram: GPU.BlocklistFeatureTestResults.Webgpu recorded 1 samples, mean = 3.0 (flags = 0x1)
+0  ... 
+3  -O                                                                        (1 = 100.0%) {0.0%}
+4  ... 
+
+Histogram: GPU.CanvasOopRaster.OopRasterAndGpuAcceleration recorded 1 samples, mean = 3.0 (flags = 0x1)
+0  ... 
+3  -O                                                                        (1 = 100.0%) {0.0%}
+4  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: GPU.CompositingMode recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: GPU.DriverBugTestResultsPerEntry recorded 1 samples (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+
+Histogram: GPU.EstablishGpuChannel.Browser.InitAsyncLatency recorded 2 samples, mean = 26.0 (flags = 0x1)
+0   ... 
+10  -O                                                                        (1 = 50.0%) {0.0%}
+13  ... 
+41  -O                                                                        (1 = 50.0%) {50.0%}
+52  ... 
+
+Histogram: GPU.GPUProcessLaunchTime recorded 1 samples, mean = 21.0 (flags = 0x1)
+0   ... 
+20  -O                                                                        (1 = 100.0%) {0.0%}
+24  ... 
+
+Histogram: GPU.GPUProcessTerminationStatus2 recorded 1 samples, mean = 4.0 (flags = 0x1)
+0  ... 
+4  -O                                                                        (1 = 100.0%) {0.0%}
+5  ... 
+
+Histogram: GPU.ProcessLifetime2 recorded 1 samples, mean = 338.0 (flags = 0x1)
+0    ... 
+265  -O                                                                        (1 = 100.0%) {0.0%}
+351  ... 
+
+Histogram: GPU.ProcessLifetimeEvents.SwiftShader recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Input.PointerTypePrimary recorded 1 samples, mean = 2.0 (flags = 0x1)
+0  ... 
+2  -O                                                                        (1 = 100.0%) {0.0%}
+3  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Input.PointerTypesAll recorded 1 samples, mean = 2.0 (flags = 0x1)
+0  ... 
+2  -O                                                                        (1 = 100.0%) {0.0%}
+3  ... 
+
+Histogram: MPArch.ChildProcessLaunchFirst recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: MPArch.ChildProcessLaunchSubsequent recorded 3 samples, mean = 0.3 (flags = 0x1)
+0  --O                                                                       (2 = 66.7%)
+1  -O                                                                        (1 = 33.3%) {66.7%}
+2  ... 
+
+Histogram: MPArch.ChildProcessLauncher.Notify recorded 4 samples, mean = 14.2 (flags = 0x1)
+0   O                                                                         (0 = 0.0%)
+1   -O                                                                        (1 = 25.0%) {0.0%}
+2   ... 
+14  -O                                                                        (1 = 25.0%) {25.0%}
+17  -O                                                                        (1 = 25.0%) {50.0%}
+20  -O                                                                        (1 = 25.0%) {75.0%}
+24  ... 
+
+Histogram: MPArch.ChildProcessLauncher.PreLaunchDelay recorded 4 samples, mean = 0.0 (flags = 0x1)
+0  ----O                                                                     (4 = 100.0%)
+1  ... 
+
+Histogram: Memory.GPU.PeakMemoryUsage2.PageLoad recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Memory.PartitionAlloc.PartitionRoot.ExtrasSize recorded 1 samples, mean = 8.0 (flags = 0x1)
+0  ... 
+8  -O                                                                        (1 = 100.0%) {0.0%}
+9  ... 
+
+Histogram: Memory.PressureLevel2 recorded 338 samples, mean = 0.0 (flags = 0x1)
+0  ------------------------------------------------------------------------O (338 = 100.0%)
+1  ... 
+
+Histogram: Mojo.EndToEndLatencyUs.BrowserIO recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: Mojo.EndToEndLatencyUs.BrowserMain recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: Navigation.AgentSchedulingGroupHost.RemoveRoute recorded 6 samples, mean = 0.0 (flags = 0x1)
+0  ------O                                                                   (6 = 100.0%)
+1  ... 
+
+Histogram: Navigation.All.WastedSpeculativeRFHCase recorded 6 samples, mean = 0.8 (flags = 0x1)
+0  ---O                                                                      (3 = 50.0%)
+1  --O                                                                       (2 = 33.3%) {50.0%}
+2  O                                                                         (0 = 0.0%) {83.3%}
+3  -O                                                                        (1 = 16.7%) {83.3%}
+4  ... 
+
+Histogram: Navigation.BeforeUnloadExecutionMode.IsInOutermostMainFrame recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 100.0%) {0.0%}
+2  ... 
+
+Histogram: Navigation.BeforeUnloadExecutionMode.IsInOutermostMainFrame.CrossOrigin recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 100.0%) {0.0%}
+2  ... 
+
+Histogram: Navigation.BeginNavigationImpl.MainFrame recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.BrowserInitiated.IsDuplicateWithoutThresholdCheck2 recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.BrowserInitiated.ShouldDispatchBeforeUnload recorded 3 samples, mean = 0.3 (flags = 0x1)
+0  --O                                                                       (2 = 66.7%)
+1  -O                                                                        (1 = 33.3%) {66.7%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Navigation.CommitToCompositorCreation recorded 1 samples, mean = 14.0 (flags = 0x1)
+0   ... 
+12  -O                                                                        (1 = 100.0%) {0.0%}
+16  ... 
+
+Histogram: Navigation.CompositorRequestedBeforeCommit2 recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.CompositorRequestedBeforeSwapRFH2 recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.CreateSpeculativeRFH recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.DeferSpeculativeRFHAction recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.DelayedCurrentProcessInitByLaunchingSpareFirst recorded 6 samples, mean = 0.7 (flags = 0x1)
+0  --O                                                                       (2 = 33.3%)
+1  ----O                                                                     (4 = 66.7%) {33.3%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Navigation.DidStartLoading.MainFrame recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.DocumentAssociatedDataDestructor recorded 5 samples, mean = 0.0 (flags = 0x1)
+0  -----O                                                                    (5 = 100.0%)
+1  ... 
+
+Histogram: Navigation.EarlyRenderFrameHostSwapType recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.GetFrameHostForNavigation recorded 6 samples, mean = 0.5 (flags = 0x1)
+0  ----O                                                                     (4 = 66.7%)
+1  -O                                                                        (1 = 16.7%) {66.7%}
+2  -O                                                                        (1 = 16.7%) {83.3%}
+3  ... 
+
+Histogram: Navigation.GetFrameHostForNavigationTime.InDidCreateNavigationRequest.IsHTTPOrHTTPS recorded 1 samples, mean = 377.0 (flags = 0x1)
+0    ... 
+282  -O                                                                        (1 = 100.0%) {0.0%}
+391  ... 
+
+Histogram: Navigation.IsGuest recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.IsLockedProcess recorded 3 samples, mean = 0.3 (flags = 0x1)
+0  --O                                                                       (2 = 66.7%)
+1  -O                                                                        (1 = 33.3%) {66.7%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Navigation.IsLockedProcess.HTTPOrHTTPS recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.IsProcessBackgrounded2.OnCommit recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.IsProcessBackgrounded2.OnDOMContentLoaded recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.IsSameBrowsingInstance recorded 3 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ---O                                                                      (3 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Navigation.IsSameSiteInstance recorded 3 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ---O                                                                      (3 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Navigation.IsSameSiteInstance.MainFrame recorded 3 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ---O                                                                      (3 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Navigation.LoaderCreateToRequestStart.MainFrame recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.MainFrame.FrameCount recorded 3 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ---O                                                                      (3 = 100.0%) {0.0%}
+2  ... 
+
+Histogram: Navigation.MainFrame.MaxFrameCount recorded 3 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ---O                                                                      (3 = 100.0%) {0.0%}
+2  ... 
+
+Histogram: Navigation.MainFrame.NewNavigation.IgnoreRestore.IsHTTPOrHTTPS.BeginNavigationToLoaderStart.Time2 recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.MainFrame.NewNavigation.IgnoreRestore.IsHTTPOrHTTPS.FetchStart.Time2 recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.MainFrame.NewNavigation.IgnoreRestore.IsHTTPOrHTTPS.LoaderStartToFetchStart.Time2 recorded 2 samples, mean = 6.5 (flags = 0x1)
+0   -O                                                                        (1 = 50.0%)
+1   ... 
+12  -O                                                                        (1 = 50.0%) {50.0%}
+14  ... 
+
+Histogram: Navigation.MainFrame.NewNavigation.IgnoreRestore.IsHTTPOrHTTPS.LoaderStartToReceiveResponse.Time2 recorded 2 samples, mean = 7.5 (flags = 0x1)
+0   ... 
+2   -O                                                                        (1 = 50.0%) {0.0%}
+3   ... 
+12  -O                                                                        (1 = 50.0%) {50.0%}
+14  ... 
+
+Histogram: Navigation.MainFrame.NewNavigation.IgnoreRestore.IsHTTPOrHTTPS.NavigationStartToBeginNavigation.Time2 recorded 2 samples, mean = 1.5 (flags = 0x1)
+0  -O                                                                        (1 = 50.0%)
+1  ... 
+3  -O                                                                        (1 = 50.0%) {50.0%}
+4  ... 
+
+Histogram: Navigation.MainFrame.NewNavigation.IgnoreRestore.IsHTTPOrHTTPS.ReceiveHeaders.Time2 recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.MainFrame.NewNavigation.IgnoreRestore.IsHTTPOrHTTPS.ReceiveHeadersToReceiveResponse.Time2 recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.MainFrame.NewNavigation.IgnoreRestore.IsHTTPOrHTTPS.ReceiveResponseToCommitNavigation.Time2 recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.NotFromAd.WastedSpeculativeRFHCase recorded 6 samples, mean = 0.8 (flags = 0x1)
+0  ---O                                                                      (3 = 50.0%)
+1  --O                                                                       (2 = 33.3%) {50.0%}
+2  O                                                                         (0 = 0.0%) {83.3%}
+3  -O                                                                        (1 = 16.7%) {83.3%}
+4  ... 
+
+Histogram: Navigation.OnBeforeUnloadOverheadTime recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.OnBeforeUnloadOverheadTime.NoBeforeUnloadHandlerRegistered recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.OriginAgentCluster.Result recorded 3 samples, mean = 8.3 (flags = 0x1)
+0  ... 
+8  --O                                                                       (2 = 66.7%) {0.0%}
+9  -O                                                                        (1 = 33.3%) {66.7%}
+10 O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Navigation.PendingCommit.DidBlockGetFrameHostForNavigation.Regular recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.PendingCommit.Duration.Regular recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 100.0%) {0.0%}
+2  ... 
+
+Histogram: Navigation.PendingDeletionCheckCompletedOnSubtree recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ProcessNavigationThrottlesTime.WillStartRequest.MainFrame recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.QueueTime.OnReceiveResponse.MainFrame recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ReadyToCommitUntilCommit2 recorded 3 samples, mean = 12.3 (flags = 0x1)
+0   O                                                                         (0 = 0.0%)
+1   -O                                                                        (1 = 33.3%) {0.0%}
+2   ... 
+10  -O                                                                        (1 = 33.3%) {33.3%}
+13  ... 
+25  -O                                                                        (1 = 33.3%) {66.7%}
+32  ... 
+
+Histogram: Navigation.ReadyToCommitUntilCommit2.ForegroundProcessPriority recorded 3 samples, mean = 12.3 (flags = 0x1)
+0   O                                                                         (0 = 0.0%)
+1   -O                                                                        (1 = 33.3%) {0.0%}
+2   ... 
+10  -O                                                                        (1 = 33.3%) {33.3%}
+13  ... 
+25  -O                                                                        (1 = 33.3%) {66.7%}
+32  ... 
+
+Histogram: Navigation.ReadyToCommitUntilCommit2.NewNavigation recorded 3 samples, mean = 12.3 (flags = 0x1)
+0   O                                                                         (0 = 0.0%)
+1   -O                                                                        (1 = 33.3%) {0.0%}
+2   ... 
+10  -O                                                                        (1 = 33.3%) {33.3%}
+13  ... 
+25  -O                                                                        (1 = 33.3%) {66.7%}
+32  ... 
+
+Histogram: Navigation.RegisterNavigationThrottlesTime.MainFrame recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.RenderFrameHostConstructor recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.RenderFrameHostDestructor recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.RenderViewHostConstructor recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.RenderViewHostDestructor recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.RenderWidgetHostConstructor recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.RenderWidgetHostDestructor recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.RendererDidNavigateTime.MainFrame recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.RequiresDedicatedProcess recorded 3 samples, mean = 0.3 (flags = 0x1)
+0  --O                                                                       (2 = 66.7%)
+1  -O                                                                        (1 = 33.3%) {66.7%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Navigation.RequiresDedicatedProcess.HTTPOrHTTPS recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ResetChildren recorded 7 samples, mean = 0.0 (flags = 0x1)
+0  -------O                                                                  (7 = 100.0%)
+1  ... 
+
+Histogram: Navigation.SendCommitNavigationTime.MainFrame recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.StartAdjustment.AllFrames recorded 3 samples, mean = 0.3 (flags = 0x1)
+0  --O                                                                       (2 = 66.7%)
+1  -O                                                                        (1 = 33.3%) {66.7%}
+2  ... 
+
+Histogram: Navigation.StartAdjustment.LegacyPostTask recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.StartAdjustment.LegacyPostTask.Percentage recorded 1 samples, mean = 10.0 (flags = 0x1)
+0   ... 
+10  -O                                                                        (1 = 100.0%) {0.0%}
+11  ... 
+
+Histogram: Navigation.StartAdjustment.MainFrameOnly recorded 3 samples, mean = 0.3 (flags = 0x1)
+0  --O                                                                       (2 = 66.7%)
+1  -O                                                                        (1 = 33.3%) {66.7%}
+2  ... 
+
+Histogram: Navigation.StartPendingDeletionOnSubtree.LoopSwappedOut recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.StartPendingDeletionOnSubtree.SwappedOut recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.StartToCommit recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+25  --O                                                                       (2 = 66.7%) {33.3%}
+32  ... 
+
+Histogram: Navigation.StartToCommit.ForegroundProcessPriority recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+25  --O                                                                       (2 = 66.7%) {33.3%}
+32  ... 
+
+Histogram: Navigation.StartToCommit.MainFrame recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+25  --O                                                                       (2 = 66.7%) {33.3%}
+32  ... 
+
+Histogram: Navigation.StartToCommit.MainFrame.ForegroundProcessPriority recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+25  --O                                                                       (2 = 66.7%) {33.3%}
+32  ... 
+
+Histogram: Navigation.StartToCommit.MainFrame.NewNavigation recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+25  --O                                                                       (2 = 66.7%) {33.3%}
+32  ... 
+
+Histogram: Navigation.StartToCommit.NewNavigation recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+25  --O                                                                       (2 = 66.7%) {33.3%}
+32  ... 
+
+Histogram: Navigation.StartToCommit.SameProcess recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+25  --O                                                                       (2 = 66.7%) {33.3%}
+32  ... 
+
+Histogram: Navigation.StartToCommit.SameProcess.ForegroundProcessPriority recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+25  --O                                                                       (2 = 66.7%) {33.3%}
+32  ... 
+
+Histogram: Navigation.StartToCommit.SameProcess.MainFrame recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+25  --O                                                                       (2 = 66.7%) {33.3%}
+32  ... 
+
+Histogram: Navigation.StartToCommit.SameProcess.MainFrame.ForegroundProcessPriority recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+25  --O                                                                       (2 = 66.7%) {33.3%}
+32  ... 
+
+Histogram: Navigation.StartToCommit.SameProcess.MainFrame.NewNavigation recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+25  --O                                                                       (2 = 66.7%) {33.3%}
+32  ... 
+
+Histogram: Navigation.StartToCommit.SameProcess.NewNavigation recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+25  --O                                                                       (2 = 66.7%) {33.3%}
+32  ... 
+
+Histogram: Navigation.SuddenTerminationDisabler.AllOrigins recorded 3 samples, mean = 11.7 (flags = 0x1)
+0   ... 
+9   -O                                                                        (1 = 33.3%) {0.0%}
+10  ... 
+13  --O                                                                       (2 = 66.7%) {33.3%}
+14  ... 
+
+Histogram: Navigation.SuddenTerminationDisabler.SameOrigin recorded 3 samples, mean = 11.7 (flags = 0x1)
+0   ... 
+9   -O                                                                        (1 = 33.3%) {0.0%}
+10  ... 
+13  --O                                                                       (2 = 66.7%) {33.3%}
+14  ... 
+
+Histogram: Navigation.SwapRFHToCompositorCreation recorded 1 samples, mean = 13.0 (flags = 0x1)
+0   ... 
+12  -O                                                                        (1 = 100.0%) {0.0%}
+16  ... 
+
+Histogram: Navigation.ThrottleCount recorded 2 samples, mean = 5.0 (flags = 0x1)
+0  ... 
+5  --O                                                                       (2 = 100.0%) {0.0%}
+6  ... 
+
+Histogram: Navigation.ThrottleEventDurationTime.WillCommitWithoutUrlLoader recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ThrottleEventDurationTime.WillProcessResponse recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ThrottleEventDurationTime.WillStartRequest recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ThrottleEventExecutionTime.WillCommitWithoutUrlLoader recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ThrottleEventExecutionTime.WillProcessResponse recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ThrottleEventExecutionTime.WillStartRequest recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ThrottleExecutionTime.WillCommitWithoutUrlLoader recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ThrottleExecutionTime.WillProcessResponse recorded 10 samples, mean = 0.0 (flags = 0x1)
+0  ----------O                                                               (10 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ThrottleExecutionTime.WillStartRequest recorded 10 samples, mean = 0.0 (flags = 0x1)
+0  ----------O                                                               (10 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ThrottleTotalDeferCount recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ThrottleTotalDeferCount.Request recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ThrottleTotalDeferTime recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.ThrottleTotalDeferTime.Request recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.TimeToReadyToCommit2 recorded 3 samples, mean = 6.7 (flags = 0x1)
+0   O                                                                         (0 = 0.0%)
+1   -O                                                                        (1 = 33.3%) {0.0%}
+2   -O                                                                        (1 = 33.3%) {33.3%}
+3   ... 
+16  -O                                                                        (1 = 33.3%) {66.7%}
+20  ... 
+
+Histogram: Navigation.TimeToReadyToCommit2.MainFrame recorded 3 samples, mean = 6.7 (flags = 0x1)
+0   O                                                                         (0 = 0.0%)
+1   -O                                                                        (1 = 33.3%) {0.0%}
+2   -O                                                                        (1 = 33.3%) {33.3%}
+3   ... 
+16  -O                                                                        (1 = 33.3%) {66.7%}
+20  ... 
+
+Histogram: Navigation.TimeToReadyToCommit2.MainFrame.NewNavigation recorded 3 samples, mean = 6.7 (flags = 0x1)
+0   O                                                                         (0 = 0.0%)
+1   -O                                                                        (1 = 33.3%) {0.0%}
+2   -O                                                                        (1 = 33.3%) {33.3%}
+3   ... 
+16  -O                                                                        (1 = 33.3%) {66.7%}
+20  ... 
+
+Histogram: Navigation.TimeToReadyToCommit2.NewNavigation recorded 3 samples, mean = 6.7 (flags = 0x1)
+0   O                                                                         (0 = 0.0%)
+1   -O                                                                        (1 = 33.3%) {0.0%}
+2   -O                                                                        (1 = 33.3%) {33.3%}
+3   ... 
+16  -O                                                                        (1 = 33.3%) {66.7%}
+20  ... 
+
+Histogram: Navigation.TimeToReadyToCommit2.SameProcess recorded 3 samples, mean = 6.7 (flags = 0x1)
+0   O                                                                         (0 = 0.0%)
+1   -O                                                                        (1 = 33.3%) {0.0%}
+2   -O                                                                        (1 = 33.3%) {33.3%}
+3   ... 
+16  -O                                                                        (1 = 33.3%) {66.7%}
+20  ... 
+
+Histogram: Navigation.TimeToReadyToCommit2.SameProcess.NewNavigation recorded 3 samples, mean = 6.7 (flags = 0x1)
+0   O                                                                         (0 = 0.0%)
+1   -O                                                                        (1 = 33.3%) {0.0%}
+2   -O                                                                        (1 = 33.3%) {33.3%}
+3   ... 
+16  -O                                                                        (1 = 33.3%) {66.7%}
+20  ... 
+
+Histogram: Navigation.Timeline.BeginNavigationToCommit.Duration recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.Timeline.BeginNavigationToLoaderStart.Duration recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.Timeline.CommitToDidCommit.Duration recorded 3 samples, mean = 11.7 (flags = 0x1)
+0   -O                                                                        (1 = 33.3%)
+1   ... 
+10  -O                                                                        (1 = 33.3%) {33.3%}
+12  ... 
+24  -O                                                                        (1 = 33.3%) {66.7%}
+29  ... 
+
+Histogram: Navigation.Timeline.DidCommitToFinish.Duration recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.Timeline.FetchStartToReceiveHeaders.Duration recorded 2 samples, mean = 0.5 (flags = 0x1)
+0  -O                                                                        (1 = 50.0%)
+1  -O                                                                        (1 = 50.0%) {50.0%}
+2  ... 
+
+Histogram: Navigation.Timeline.IgnoredCorrectly.Duration recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.Timeline.IgnoredIncorrectly.Duration recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.Timeline.IgnoredIncorrectly.MainFrameOnly.Duration recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.Timeline.IgnoredIncorrectly.MainFrameOnly.Percentage recorded 3 samples, mean = 3.3 (flags = 0x1)
+0   --O                                                                       (2 = 66.7%)
+1   ... 
+10  -O                                                                        (1 = 33.3%) {66.7%}
+11  ... 
+
+Histogram: Navigation.Timeline.IgnoredIncorrectly.Percentage recorded 3 samples, mean = 3.3 (flags = 0x1)
+0   --O                                                                       (2 = 66.7%)
+1   ... 
+10  -O                                                                        (1 = 33.3%) {66.7%}
+11  ... 
+
+Histogram: Navigation.Timeline.LoaderStartToFetchStart.Duration recorded 2 samples, mean = 6.5 (flags = 0x1)
+0   -O                                                                        (1 = 50.0%)
+1   ... 
+12  -O                                                                        (1 = 50.0%) {50.0%}
+14  ... 
+
+Histogram: Navigation.Timeline.LoaderStartToReceiveResponse.Duration recorded 2 samples, mean = 7.5 (flags = 0x1)
+0   ... 
+2   -O                                                                        (1 = 50.0%) {0.0%}
+3   ... 
+12  -O                                                                        (1 = 50.0%) {50.0%}
+14  ... 
+
+Histogram: Navigation.Timeline.NavigationRequestToBeginNavigation.Duration recorded 3 samples, mean = 1.3 (flags = 0x1)
+0  -O                                                                        (1 = 33.3%)
+1  -O                                                                        (1 = 33.3%) {33.3%}
+2  O                                                                         (0 = 0.0%) {66.7%}
+3  -O                                                                        (1 = 33.3%) {66.7%}
+4  ... 
+
+Histogram: Navigation.Timeline.ReceiveHeadersToReceiveResponse.Duration recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.Timeline.ReceiveResponseToCommit.Duration recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Navigation.Timeline.RendererCommitToDidCommit.Duration recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.Timeline.StartToNavigationRequestCreation.Duration recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Navigation.Timeline.Total.Duration recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+24  --O                                                                       (2 = 66.7%) {33.3%}
+29  ... 
+
+Histogram: Navigation.Timeline.TotalExcludingBeforeUnload.Duration recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+24  --O                                                                       (2 = 66.7%) {33.3%}
+29  ... 
+
+Histogram: Navigation.Timeline.TotalExcludingBeforeUnload.MainFrameOnly.Duration recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+24  --O                                                                       (2 = 66.7%) {33.3%}
+29  ... 
+
+Histogram: Navigation.Timeline.TotalExcludingBeforeUnloadDialog.Duration recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+24  --O                                                                       (2 = 66.7%) {33.3%}
+29  ... 
+
+Histogram: Navigation.Timeline.TotalExcludingBeforeUnloadDialog.MainFrameOnly.Duration recorded 3 samples, mean = 19.3 (flags = 0x1)
+0   ... 
+4   -O                                                                        (1 = 33.3%) {0.0%}
+5   ... 
+24  --O                                                                       (2 = 66.7%) {33.3%}
+29  ... 
+
+Histogram: Navigation.URLLoader.HasClientHintsControllerDelegate recorded 2 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  --O                                                                       (2 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Navigation.URLLoader.InMainPath recorded 2 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  --O                                                                       (2 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Navigation.Unload recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Navigation.UserAgentStringType recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 100.0%) {0.0%}
+2  ... 
+
+Histogram: Navigation.WillStartRequestToLoaderStart.MainFrame recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Net.DNS.DnsHosts.Count recorded 1 samples, mean = 3.0 (flags = 0x1)
+0  ... 
+3  -O                                                                        (1 = 100.0%) {0.0%}
+4  ... 
+
+Histogram: Net.DNS.DnsHosts.EstimateMemoryUsage recorded 1 samples, mean = 256.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1000... 
+
+Histogram: Net.DNS.DnsHosts.FileSize recorded 1 samples, mean = 213.0 (flags = 0x1)
+0    ... 
+169  -O                                                                        (1 = 100.0%) {0.0%}
+244  ... 
+
+Histogram: Net.HttpResponseCode2 recorded 4 samples, mean = 200.0 (flags = 0x1)
+0    ... 
+200  ----O                                                                     (4 = 100.0%) {0.0%}
+201  ... 
+
+Histogram: Net.URLLoaderThrottle.OnReceiveResponseTime recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Net.URLLoaderThrottleExecutionTime.BeforeWillProcessResponse recorded 8 samples, mean = 0.0 (flags = 0x1)
+0  --------O                                                                 (8 = 100.0%)
+1  ... 
+
+Histogram: Net.URLLoaderThrottleExecutionTime.WillProcessResponse recorded 8 samples, mean = 0.0 (flags = 0x1)
+0  --------O                                                                 (8 = 100.0%)
+1  ... 
+
+Histogram: Net.URLLoaderThrottleExecutionTime.WillStartRequest recorded 8 samples, mean = 0.0 (flags = 0x1)
+0  --------O                                                                 (8 = 100.0%)
+1  ... 
+
+Histogram: NetworkService.GrantSandboxResult recorded 2 samples, mean = 7.0 (flags = 0x1)
+0  ... 
+7  --O                                                                       (2 = 100.0%) {0.0%}
+8  ... 
+
+Histogram: OriginTrials.PersistentOriginTrial.LevelDbInitSuccess recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: OriginTrials.PersistentOriginTrial.LevelDbLoadSize recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: OriginTrials.PersistentOriginTrial.LevelDbLoadSuccess recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: OriginTrials.PersistentOriginTrial.LevelDbLoadTime recorded 1 samples, mean = 21.0 (flags = 0x1)
+0   ... 
+20  -O                                                                        (1 = 100.0%) {0.0%}
+24  ... 
+
+Histogram: OriginTrials.PersistentOriginTrial.OriginLookupsBeforeDbLoad recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 100.0%) {0.0%}
+2  ... 
+
+Histogram: OriginTrials.PersistentOriginTrial.OriginsAddedBeforeDbLoad recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Power.DarkMode.InferredDarkPageColorScheme recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Prerender.Experimental.PrerenderProcessReuseAvailability recorded 3 samples, mean = 3.0 (flags = 0x1)
+0  ... 
+3  ---O                                                                      (3 = 100.0%) {0.0%}
+4  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Privacy.DIPS.BtmBounceDetector.AllAccessesMatched recorded 3 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ---O                                                                      (3 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Privacy.DIPS.ClearedSitesCount.OffTheRecord_Block3PC recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Privacy.DIPS.Database.Operation.GetSitesThatBouncedTime recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Privacy.DIPS.Database.Operation.InitTime recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 100.0%) {0.0%}
+2  ... 
+
+Histogram: Privacy.DIPS.DatabaseEntryCount recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Privacy.DIPS.DatabaseHealthMetricsTime recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Privacy.DIPS.DatabaseInit recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 100.0%) {0.0%}
+2  ... 
+
+Histogram: ProtoDB.LoadEntriesSuccess.PersistentOriginTrials recorded 1 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: ProtoDB.SharedDbInitStatus recorded 2 samples, mean = 13.5 (flags = 0x1)
+0   -O                                                                        (1 = 50.0%)
+1   ... 
+27  -O                                                                        (1 = 50.0%) {50.0%}
+28  ... 
+
+Histogram: Scheduling.MessagePumpTimeKeeper.BrowserIO recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: Scheduling.MessagePumpTimeKeeper.BrowserUI recorded 0 samples (flags = 0x1)
+0 ... 
+
+Histogram: Scheduling.ThreadController.ActiveIntervalDuration.Any.BrowserIO recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Scheduling.ThreadController.ActiveIntervalDuration.Short.BrowserIO recorded 1 samples, mean = 5.0 (flags = 0x1)
+0  ... 
+5  -O                                                                        (1 = 100.0%) {0.0%}
+6  ... 
+
+Histogram: Scheduling.ThreadController.ActiveIntervalOffCpuDuration.Any.BrowserIO recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Scheduling.ThreadController.ActiveIntervalOffCpuDuration.Short.BrowserIO recorded 1 samples, mean = 3.0 (flags = 0x1)
+0  ... 
+3  -O                                                                        (1 = 100.0%) {0.0%}
+4  ... 
+
+Histogram: Scheduling.ThreadController.ActiveIntervalOnCpuDuration.Any.BrowserIO recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Scheduling.ThreadController.ActiveIntervalOnCpuDuration.Short.BrowserIO recorded 1 samples, mean = 2.0 (flags = 0x1)
+0  ... 
+2  -O                                                                        (1 = 100.0%) {0.0%}
+3  ... 
+
+Histogram: Scheduling.ThreadController.ActiveIntervalOnCpuPercentage.Any.BrowserIO recorded 1 samples, mean = 40.0 (flags = 0x1)
+0   ... 
+40  -O                                                                        (1 = 100.0%) {0.0%}
+41  ... 
+
+Histogram: Scheduling.ThreadController.ActiveIntervalOnCpuPercentage.Short.BrowserIO recorded 1 samples, mean = 40.0 (flags = 0x1)
+0   ... 
+40  -O                                                                        (1 = 100.0%) {0.0%}
+41  ... 
+
+Histogram: Scheduling.ThreadController.IdleDuration.Any.BrowserIO recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Scheduling.ThreadController.IdleDuration.Short.BrowserIO recorded 1 samples, mean = 338.0 (flags = 0x1)
+0    ... 
+331  -O                                                                        (1 = 100.0%) {0.0%}
+348  ... 
+
+Histogram: ServiceWorker.RegisteredStorageKeyCount recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: ServiceWorker.Storage.ReadInitialDataFromDB.Time recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: ServiceWorker.Storage.RegisteredStorageKeyCacheInitialization.Time2 recorded 1 samples, mean = 18.0 (flags = 0x1)
+0   ... 
+16  -O                                                                        (1 = 100.0%) {0.0%}
+20  ... 
+
+Histogram: SiteIsolation.BrowsingInstance.MaxCountPerProcess recorded 2 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  --O                                                                       (2 = 100.0%) {0.0%}
+2  ... 
+
+Histogram: SiteIsolation.CreateOpenerProxiesTime recorded 3 samples, mean = 2.3 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 33.3%) {0.0%}
+2  -O                                                                        (1 = 33.3%) {33.3%}
+3  O                                                                         (0 = 0.0%) {66.7%}
+4  -O                                                                        (1 = 33.3%) {66.7%}
+6  ... 
+
+Histogram: SiteIsolation.IsSitePerProcessOrStricter recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: SiteIsolation.MainFrameProcessReuse.BlockReason2 recorded 2 samples, mean = 3.0 (flags = 0x1)
+0  ... 
+3  --O                                                                       (2 = 100.0%) {0.0%}
+4  ... 
+
+Histogram: Sql.Database.Success.OpenInternalTime.DIPS recorded 1 samples, mean = 996.0 (flags = 0x1)
+0    ... 
+918  -O                                                                        (1 = 100.0%) {0.0%}
+1092 ... 
+
+Histogram: Sql.Database.Success.SqliteOpenTime.DIPS recorded 1 samples, mean = 33.0 (flags = 0x1)
+0   ... 
+29  -O                                                                        (1 = 100.0%) {0.0%}
+34  ... 
+
+Histogram: Sql.Statement.DIPS.VMSteps recorded 17 samples, mean = 9.7 (flags = 0x1)
+0   ... 
+3   --O                                                                       (2 = 11.8%) {0.0%}
+4   -O                                                                        (1 = 5.9%) {11.8%}
+5   ... 
+8   ---------O                                                                (9 = 52.9%) {17.6%}
+10  -O                                                                        (1 = 5.9%) {70.6%}
+12  ... 
+17  ----O                                                                     (4 = 23.5%) {76.5%}
+20  ... 
+
+Histogram: Sql.Statement.ExecutionTime.DIPS recorded 17 samples, mean = 2.0 (flags = 0x1)
+0   -----O                                                                    (5 = 29.4%)
+1   -----O                                                                    (5 = 29.4%) {29.4%}
+2   ---O                                                                      (3 = 17.6%) {58.8%}
+3   -O                                                                        (1 = 5.9%) {76.5%}
+4   --O                                                                       (2 = 11.8%) {82.4%}
+5   ... 
+12  -O                                                                        (1 = 5.9%) {94.1%}
+14  ... 
+
+Histogram: Sql.Statement.StepTime.DIPS recorded 17 samples, mean = 2.0 (flags = 0x1)
+0   -----O                                                                    (5 = 29.4%)
+1   -----O                                                                    (5 = 29.4%) {29.4%}
+2   ---O                                                                      (3 = 17.6%) {58.8%}
+3   -O                                                                        (1 = 5.9%) {76.5%}
+4   --O                                                                       (2 = 11.8%) {82.4%}
+5   ... 
+12  -O                                                                        (1 = 5.9%) {94.1%}
+14  ... 
+
+Histogram: Startup.BrowserMainRunnerImplInitializeLongTime recorded 1 samples, mean = 11.0 (flags = 0x1)
+0   ... 
+10  -O                                                                        (1 = 100.0%) {0.0%}
+12  ... 
+
+Histogram: Storage.LocalStorage.Duration.OpenDatabase2.InMemory recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.LocalStorage.Duration.ReadAllMetadata.InMemory recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.LocalStorage.Duration.ReadMapKeyValues.InMemory recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.LocalStorage.OpenDatabase.InMemory recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.LocalStorage.ReadAllMetadata.InMemory recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.LocalStorage.ReadMapKeyValues.InMemory recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.LocalStorage.ShutdownDroppedChanges recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.SessionStorage.ClearDiskStateAtStoragePartitionInit recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.SessionStorage.DeleteSessions.InMemory recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Storage.SessionStorage.Duration.DeleteSessions.InMemory recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: Storage.SessionStorage.Duration.OpenDatabase2.InMemory recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.SessionStorage.Duration.PutMetadata.InMemory recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.SessionStorage.Duration.ReadAllMetadata.InMemory recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.SessionStorage.OpenDatabase.InMemory recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.SessionStorage.PutMetadata.InMemory recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.SessionStorage.ReadAllMetadata.InMemory recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.SharedStorage.OnShutdown.HasSqlErrors recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.SharedStorage.OnShutdown.NumSqlErrors recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.SharedStorage.OnShutdown.RecoveryFromInitFailureAttempted recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Storage.SharedStorage.OnShutdown.RecoveryOnDiskAttempted recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: ThreadPool.UnnecessaryWakeup.Browser.Foreground recorded 15 samples, mean = 1.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  ---------------O                                                          (15 = 100.0%) {0.0%}
+2  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: Tracing.Init.InitTracing recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Tracing.Init.Perfetto.Initialize recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: UMA.ChildProcess.Ping.SharedMemorySetUp recorded 8 samples, mean = 1.0 (flags = 0x1)
+0  ----O                                                                     (4 = 50.0%)
+1  O                                                                         (0 = 0.0%) {50.0%}
+2  ----O                                                                     (4 = 50.0%) {50.0%}
+3  O                                                                         (0 = 0.0%) {100.0%}
+
+Histogram: UMA.PersistentAllocator.FieldTrialAllocator.UsedPct recorded 4 samples, mean = 0.0 (flags = 0x1)
+0  ----O                                                                     (4 = 100.0%)
+1  ... 
+
+Histogram: Variations.FeatureAccess recorded 255 samples (flags = 0x1)
+-2145869757 -O                                                                        (1 = 0.4%)
+-2142950691 -O                                                                        (1 = 0.4%)
+-2117579521 -O                                                                        (1 = 0.4%)
+-2107538580 -O                                                                        (1 = 0.4%)
+-2102298458 -O                                                                        (1 = 0.4%)
+-2082548071 -O                                                                        (1 = 0.4%)
+-2072745679 -O                                                                        (1 = 0.4%)
+-2063702825 -O                                                                        (1 = 0.4%)
+-2058067242 -O                                                                        (1 = 0.4%)
+-2026533617 -O                                                                        (1 = 0.4%)
+-2021461599 -O                                                                        (1 = 0.4%)
+-2020727180 -O                                                                        (1 = 0.4%)
+-2003020968 -O                                                                        (1 = 0.4%)
+-1999341188 -O                                                                        (1 = 0.4%)
+-1987372349 -O                                                                        (1 = 0.4%)
+-1941288922 -O                                                                        (1 = 0.4%)
+-1914946335 -O                                                                        (1 = 0.4%)
+-1906867679 -O                                                                        (1 = 0.4%)
+-1903991318 -O                                                                        (1 = 0.4%)
+-1886812280 -O                                                                        (1 = 0.4%)
+-1886162394 -O                                                                        (1 = 0.4%)
+-1859983128 -O                                                                        (1 = 0.4%)
+-1822861670 -O                                                                        (1 = 0.4%)
+-1785165294 -O                                                                        (1 = 0.4%)
+-1760372553 -O                                                                        (1 = 0.4%)
+-1738329526 -O                                                                        (1 = 0.4%)
+-1735659514 -O                                                                        (1 = 0.4%)
+-1728976901 -O                                                                        (1 = 0.4%)
+-1711598625 -O                                                                        (1 = 0.4%)
+-1711317086 -O                                                                        (1 = 0.4%)
+-1688499241 -O                                                                        (1 = 0.4%)
+-1688165356 -O                                                                        (1 = 0.4%)
+-1683296285 -O                                                                        (1 = 0.4%)
+-1676182141 -O                                                                        (1 = 0.4%)
+-1671311516 -O                                                                        (1 = 0.4%)
+-1661548781 -O                                                                        (1 = 0.4%)
+-1659481002 -O                                                                        (1 = 0.4%)
+-1637856760 -O                                                                        (1 = 0.4%)
+-1606737133 -O                                                                        (1 = 0.4%)
+-1597152580 -O                                                                        (1 = 0.4%)
+-1585192078 -O                                                                        (1 = 0.4%)
+-1518631314 -O                                                                        (1 = 0.4%)
+-1512085727 -O                                                                        (1 = 0.4%)
+-1502757532 -O                                                                        (1 = 0.4%)
+-1492938903 -O                                                                        (1 = 0.4%)
+-1487886666 -O                                                                        (1 = 0.4%)
+-1467201699 -O                                                                        (1 = 0.4%)
+-1437331633 -O                                                                        (1 = 0.4%)
+-1429809981 -O                                                                        (1 = 0.4%)
+-1422038153 -O                                                                        (1 = 0.4%)
+-1374322193 -O                                                                        (1 = 0.4%)
+-1349239985 -O                                                                        (1 = 0.4%)
+-1326432168 -O                                                                        (1 = 0.4%)
+-1321341451 -O                                                                        (1 = 0.4%)
+-1311854481 -O                                                                        (1 = 0.4%)
+-1296949570 -O                                                                        (1 = 0.4%)
+-1284139727 -O                                                                        (1 = 0.4%)
+-1228702833 -O                                                                        (1 = 0.4%)
+-1205717921 -O                                                                        (1 = 0.4%)
+-1195638501 -O                                                                        (1 = 0.4%)
+-1187667623 -O                                                                        (1 = 0.4%)
+-1138693210 -O                                                                        (1 = 0.4%)
+-1091190778 -O                                                                        (1 = 0.4%)
+-1085869190 -O                                                                        (1 = 0.4%)
+-1051146215 -O                                                                        (1 = 0.4%)
+-1049548357 -O                                                                        (1 = 0.4%)
+-1049192801 -O                                                                        (1 = 0.4%)
+-1032654333 -O                                                                        (1 = 0.4%)
+-1022941035 -O                                                                        (1 = 0.4%)
+-1016276104 -O                                                                        (1 = 0.4%)
+-1014105586 -O                                                                        (1 = 0.4%)
+-950244418  -O                                                                        (1 = 0.4%)
+-948819910  -O                                                                        (1 = 0.4%)
+-944594195  -O                                                                        (1 = 0.4%)
+-909212394  -O                                                                        (1 = 0.4%)
+-892048512  -O                                                                        (1 = 0.4%)
+-832716341  -O                                                                        (1 = 0.4%)
+-820743846  -O                                                                        (1 = 0.4%)
+-811535300  -O                                                                        (1 = 0.4%)
+-807606769  -O                                                                        (1 = 0.4%)
+-752940581  -O                                                                        (1 = 0.4%)
+-738168128  -O                                                                        (1 = 0.4%)
+-730509471  -O                                                                        (1 = 0.4%)
+-727594202  -O                                                                        (1 = 0.4%)
+-717224835  -O                                                                        (1 = 0.4%)
+-705874554  -O                                                                        (1 = 0.4%)
+-652883820  -O                                                                        (1 = 0.4%)
+-649893643  -O                                                                        (1 = 0.4%)
+-647327842  -O                                                                        (1 = 0.4%)
+-632734404  -O                                                                        (1 = 0.4%)
+-626588394  -O                                                                        (1 = 0.4%)
+-614860742  -O                                                                        (1 = 0.4%)
+-612630107  -O                                                                        (1 = 0.4%)
+-608945016  -O                                                                        (1 = 0.4%)
+-601999812  -O                                                                        (1 = 0.4%)
+-578246082  -O                                                                        (1 = 0.4%)
+-570260697  -O                                                                        (1 = 0.4%)
+-566659406  -O                                                                        (1 = 0.4%)
+-548255851  -O                                                                        (1 = 0.4%)
+-519498267  -O                                                                        (1 = 0.4%)
+-516599012  -O                                                                        (1 = 0.4%)
+-514923026  -O                                                                        (1 = 0.4%)
+-506135020  -O                                                                        (1 = 0.4%)
+-506046811  -O                                                                        (1 = 0.4%)
+-500401001  -O                                                                        (1 = 0.4%)
+-494086340  -O                                                                        (1 = 0.4%)
+-480931309  -O                                                                        (1 = 0.4%)
+-441588425  -O                                                                        (1 = 0.4%)
+-410734873  -O                                                                        (1 = 0.4%)
+-406115708  -O                                                                        (1 = 0.4%)
+-362063204  -O                                                                        (1 = 0.4%)
+-337400621  -O                                                                        (1 = 0.4%)
+-335233151  -O                                                                        (1 = 0.4%)
+-304280190  -O                                                                        (1 = 0.4%)
+-295930877  -O                                                                        (1 = 0.4%)
+-264008106  -O                                                                        (1 = 0.4%)
+-260445951  -O                                                                        (1 = 0.4%)
+-216730183  -O                                                                        (1 = 0.4%)
+-203688515  -O                                                                        (1 = 0.4%)
+-202553235  -O                                                                        (1 = 0.4%)
+-179758137  -O                                                                        (1 = 0.4%)
+-165620841  -O                                                                        (1 = 0.4%)
+-161487917  -O                                                                        (1 = 0.4%)
+-158333951  -O                                                                        (1 = 0.4%)
+-150047060  -O                                                                        (1 = 0.4%)
+-139594597  -O                                                                        (1 = 0.4%)
+-108627637  -O                                                                        (1 = 0.4%)
+-105097242  -O                                                                        (1 = 0.4%)
+-23209715   -O                                                                        (1 = 0.4%)
+-2678114    -O                                                                        (1 = 0.4%)
+20850721    -O                                                                        (1 = 0.4%)
+41534857    -O                                                                        (1 = 0.4%)
+98757146    -O                                                                        (1 = 0.4%)
+105698267   -O                                                                        (1 = 0.4%)
+119135443   -O                                                                        (1 = 0.4%)
+126673147   -O                                                                        (1 = 0.4%)
+140506361   -O                                                                        (1 = 0.4%)
+152096159   -O                                                                        (1 = 0.4%)
+152877720   -O                                                                        (1 = 0.4%)
+157238201   -O                                                                        (1 = 0.4%)
+173189736   -O                                                                        (1 = 0.4%)
+189943527   -O                                                                        (1 = 0.4%)
+202773422   -O                                                                        (1 = 0.4%)
+240240699   -O                                                                        (1 = 0.4%)
+242040082   -O                                                                        (1 = 0.4%)
+254190120   -O                                                                        (1 = 0.4%)
+270624428   -O                                                                        (1 = 0.4%)
+282209792   -O                                                                        (1 = 0.4%)
+284785381   -O                                                                        (1 = 0.4%)
+296915847   -O                                                                        (1 = 0.4%)
+305862212   -O                                                                        (1 = 0.4%)
+315422501   -O                                                                        (1 = 0.4%)
+331875907   -O                                                                        (1 = 0.4%)
+358642704   -O                                                                        (1 = 0.4%)
+375472237   -O                                                                        (1 = 0.4%)
+387541329   -O                                                                        (1 = 0.4%)
+391992464   -O                                                                        (1 = 0.4%)
+395217719   -O                                                                        (1 = 0.4%)
+435853294   -O                                                                        (1 = 0.4%)
+437594665   -O                                                                        (1 = 0.4%)
+438139742   -O                                                                        (1 = 0.4%)
+458876925   -O                                                                        (1 = 0.4%)
+484427022   -O                                                                        (1 = 0.4%)
+485578342   -O                                                                        (1 = 0.4%)
+485903736   -O                                                                        (1 = 0.4%)
+487267845   -O                                                                        (1 = 0.4%)
+492662271   -O                                                                        (1 = 0.4%)
+511435904   -O                                                                        (1 = 0.4%)
+528170159   -O                                                                        (1 = 0.4%)
+535189609   -O                                                                        (1 = 0.4%)
+536065358   -O                                                                        (1 = 0.4%)
+586648013   -O                                                                        (1 = 0.4%)
+679544893   -O                                                                        (1 = 0.4%)
+684909481   -O                                                                        (1 = 0.4%)
+713485102   -O                                                                        (1 = 0.4%)
+720628981   -O                                                                        (1 = 0.4%)
+748164110   -O                                                                        (1 = 0.4%)
+768069684   -O                                                                        (1 = 0.4%)
+781973865   -O                                                                        (1 = 0.4%)
+811849759   -O                                                                        (1 = 0.4%)
+826939846   -O                                                                        (1 = 0.4%)
+832704520   -O                                                                        (1 = 0.4%)
+842030887   -O                                                                        (1 = 0.4%)
+863847320   -O                                                                        (1 = 0.4%)
+895729307   -O                                                                        (1 = 0.4%)
+919092195   -O                                                                        (1 = 0.4%)
+962216855   -O                                                                        (1 = 0.4%)
+988158415   -O                                                                        (1 = 0.4%)
+989585550   -O                                                                        (1 = 0.4%)
+1040504811  -O                                                                        (1 = 0.4%)
+1054475148  -O                                                                        (1 = 0.4%)
+1067814442  -O                                                                        (1 = 0.4%)
+1078028982  -O                                                                        (1 = 0.4%)
+1081479179  -O                                                                        (1 = 0.4%)
+1095158822  -O                                                                        (1 = 0.4%)
+1098844891  -O                                                                        (1 = 0.4%)
+1127113212  -O                                                                        (1 = 0.4%)
+1208454642  -O                                                                        (1 = 0.4%)
+1212414187  -O                                                                        (1 = 0.4%)
+1217227946  -O                                                                        (1 = 0.4%)
+1244485374  -O                                                                        (1 = 0.4%)
+1279460878  -O                                                                        (1 = 0.4%)
+1280183490  -O                                                                        (1 = 0.4%)
+1283609399  -O                                                                        (1 = 0.4%)
+1314327410  -O                                                                        (1 = 0.4%)
+1362357059  -O                                                                        (1 = 0.4%)
+1378756643  -O                                                                        (1 = 0.4%)
+1396360914  -O                                                                        (1 = 0.4%)
+1407803763  -O                                                                        (1 = 0.4%)
+1408933162  -O                                                                        (1 = 0.4%)
+1440291367  -O                                                                        (1 = 0.4%)
+1495121320  -O                                                                        (1 = 0.4%)
+1506130378  -O                                                                        (1 = 0.4%)
+1537201223  -O                                                                        (1 = 0.4%)
+1537607498  -O                                                                        (1 = 0.4%)
+1545625355  -O                                                                        (1 = 0.4%)
+1546696789  -O                                                                        (1 = 0.4%)
+1580801830  -O                                                                        (1 = 0.4%)
+1588373564  -O                                                                        (1 = 0.4%)
+1589069224  -O                                                                        (1 = 0.4%)
+1625701043  -O                                                                        (1 = 0.4%)
+1640390781  -O                                                                        (1 = 0.4%)
+1662315904  -O                                                                        (1 = 0.4%)
+1691859835  -O                                                                        (1 = 0.4%)
+1740992949  -O                                                                        (1 = 0.4%)
+1799862370  -O                                                                        (1 = 0.4%)
+1803370640  -O                                                                        (1 = 0.4%)
+1816811671  -O                                                                        (1 = 0.4%)
+1829331278  -O                                                                        (1 = 0.4%)
+1838400867  -O                                                                        (1 = 0.4%)
+1843307049  -O                                                                        (1 = 0.4%)
+1858620917  -O                                                                        (1 = 0.4%)
+1891763329  -O                                                                        (1 = 0.4%)
+1895138989  -O                                                                        (1 = 0.4%)
+1896790961  -O                                                                        (1 = 0.4%)
+1920289649  -O                                                                        (1 = 0.4%)
+1921626647  -O                                                                        (1 = 0.4%)
+1924857150  -O                                                                        (1 = 0.4%)
+1936205171  -O                                                                        (1 = 0.4%)
+1958626956  -O                                                                        (1 = 0.4%)
+1969067456  -O                                                                        (1 = 0.4%)
+1976013947  -O                                                                        (1 = 0.4%)
+1977291722  -O                                                                        (1 = 0.4%)
+1982759040  -O                                                                        (1 = 0.4%)
+2005883068  -O                                                                        (1 = 0.4%)
+2014181330  -O                                                                        (1 = 0.4%)
+2025929491  -O                                                                        (1 = 0.4%)
+2033920831  -O                                                                        (1 = 0.4%)
+2038081675  -O                                                                        (1 = 0.4%)
+2040130620  -O                                                                        (1 = 0.4%)
+2053373274  -O                                                                        (1 = 0.4%)
+2081264511  -O                                                                        (1 = 0.4%)
+2081599086  -O                                                                        (1 = 0.4%)
+2101183467  -O                                                                        (1 = 0.4%)
+2110501640  -O                                                                        (1 = 0.4%)
+
+Histogram: Views.Browser.NumColorProvidersInitializedDuringOnNativeThemeUpdated recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Views.Browser.TimeSpentInitializingColorProvider recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: Views.Browser.TimeSpentProcessingOnNativeThemeUpdatedEvent recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: Views.ColorProviderCacheSize recorded 3 samples, mean = 2.0 (flags = 0x1)
+0  O                                                                         (0 = 0.0%)
+1  -O                                                                        (1 = 33.3%) {0.0%}
+2  -O                                                                        (1 = 33.3%) {33.3%}
+3  -O                                                                        (1 = 33.3%) {66.7%}
+4  ... 
+
+Histogram: WebContentsObserver.DOMContentLoaded recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.DidChangeVisibleSecurityState recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.DidFinishLoad recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.DidFinishNavigation recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.DidFirstVisuallyNonEmptyPaint recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.DidStartLoading recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.DidStartNavigation recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.DidStartNavigation.MainFrame recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.DidStopLoading recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.DidUpdateNavigationHandleTiming recorded 7 samples, mean = 0.0 (flags = 0x1)
+0  -------O                                                                  (7 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.LoadProgressChanged recorded 9 samples, mean = 0.0 (flags = 0x1)
+0  ---------O                                                                (9 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.NavigationEntryChanged recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.NavigationEntryCommitted recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.OnVisibilityChanged recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.OnVisibilityWillChange recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.PrimaryMainDocumentElementAvailable recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.RenderFrameCreated recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.RenderFrameDeleted recorded 3 samples, mean = 0.0 (flags = 0x1)
+0  ---O                                                                      (3 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.RenderViewReady recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.TitleWasSet recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: WebContentsObserver.TitleWasSetForMainFrame recorded 1 samples, mean = 0.0 (flags = 0x1)
+0  -O                                                                        (1 = 100.0%)
+1  ... 
+
+Histogram: WebUI.WebUIURLLoaderFactory.URLRequestLoadTime recorded 2 samples, mean = 0.0 (flags = 0x1)
+0  --O                                                                       (2 = 100.0%)
+1  ... 
+
+
