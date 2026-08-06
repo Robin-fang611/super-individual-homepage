@@ -2,13 +2,14 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
-test("exploration shell has no visible nav, labels, or years", () => {
+test("exploration shell contains core exploration elements", () => {
   const html = readFileSync("index.html", "utf8");
 
   assert.match(html, /id="intro-screen"/);
   assert.match(html, /id="universe-canvas"/);
   assert.match(html, /id="reading-overlay"/);
-  assert.doesNotMatch(html, /hidden-nav|interaction-hint|星路导航|STAR ROAD|2026/);
+  assert.match(html, /id="star-compass"/);
+  assert.match(html, /id="interaction-hint"/);
 });
 
 test("includes a static ink fallback for unavailable WebGL", () => {

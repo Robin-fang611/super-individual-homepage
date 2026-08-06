@@ -16,6 +16,7 @@ const fallbackElement = requireElement("#universe-fallback");
 const readingOverlay = requireElement("#reading-overlay");
 const readingContent = requireElement("#reading-content");
 const readingClose = requireElement("#reading-close");
+const hintElement = requireElement("#interaction-hint");
 
 function showFallback() {
   appElement.dataset.renderMode = "fallback";
@@ -32,12 +33,14 @@ async function boot() {
       { createReadingOverlay },
       { createStarField },
       { createSceneStarLayout },
+      { createExplorationHint },
     ] = await Promise.all([
       import("./record-content.mjs?v=universe-map-3"),
       import("./intro-controller.mjs?v=universe-map-3"),
       import("./reading-overlay.mjs?v=universe-map-3"),
       import("./star-field.mjs?v=3d-scene-25"),
       import("./star-layout.mjs?v=3d-scene-25"),
+      import("./exploration-hint.mjs?v=universe-map-3"),
     ]);
 
     window.__universeBoot = { step: "loading-records" };
@@ -70,6 +73,11 @@ async function boot() {
       closeButton: readingClose,
       onClose: () => starField?.resume?.(),
     });
+    const hint = createExplorationHint({
+      element: hintElement,
+      delayMs: 1400,
+      visibleMs: 3200,
+    });
 
     window.__universeBoot = { step: "creating-scene", records: records.length };
     starField = await createStarField({
@@ -97,6 +105,7 @@ async function boot() {
       if (heroFaded) return;
       heroFaded = true;
       heroHud.classList.add("is-exploring");
+      hint.dismiss();
     }
     canvas.addEventListener("wheel", fadeHeroOnExplore, { once: true });
     canvas.addEventListener("pointerdown", fadeHeroOnExplore, { once: true });
@@ -106,6 +115,7 @@ async function boot() {
       const snap = starField?.getSnapshot?.();
       if (snap && snap.mode === "handoff") {
         setTimeout(fadeHeroOnExplore, 1200);
+        hint.schedule();
         clearInterval(checkHandoff);
       }
     }, 400);
