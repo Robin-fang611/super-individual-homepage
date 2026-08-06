@@ -1,14 +1,14 @@
 {
   "url": "http://localhost:8788",
-  "total": 6,
-  "passed": 4,
-  "failed": 2,
-  "ok": false,
+  "total": 13,
+  "passed": 13,
+  "failed": 0,
+  "ok": true,
   "checks": [
     {
       "name": "default realm is road",
-      "ok": false,
-      "detail": "data-realm=undefined"
+      "ok": true,
+      "detail": "data-realm=road"
     },
     {
       "name": "inner & interactive layers hidden on road",
@@ -31,9 +31,44 @@
       "detail": "2 cards"
     },
     {
-      "name": "script executed without throwing",
-      "ok": false,
-      "detail": "TimeoutError: Waiting failed: 5000ms exceeded"
+      "name": "inner thought expands on click",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "switch to interactive",
+      "ok": true,
+      "detail": "data-realm=interactive"
+    },
+    {
+      "name": "interactive layer visible",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "stardust seed chips rendered",
+      "ok": true,
+      "detail": "3 chips"
+    },
+    {
+      "name": "stardust submit adds a chip",
+      "ok": true,
+      "detail": "3 -> 4"
+    },
+    {
+      "name": "switch back to road",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "no uncaught page errors",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "no console errors (non-GPU)",
+      "ok": true,
+      "detail": ""
     }
   ],
   "consoleErrors": [],

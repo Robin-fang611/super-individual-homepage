@@ -72,6 +72,15 @@ async function boot() {
         window.__universeBoot = { step: "ready", records: records.length };
       },
     });
+
+    // Dismiss the intro on the first interaction anywhere on the page.
+    // Without this, clicking the realm nav (which never reaches the 3D canvas
+    // handoff) leaves the intro overlay up and blocking the inner/interactive
+    // content layers below it.
+    const dismissIntro = () => intro?.skip?.();
+    document.addEventListener("pointerdown", dismissIntro, { once: true });
+    document.addEventListener("keydown", dismissIntro, { once: true });
+
     const reader = createReadingOverlay({
       overlayElement: readingOverlay,
       contentElement: readingContent,
