@@ -1,62 +1,22 @@
 {
-  "url": "http://localhost:8788",
-  "total": 13,
-  "passed": 13,
+  "url": "http://127.0.0.1:8788",
+  "total": 5,
+  "passed": 5,
   "failed": 0,
   "ok": true,
   "checks": [
     {
-      "name": "default realm is road",
+      "name": "app booted without throwing",
       "ok": true,
-      "detail": "data-realm=road"
+      "detail": "step=ready"
     },
     {
-      "name": "inner & interactive layers hidden on road",
-      "ok": true,
-      "detail": ""
-    },
-    {
-      "name": "switch to inner",
-      "ok": true,
-      "detail": "data-realm=inner"
-    },
-    {
-      "name": "inner layer visible",
+      "name": "interact-prompt element present",
       "ok": true,
       "detail": ""
     },
     {
-      "name": "inner thoughts loaded",
-      "ok": true,
-      "detail": "2 cards"
-    },
-    {
-      "name": "inner thought expands on click",
-      "ok": true,
-      "detail": ""
-    },
-    {
-      "name": "switch to interactive",
-      "ok": true,
-      "detail": "data-realm=interactive"
-    },
-    {
-      "name": "interactive layer visible",
-      "ok": true,
-      "detail": ""
-    },
-    {
-      "name": "stardust seed chips rendered",
-      "ok": true,
-      "detail": "3 chips"
-    },
-    {
-      "name": "stardust submit adds a chip",
-      "ok": true,
-      "detail": "3 -> 4"
-    },
-    {
-      "name": "switch back to road",
+      "name": "interact-prompt hidden on load",
       "ok": true,
       "detail": ""
     },

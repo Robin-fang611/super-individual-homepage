@@ -17,9 +17,7 @@ const readingOverlay = requireElement("#reading-overlay");
 const readingContent = requireElement("#reading-content");
     const readingClose = requireElement("#reading-close");
     const hintElement = requireElement("#interaction-hint");
-    const realmNav = requireElement("#realm-nav");
-    const realmInner = requireElement("#realm-inner");
-    const realmInteractive = requireElement("#realm-interactive");
+    const interactPrompt = requireElement("#interact-prompt");
 
 function showFallback() {
   appElement.dataset.renderMode = "fallback";
@@ -34,7 +32,6 @@ async function boot() {
       { loadRecords },
       { createIntroController },
       { createReadingOverlay },
-      { createRealmSwitch },
       { createStarField },
       { createSceneStarLayout },
       { createExplorationHint },
@@ -42,7 +39,6 @@ async function boot() {
       import("./record-content.mjs?v=universe-map-3"),
       import("./intro-controller.mjs?v=universe-map-3"),
       import("./reading-overlay.mjs?v=universe-map-3"),
-      import("./realm-switch.mjs?v=universe-map-3"),
       import("./star-field.mjs?v=3d-scene-25"),
       import("./star-layout.mjs?v=3d-scene-25"),
       import("./exploration-hint.mjs?v=universe-map-3"),
@@ -73,10 +69,8 @@ async function boot() {
       },
     });
 
-    // Dismiss the intro on the first interaction anywhere on the page.
-    // Without this, clicking the realm nav (which never reaches the 3D canvas
-    // handoff) leaves the intro overlay up and blocking the inner/interactive
-    // content layers below it.
+    // Dismiss the intro on the first interaction anywhere on the page so the
+    // overlay never blocks the star map below it.
     const dismissIntro = () => intro?.skip?.();
     document.addEventListener("pointerdown", dismissIntro, { once: true });
     document.addEventListener("keydown", dismissIntro, { once: true });
@@ -99,6 +93,7 @@ async function boot() {
       canvas,
       layout,
       intro,
+      interactPrompt,
       onSelect: (star) => {
         // 找到对应的 record
         const record = records.find((r) => r.id === star.file || r.file === star.file || r.id === star.id);
@@ -113,14 +108,6 @@ async function boot() {
       onError: showFallback,
     });
     window.__starField = starField;
-
-    createRealmSwitch({
-      appElement,
-      starField,
-      navElement: realmNav,
-      innerElement: realmInner,
-      interactiveElement: realmInteractive,
-    });
 
     // Hero HUD fade on user exploration
     let heroFaded = false;

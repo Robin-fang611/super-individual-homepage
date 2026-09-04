@@ -34,6 +34,7 @@ export async function createStarField({
   intro,
   onSelect,
   onError,
+  interactPrompt,
   loadThreeModule = loadThree,
   createWorld = createInkUniverseWorld,
 }) {
@@ -46,14 +47,14 @@ export async function createStarField({
   });
 
   try {
-    return await initializeStarField({ THREE, canvas, layout, intro, onSelect, onError, renderer, createWorld });
+    return await initializeStarField({ THREE, canvas, layout, intro, onSelect, onError, interactPrompt, renderer, createWorld });
   } catch (error) {
     renderer.dispose();
     throw error;
   }
 }
 
-async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onError, renderer, createWorld }) {
+async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onError, interactPrompt, renderer, createWorld }) {
   renderer.setClearColor(0x010306, 1);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
@@ -75,7 +76,33 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
   let pointerX = -9999;
   let pointerY = -9999;
   let lastClickTime = 0;
-  let savedFlightState = null;
+  const INTERACT_RADIUS = 1.4;
+  const _camPos = new THREE.Vector3();
+  const _beaconPos = new THREE.Vector3();
+  let activeInteractable = null;
+  const promptLabel = interactPrompt ? interactPrompt.querySelector("#interact-prompt-label") : null;
+
+  function setPromptVisible(visible) {
+    if (!interactPrompt) return;
+    interactPrompt.hidden = !visible;
+    interactPrompt.setAttribute("aria-hidden", String(!visible));
+  }
+
+  function updatePrompt(def) {
+    if (!interactPrompt) return;
+    if (promptLabel) promptLabel.textContent = `阅读 · ${def.star.title}`;
+    def.group.getWorldPosition(_beaconPos);
+    const projected = _beaconPos.clone().project(camera);
+    if (projected.z > 1 || projected.z < -1) {
+      setPromptVisible(false);
+      return;
+    }
+    const vp = getViewport();
+    const x = (projected.x * 0.5 + 0.5) * vp.width;
+    const y = (-projected.y * 0.5 + 0.5) * vp.height;
+    interactPrompt.style.transform = `translate(-50%, -100%) translate(${x}px, ${y - 30}px)`;
+    setPromptVisible(true);
+  }
 
   function reportError(error) {
     onError?.(error);
@@ -123,6 +150,31 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
       beacons.applyHover(hit);
     }
 
+    // Proximity interaction (Genshin-like): surface a prompt near the closest
+    // beacon within reach, and let F / tap trigger its reading.
+    if (state.paused || !beacons || !interactPrompt) {
+      activeInteractable = null;
+      setPromptVisible(false);
+    } else {
+      camera.getWorldPosition(_camPos);
+      let nearestDef = null;
+      let nearestDist = Infinity;
+      for (const def of beacons.beaconDefs) {
+        def.group.getWorldPosition(_beaconPos);
+        const dist = _camPos.distanceTo(_beaconPos);
+        if (dist < INTERACT_RADIUS && dist < nearestDist) {
+          nearestDef = def;
+          nearestDist = dist;
+        }
+      }
+      activeInteractable = nearestDef ? nearestDef.star : null;
+      if (nearestDef) {
+        updatePrompt(nearestDef);
+      } else {
+        setPromptVisible(false);
+      }
+    }
+
     const before = activeProfile.name;
     const next = quality.observe(frameMonitor.summary()).profile;
     if (next.name !== before) {
@@ -156,25 +208,28 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
     if (!beacons) return;
 
     const hit = beacons.hitTest(camera, getViewport(), event.clientX, event.clientY);
-    if (hit) {
-      // Save current flight state before jumping
-      const rig = scene.getObjectByName("PlayerRig");
-      if (rig) {
-        savedFlightState = {
-          position: rig.position.clone(),
-          quaternion: rig.quaternion.clone(),
-        };
-        const pos = hit.group.position;
-        rig.position.set(pos.x + 0.8, pos.y - 0.3, pos.z + 1.2);
-        rig.quaternion.setFromEuler(new THREE.Euler(0.12, -0.3, 0, "YXZ"));
-      }
-      onSelect(hit.star);
-    }
+    if (hit) onSelect(hit.star);
   }
 
   // Track pointer and clicks on canvas
   canvas.addEventListener("pointermove", handlePointerMove);
   canvas.addEventListener("click", handleClick);
+
+  function triggerInteract() {
+    if (activeInteractable && onSelect) onSelect(activeInteractable);
+  }
+
+  function handleInteractKey(event) {
+    if (event.code === "KeyF" && activeInteractable) {
+      event.preventDefault();
+      triggerInteract();
+    }
+  }
+
+  window.addEventListener("keydown", handleInteractKey);
+  if (interactPrompt) {
+    interactPrompt.addEventListener("click", triggerInteract);
+  }
 
   const initialQuaternion = new THREE.Quaternion().setFromEuler(
     new THREE.Euler(0.08, -0.14, 0, "YXZ"),
@@ -219,15 +274,6 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
 
   function resume() {
     state.paused = false;
-    // Restore saved flight state if we jumped to a node
-    if (savedFlightState) {
-      const rig = scene.getObjectByName("PlayerRig");
-      if (rig) {
-        rig.position.copy(savedFlightState.position);
-        rig.quaternion.copy(savedFlightState.quaternion);
-      }
-      savedFlightState = null;
-    }
     runtime.resume();
   }
 
@@ -239,6 +285,8 @@ async function initializeStarField({ THREE, canvas, layout, intro, onSelect, onE
     canvas.removeEventListener("webglcontextlost", onContextLost);
     canvas.removeEventListener("pointermove", handlePointerMove);
     canvas.removeEventListener("click", handleClick);
+    window.removeEventListener("keydown", handleInteractKey);
+    if (interactPrompt) interactPrompt.removeEventListener("click", triggerInteract);
     inkWorld.dispose();
     renderer.dispose();
   }
